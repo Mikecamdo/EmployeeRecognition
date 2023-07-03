@@ -233,3 +233,5 @@ _Pvt_Extensions
 
 # .env file containing MySQL connection details
 .env
+
+.angular
