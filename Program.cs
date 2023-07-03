@@ -1,4 +1,5 @@
 using DotNetEnv;
+using EmployeeRecognition.Database.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
