@@ -21,8 +21,9 @@ builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Use cases
-builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
+builder.Services.AddScoped<IGetUserByIdUseCase, GetUserByIdUseCase>();
+builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 

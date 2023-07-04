@@ -19,6 +19,11 @@ public class UserRepository : IUserRepository
         return await _mySqlDbContext.Users.ToListAsync();
     }
 
+    public async Task<User?> GetUserByIdAsync(string userId)
+    {
+        return await _mySqlDbContext.Users.FirstOrDefaultAsync(e => e.Id == userId);
+    }
+
     public async Task<User> AddUserAsync(User user)
     {
         _mySqlDbContext.Users.Add(user);

@@ -10,16 +10,19 @@ namespace EmployeeRecognition.Api.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
+    private readonly IGetUserByIdUseCase _getUserByIdUseCase;
     private readonly IAddUserUseCase _addUserUseCase;
     private readonly IUpdateUserUseCase _updateUserUseCase;
     private readonly IDeleteUserUseCase _deleteUserUseCase;
     public UserController(
         IGetAllUsersUseCase getAllUsersUseCase,
+        IGetUserByIdUseCase getUserByIdUseCase,
         IAddUserUseCase addUserUseCase,
         IUpdateUserUseCase updateUserUseCase,
         IDeleteUserUseCase deleteUserUseCase)
     {
         _getAllUsersUseCase = getAllUsersUseCase;
+        _getUserByIdUseCase = getUserByIdUseCase;
         _addUserUseCase = addUserUseCase;
         _updateUserUseCase = updateUserUseCase;
         _deleteUserUseCase = deleteUserUseCase;
@@ -30,6 +33,17 @@ public class UserController : ControllerBase
     {
         var allUsers = await _getAllUsersUseCase.ExecuteAsync();
         return Ok(allUsers);
+    }
+
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetUserById([FromRoute] string userId)
+    {
+        var currentUser = await _getUserByIdUseCase.ExecuteAsync(userId);
+        if (currentUser == null)
+        {
+            return Ok();
+        }
+        return Ok(currentUser);
     }
 
     [HttpPost]
