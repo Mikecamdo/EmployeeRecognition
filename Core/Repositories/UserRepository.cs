@@ -13,6 +13,12 @@ public class UserRepository : IUserRepository
     {
         _mySqlDbContext = mySqlDbContext;
     }
+
+    public async Task<IEnumerable<User>> GetUsersAsync()
+    {
+        return await _mySqlDbContext.Users.ToListAsync();
+    }
+
     public async Task<User> AddUserAsync(User user)
     {
         _mySqlDbContext.Users.Add(user);
@@ -20,8 +26,10 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<IEnumerable<User>> GetUsersAsync()
+    public async Task<User> UpdateUserAsync(User user)
     {
-        return await _mySqlDbContext.Users.ToListAsync();
+        _mySqlDbContext.Users.Update(user);
+        await _mySqlDbContext.SaveChangesAsync();
+        return user;
     }
 }

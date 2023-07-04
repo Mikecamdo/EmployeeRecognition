@@ -21,8 +21,9 @@ builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Use cases
-builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>(); //FIXME need to update namespaces and imports since I rearranged folder/file structure
+builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
+builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 
 //Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();

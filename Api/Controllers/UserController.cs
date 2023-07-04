@@ -9,14 +9,24 @@ namespace EmployeeRecognition.Api.Controllers;
 [Route("users")]
 public class UserController : ControllerBase
 {
-    private readonly IAddUserUseCase _addUserUseCase;
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
+    private readonly IAddUserUseCase _addUserUseCase;
+    private readonly IUpdateUserUseCase _updateUserUseCase;
     public UserController(
+        IGetAllUsersUseCase getAllUsersUseCase,
         IAddUserUseCase addUserUseCase,
-        IGetAllUsersUseCase getAllUsersUseCase) 
+        IUpdateUserUseCase updateUserUseCase) 
     {
-        _addUserUseCase= addUserUseCase;
-        _getAllUsersUseCase= getAllUsersUseCase;
+        _getAllUsersUseCase = getAllUsersUseCase;
+        _addUserUseCase = addUserUseCase;
+        _updateUserUseCase= updateUserUseCase;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUsers()
+    {
+        var allUsers = await _getAllUsersUseCase.ExecuteAsync();
+        return Ok(allUsers);
     }
 
     [HttpPost]
@@ -34,10 +44,17 @@ public class UserController : ControllerBase
         return Ok(addedUser);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetUsers()
+    [HttpPut("{userId}")]
+    public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
-        var allUsers = await _getAllUsersUseCase.ExecuteAsync();
-        return Ok(allUsers);
+        var newUser = new User() //FIXME need to move to a converter
+        {
+            Id = userId,
+            Name = updatedUserInfo.Name,
+            Department = updatedUserInfo.Department,
+            AvatarUrl = updatedUserInfo.AvatarUrl
+        };
+        var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);
+        return Ok(updatedUser);
     }
 }
