@@ -24,6 +24,7 @@ builder.Services.AddDbContext<MySqlDbContext>(options =>
 builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
 builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 
 //Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();

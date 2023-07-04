@@ -32,4 +32,10 @@ public class UserRepository : IUserRepository
         await _mySqlDbContext.SaveChangesAsync();
         return user;
     }
+
+    public async Task DeleteUserAsync(User user)
+    {
+        _mySqlDbContext.Users.Remove(user);
+        await _mySqlDbContext.SaveChangesAsync();
+    }
 }

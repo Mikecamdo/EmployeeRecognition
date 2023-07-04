@@ -12,14 +12,17 @@ public class UserController : ControllerBase
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
     private readonly IAddUserUseCase _addUserUseCase;
     private readonly IUpdateUserUseCase _updateUserUseCase;
+    private readonly IDeleteUserUseCase _deleteUserUseCase;
     public UserController(
         IGetAllUsersUseCase getAllUsersUseCase,
         IAddUserUseCase addUserUseCase,
-        IUpdateUserUseCase updateUserUseCase) 
+        IUpdateUserUseCase updateUserUseCase,
+        IDeleteUserUseCase deleteUserUseCase)
     {
         _getAllUsersUseCase = getAllUsersUseCase;
         _addUserUseCase = addUserUseCase;
-        _updateUserUseCase= updateUserUseCase;
+        _updateUserUseCase = updateUserUseCase;
+        _deleteUserUseCase = deleteUserUseCase;
     }
 
     [HttpGet]
@@ -56,5 +59,12 @@ public class UserController : ControllerBase
         };
         var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);
         return Ok(updatedUser);
+    }
+
+    [HttpDelete("{userId}")]
+    public async Task<IActionResult> DeleteUser([FromRoute] string userId)
+    {
+        await _deleteUserUseCase.ExecuteAsync(userId);
+        return NoContent();
     }
 }
