@@ -13,17 +13,7 @@ public class DeleteUserUseCase : IDeleteUserUseCase
     }
     public async Task ExecuteAsync(string userId)
     {
-        var allUsers = _userRepository.GetUsersAsync(); //FIXME need to implement GetUserByIdAsync
-        User? toBeDeleted = null;
-
-        foreach (var user in allUsers.Result)
-        {
-            if (user.Id == userId)
-            {
-                toBeDeleted= user;
-                break;
-            }
-        }
+        var toBeDeleted = await _userRepository.GetUserByIdAsync(userId);
 
         if (toBeDeleted == null)
         {
