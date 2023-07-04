@@ -1,7 +1,7 @@
 using EmployeeRecognition.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeRecognition.Database.EntityFramework;
+namespace EmployeeRecognition.Database.Context;
 
 public class MySqlDbContext : DbContext
 {

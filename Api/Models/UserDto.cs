@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Models;
+﻿namespace EmployeeRecognition.Api.Models;
 
 public class UserDto
 {

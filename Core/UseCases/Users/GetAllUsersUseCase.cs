@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Interfaces;
-using EmployeeRecognition.Database;
-using EmployeeRecognition.Interfaces;
+﻿using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+using EmployeeRecognition.Core.Interfaces.Repositories;
+using EmployeeRecognition.Core.Entities;
 
-namespace EmployeeRecognition.Core.UseCases.User;
+namespace EmployeeRecognition.Core.UseCases.Users;
 
 public class GetAllUsersUseCase : IGetAllUsersUseCase
 {

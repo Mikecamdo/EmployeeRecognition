@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Core.Interfaces.UseCases.User;
-using EmployeeRecognition.Database;
-using EmployeeRecognition.Models;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Entities;
+using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeRecognition.Controllers;
+namespace EmployeeRecognition.Api.Controllers;
 
 [ApiController]
 [Route("users")]

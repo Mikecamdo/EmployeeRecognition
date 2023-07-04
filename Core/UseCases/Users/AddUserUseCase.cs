@@ -1,7 +1,8 @@
-﻿using EmployeeRecognition.Interfaces;
-using EmployeeRecognition.Database;
+﻿using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+using EmployeeRecognition.Core.Interfaces.Repositories;
+using EmployeeRecognition.Core.Entities;
 
-namespace EmployeeRecognition.Core.UseCases.User;
+namespace EmployeeRecognition.Core.UseCases.Users;
 
 public class AddUserUseCase : IAddUserUseCase
 {

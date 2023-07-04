@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Database.EntityFramework;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Entities;
+using EmployeeRecognition.Database.Context;
 
-namespace EmployeeRecognition.Repositories;
+namespace EmployeeRecognition.Core.Repositories;
 
 public class UserRepository : IUserRepository
 {

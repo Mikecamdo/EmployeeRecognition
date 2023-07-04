@@ -1,12 +1,12 @@
 using DotNetEnv;
-using EmployeeRecognition.Database.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using EmployeeRecognition.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.User;
 using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.User;
+using EmployeeRecognition.Database.Context;
+using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+using EmployeeRecognition.Core.UseCases.Users;
+using EmployeeRecognition.Core.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
