@@ -72,6 +72,10 @@ public class UserController : ControllerBase
             AvatarUrl = updatedUserInfo.AvatarUrl
         };
         var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);
+        if (updatedUser == null)
+        {
+            return Ok();
+        }
         return Ok(updatedUser);
     }
 

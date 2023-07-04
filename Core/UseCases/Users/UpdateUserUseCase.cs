@@ -12,8 +12,14 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<User> ExecuteAsync(User user)
+    public async Task<User?> ExecuteAsync(User user)
     {
+        var toBeUpdated = await _userRepository.GetUserByIdAsync(user.Id);
+        if (toBeUpdated == null)
+        {
+            return null;
+        }
+
         return await _userRepository.UpdateUserAsync(user);
     }
 }
