@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Database;
+﻿using EmployeeRecognition.Core.Interfaces;
+using EmployeeRecognition.Database;
 using EmployeeRecognition.Interfaces;
 using EmployeeRecognition.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,13 @@ namespace EmployeeRecognition.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IAddUserUseCase _addUserUseCase;
-    public UserController(IAddUserUseCase addUserUseCase) 
+    private readonly IGetAllUsersUseCase _getAllUsersUseCase;
+    public UserController(
+        IAddUserUseCase addUserUseCase,
+        IGetAllUsersUseCase getAllUsersUseCase) 
     {
         _addUserUseCase= addUserUseCase;
+        _getAllUsersUseCase= getAllUsersUseCase;
     }
 
     [HttpPost]
@@ -28,5 +33,12 @@ public class UserController : ControllerBase
         };
         var addedUser = await _addUserUseCase.ExecuteAsync(newUser);
         return Ok(addedUser);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUsers()
+    {
+        var allUsers = await _getAllUsersUseCase.ExecuteAsync();
+        return Ok(allUsers);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EmployeeRecognition.Database.EntityFramework;
 using EmployeeRecognition.Interfaces;
 using EmployeeRecognition.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRecognition.Repositories;
 
@@ -17,5 +18,10 @@ public class UserRepository : IUserRepository
         _mySqlDbContext.Users.Add(user);
         await _mySqlDbContext.SaveChangesAsync();
         return user;
+    }
+
+    public async Task<IEnumerable<User>> GetUsersAsync()
+    {
+        return await _mySqlDbContext.Users.ToListAsync();
     }
 }

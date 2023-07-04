@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using EmployeeRecognition.UseCases;
 using EmployeeRecognition.Repositories;
+using EmployeeRecognition.Core.Interfaces;
+using EmployeeRecognition.Core.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,8 @@ builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Use cases
-builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
+builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>(); //FIXME need to update namespaces and imports since I rearranged folder/file structure
+builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
 
 //Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
