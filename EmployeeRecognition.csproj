@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="EmployeeRecognition\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

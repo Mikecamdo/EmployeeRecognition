@@ -22,7 +22,7 @@ public class MySqlDbContext : DbContext
     {
         modelBuilder.Entity<User>(entity =>
         {
-            entity.ToTable("Users");
+            entity.ToTable("users");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
@@ -34,7 +34,7 @@ public class MySqlDbContext : DbContext
 
         modelBuilder.Entity<Kudo>(entity =>
         {
-            entity.ToTable("Kudos");
+            entity.ToTable("kudos");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Sender).HasMaxLength(50).IsRequired();
@@ -59,7 +59,7 @@ public class MySqlDbContext : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.ToTable("Comments");
+            entity.ToTable("comments");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.KudosId).IsRequired();

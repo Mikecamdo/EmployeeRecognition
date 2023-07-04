@@ -1,8 +1,11 @@
 using DotNetEnv;
 using EmployeeRecognition.Database.EntityFramework;
+using EmployeeRecognition.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using EmployeeRecognition.UseCases;
+using EmployeeRecognition.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,11 @@ var connectionString = $"Server={Env.GetString("MYSQLHOST")};Port={Env.GetString
 builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+//Use cases
+builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
+
+//Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {
