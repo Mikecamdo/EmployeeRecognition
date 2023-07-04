@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeRecognition.Database;
+namespace EmployeeRecognition.Core.Entities;
 
 
 [Table("kudos")]
@@ -17,13 +17,13 @@ public class Kudo
 
     public required string Title { get; set; }
     public required string Message { get; set; }
-    public required Boolean TeamPlayer { get; set; }
-    public required Boolean OneOfAKind { get; set; }
-    public required Boolean Creative { get; set; }
-    public required Boolean HighEnergy { get; set; }
-    public required Boolean Awesome { get; set; }
-    public required Boolean Achiever { get; set; }
-    public required Boolean Sweetness { get; set; }
+    public required bool TeamPlayer { get; set; }
+    public required bool OneOfAKind { get; set; }
+    public required bool Creative { get; set; }
+    public required bool HighEnergy { get; set; }
+    public required bool Awesome { get; set; }
+    public required bool Achiever { get; set; }
+    public required bool Sweetness { get; set; }
     public required DateOnly TheDate { get; set; }
 
 }

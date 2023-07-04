@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Database;
+﻿using EmployeeRecognition.Core.Entities;
 
-namespace EmployeeRecognition.Interfaces;
+namespace EmployeeRecognition.Core.Interfaces.Repositories;
 
 public interface IUserRepository
 {

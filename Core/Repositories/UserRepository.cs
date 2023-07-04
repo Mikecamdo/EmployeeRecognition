@@ -1,7 +1,7 @@
 ﻿using EmployeeRecognition.Database.EntityFramework;
-using EmployeeRecognition.Interfaces;
-using EmployeeRecognition.Database;
 using Microsoft.EntityFrameworkCore;
+using EmployeeRecognition.Core.Interfaces.Repositories;
+using EmployeeRecognition.Core.Entities;
 
 namespace EmployeeRecognition.Repositories;
 

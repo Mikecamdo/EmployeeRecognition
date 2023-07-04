@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeRecognition.Database;
+namespace EmployeeRecognition.Core.Entities;
 
 [Table("comments")]
 public class Comment

@@ -1,6 +1,6 @@
 ﻿using EmployeeRecognition.Database;
 
-namespace EmployeeRecognition.Interfaces;
+namespace EmployeeRecognition.Core.Interfaces.UseCases.User;
 
 public interface IAddUserUseCase
 {

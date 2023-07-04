@@ -1,4 +1,4 @@
-using EmployeeRecognition.Database;
+using EmployeeRecognition.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeRecognition.Database.EntityFramework;

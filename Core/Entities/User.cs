@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeRecognition.Database;
+namespace EmployeeRecognition.Core.Entities;
 
 [Table("users")]
 public class User

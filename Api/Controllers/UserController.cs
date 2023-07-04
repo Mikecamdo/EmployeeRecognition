@@ -1,6 +1,5 @@
-﻿using EmployeeRecognition.Core.Interfaces;
+﻿using EmployeeRecognition.Core.Interfaces.UseCases.User;
 using EmployeeRecognition.Database;
-using EmployeeRecognition.Interfaces;
 using EmployeeRecognition.Models;
 using Microsoft.AspNetCore.Mvc;
 

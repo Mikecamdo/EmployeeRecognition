@@ -27,14 +27,17 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Converters\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Converters\**" />
+    <EmbeddedResource Remove="Converters\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Converters\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="EmployeeRecognition\" />
-    <Folder Include="Converters\" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
