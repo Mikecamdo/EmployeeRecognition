@@ -33,6 +33,7 @@ builder.Services.AddScoped<IGetAllKudosUseCase, GetAllKudosUseCase>(); //FIXME c
 builder.Services.AddScoped<IGetKudosBySenderIdUseCase, GetKudosBySenderIdUseCase>();
 builder.Services.AddScoped<IGetKudosByReceiverIdUseCase, GetKudosByReceiverIdUseCase>();
 builder.Services.AddScoped<IAddKudoUseCase, AddKudoUseCase>();
+builder.Services.AddScoped<IDeleteKudoUseCase, DeleteKudoUseCase>();
 
 //Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();

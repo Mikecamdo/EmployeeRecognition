@@ -19,12 +19,17 @@ public class KudoRepository : IKudoRepository
         return await _mySqlDbContext.Kudos.ToListAsync();
     }
 
-    public async Task<IEnumerable<Kudo>> GetKudosBySenderId(string senderId)
+    public async Task<Kudo?> GetKudoByIdAsync(int kudoId)
+    {
+        return await _mySqlDbContext.Kudos.FirstOrDefaultAsync(k => k.Id == kudoId);
+    }
+
+    public async Task<IEnumerable<Kudo>> GetKudosBySenderIdAsync(string senderId)
     {
         return await _mySqlDbContext.Kudos.Where(k => k.SenderId == senderId).ToListAsync();
     }
 
-    public async Task<IEnumerable<Kudo>> GetKudosByReceiverId(string receiverId)
+    public async Task<IEnumerable<Kudo>> GetKudosByReceiverIdAsync(string receiverId)
     {
         return await _mySqlDbContext.Kudos.Where(k => k.ReceiverId == receiverId).ToListAsync();
     }
@@ -34,5 +39,11 @@ public class KudoRepository : IKudoRepository
         _mySqlDbContext.Kudos.Add(kudo);
         await _mySqlDbContext.SaveChangesAsync();
         return kudo;
+    }
+
+    public async Task DeleteKudoAsync(Kudo kudo)
+    {
+        _mySqlDbContext.Kudos.Remove(kudo);
+        await _mySqlDbContext.SaveChangesAsync();
     }
 }

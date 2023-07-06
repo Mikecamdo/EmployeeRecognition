@@ -13,17 +13,20 @@ public class KudoController : ControllerBase
     private readonly IGetKudosBySenderIdUseCase _getKudosBySenderIdUseCase;
     private readonly IGetKudosByReceiverIdUseCase _getKudosByReceiverIdUseCase;
     private readonly IAddKudoUseCase _addKudoUseCase;
+    private readonly IDeleteKudoUseCase _deleteKudoUseCase;
 
     public KudoController(
         IGetAllKudosUseCase getAllKudosUseCase,
         IGetKudosBySenderIdUseCase getKudosBySenderIdUseCase,
         IGetKudosByReceiverIdUseCase getKudosByReceiverIdUseCase,
-        IAddKudoUseCase addKudoUseCase) 
+        IAddKudoUseCase addKudoUseCase,
+        IDeleteKudoUseCase deleteKudoUseCase)
     {
         _getAllKudosUseCase = getAllKudosUseCase;
         _getKudosBySenderIdUseCase = getKudosBySenderIdUseCase;
         _getKudosByReceiverIdUseCase = getKudosByReceiverIdUseCase;
         _addKudoUseCase = addKudoUseCase;
+        _deleteKudoUseCase = deleteKudoUseCase;
     }
 
     [HttpGet]
@@ -48,7 +51,7 @@ public class KudoController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUser([FromBody] KudoDto kudo)
+    public async Task<IActionResult> AddKudo([FromBody] KudoDto kudo)
     {
         var newKudo = new Kudo() //FIXME need to move to a converter
         {
@@ -74,5 +77,12 @@ public class KudoController : ControllerBase
 
         var addedKudo = await _addKudoUseCase.ExecuteAsync(newKudo);
         return Ok(addedKudo);
+    }
+
+    [HttpDelete("{kudoId}")]
+    public async Task<IActionResult> DeleteKudo([FromRoute] int kudoId)
+    {
+        await _deleteKudoUseCase.ExecuteAsync(kudoId);
+        return NoContent();
     }
 }

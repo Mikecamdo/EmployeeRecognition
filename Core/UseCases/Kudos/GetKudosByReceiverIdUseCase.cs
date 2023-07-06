@@ -13,6 +13,6 @@ public class GetKudosByReceiverIdUseCase : IGetKudosByReceiverIdUseCase
     }
     public async Task<IEnumerable<Kudo>> ExecuteAsync(string receiverId)
     {
-        return await _kudoRepository.GetKudosByReceiverId(receiverId);
+        return await _kudoRepository.GetKudosByReceiverIdAsync(receiverId);
     }
 }
