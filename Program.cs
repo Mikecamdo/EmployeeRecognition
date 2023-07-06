@@ -29,6 +29,7 @@ builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
 builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
 
+builder.Services.AddScoped<IGetAllKudosUseCase, GetAllKudosUseCase>(); //FIXME can move all of these to their own folders to make this cleaner
 builder.Services.AddScoped<IAddKudoUseCase, AddKudoUseCase>();
 
 //Repositories

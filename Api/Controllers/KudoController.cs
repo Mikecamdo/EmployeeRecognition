@@ -9,10 +9,22 @@ namespace EmployeeRecognition.Api.Controllers;
 [Route("kudos")]
 public class KudoController : ControllerBase
 {
+    private readonly IGetAllKudosUseCase _getAllKudosUseCase;
     private readonly IAddKudoUseCase _addKudoUseCase;
-    public KudoController(IAddKudoUseCase addKudoUseCase) 
-    { 
+
+    public KudoController(
+        IGetAllKudosUseCase getAllKudosUseCase,
+        IAddKudoUseCase addKudoUseCase) 
+    {
+        _getAllKudosUseCase = getAllKudosUseCase;
         _addKudoUseCase = addKudoUseCase;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetKudos()
+    {
+        var allKudos = await _getAllKudosUseCase.ExecuteAsync();
+        return Ok(allKudos);
     }
 
     [HttpPost]
