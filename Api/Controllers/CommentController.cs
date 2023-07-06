@@ -9,12 +9,23 @@ namespace EmployeeRecognition.Api.Controllers;
 [Route("comment")]
 public class CommentController : ControllerBase
 {
+    private readonly IGetCommentsUseCase _getCommentsUseCase;
     private readonly IAddCommentUseCase _addCommentUseCase;
 
     public CommentController(
+        IGetCommentsUseCase getCommentsUseCase,
         IAddCommentUseCase addCommentUseCase)
     {
+        _getCommentsUseCase = getCommentsUseCase;
         _addCommentUseCase = addCommentUseCase;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllComments()
+    {
+        var allComments = await _getCommentsUseCase.ExecuteAsync();
+        return Ok(allComments);
+
     }
 
     [HttpPost]

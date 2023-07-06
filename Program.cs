@@ -37,6 +37,7 @@ builder.Services.AddScoped<IGetKudosByReceiverIdUseCase, GetKudosByReceiverIdUse
 builder.Services.AddScoped<IAddKudoUseCase, AddKudoUseCase>();
 builder.Services.AddScoped<IDeleteKudoUseCase, DeleteKudoUseCase>();
 
+builder.Services.AddScoped<IGetCommentsUseCase, GetCommentsUseCase>();
 builder.Services.AddScoped<IAddCommentUseCase, AddCommentUseCase>();
 
 //Repositories
