@@ -19,6 +19,11 @@ public class CommentRepository : ICommentRepository
         return await _mySqlDbContext.Comments.ToListAsync();
     }
 
+    public async Task<IEnumerable<Comment>> GetCommentsByKudoIdAsync(int kudoId)
+    {
+        return await _mySqlDbContext.Comments.Where(c => c.KudoId == kudoId).ToListAsync();
+    }
+
     public async Task<Comment> AddCommentAsync(Comment comment)
     {
         _mySqlDbContext.Comments.Add(comment);

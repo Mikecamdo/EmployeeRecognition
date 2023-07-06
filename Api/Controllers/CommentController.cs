@@ -10,13 +10,16 @@ namespace EmployeeRecognition.Api.Controllers;
 public class CommentController : ControllerBase
 {
     private readonly IGetCommentsUseCase _getCommentsUseCase;
+    private readonly IGetCommentsByKudoIdUseCase _getCommentsByKudoIdUseCase;
     private readonly IAddCommentUseCase _addCommentUseCase;
 
     public CommentController(
         IGetCommentsUseCase getCommentsUseCase,
+        IGetCommentsByKudoIdUseCase getCommentsByKudoIdUseCase,
         IAddCommentUseCase addCommentUseCase)
     {
         _getCommentsUseCase = getCommentsUseCase;
+        _getCommentsByKudoIdUseCase = getCommentsByKudoIdUseCase;
         _addCommentUseCase = addCommentUseCase;
     }
 
@@ -26,6 +29,13 @@ public class CommentController : ControllerBase
         var allComments = await _getCommentsUseCase.ExecuteAsync();
         return Ok(allComments);
 
+    }
+
+    [HttpGet("{kudoId}")]
+    public async Task<IActionResult> GetCommentsByKudoId(int kudoId)
+    {
+        var kudoComments = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
+        return Ok(kudoComments);
     }
 
     [HttpPost]
