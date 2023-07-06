@@ -12,15 +12,18 @@ public class CommentController : ControllerBase
     private readonly IGetCommentsUseCase _getCommentsUseCase;
     private readonly IGetCommentsByKudoIdUseCase _getCommentsByKudoIdUseCase;
     private readonly IAddCommentUseCase _addCommentUseCase;
+    private readonly IDeleteCommentUseCase _deleteCommentUseCase;
 
     public CommentController(
         IGetCommentsUseCase getCommentsUseCase,
         IGetCommentsByKudoIdUseCase getCommentsByKudoIdUseCase,
-        IAddCommentUseCase addCommentUseCase)
+        IAddCommentUseCase addCommentUseCase,
+        IDeleteCommentUseCase deleteCommentUseCase)
     {
         _getCommentsUseCase = getCommentsUseCase;
         _getCommentsByKudoIdUseCase = getCommentsByKudoIdUseCase;
         _addCommentUseCase = addCommentUseCase;
+        _deleteCommentUseCase = deleteCommentUseCase;
     }
 
     [HttpGet]
@@ -32,7 +35,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet("{kudoId}")]
-    public async Task<IActionResult> GetCommentsByKudoId(int kudoId)
+    public async Task<IActionResult> GetCommentsByKudoId([FromRoute] int kudoId)
     {
         var kudoComments = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
         return Ok(kudoComments);
@@ -52,5 +55,12 @@ public class CommentController : ControllerBase
 
         var addedComment = await _addCommentUseCase.ExecuteAsync(newComment);
         return Ok(addedComment);
+    }
+
+    [HttpDelete("{commentId}")]
+    public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
+    {
+        await _deleteCommentUseCase.ExecuteAsync(commentId);
+        return NoContent();
     }
 }
