@@ -5,8 +5,8 @@ namespace EmployeeRecognition.Core.Entities;
 [Table("comments")]
 public class Comment
 {
-    public required int Id { get; set; }
-    public required int KudosId { get; set; }
+    public int Id { get; set; }
+    public required int KudoId { get; set; }
     public required string SenderId { get; set; }
     public required string SenderName { get; set; }
     public required string SenderAvatar { get; set; }

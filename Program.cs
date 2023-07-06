@@ -9,6 +9,8 @@ using EmployeeRecognition.Core.UseCases.Users;
 using EmployeeRecognition.Core.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos;
+using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+using EmployeeRecognition.Core.UseCases.Comments;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,9 +37,12 @@ builder.Services.AddScoped<IGetKudosByReceiverIdUseCase, GetKudosByReceiverIdUse
 builder.Services.AddScoped<IAddKudoUseCase, AddKudoUseCase>();
 builder.Services.AddScoped<IDeleteKudoUseCase, DeleteKudoUseCase>();
 
+builder.Services.AddScoped<IAddCommentUseCase, AddCommentUseCase>();
+
 //Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IKudoRepository, KudoRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {

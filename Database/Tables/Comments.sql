@@ -1,6 +1,6 @@
 CREATE TABLE Comments (
 	Id INT AUTO_INCREMENT PRIMARY KEY,
-    KudosId INT NOT NULL,
+    KudoId INT NOT NULL,
     SenderId VARCHAR(50) NOT NULL,
     SenderName VARCHAR(50) NOT NULL,
     SenderAvatar VARCHAR(50) NOT NULL,

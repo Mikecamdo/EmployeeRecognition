@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System.Reflection;
-
-namespace EmployeeRecognition.Api.Models;
+﻿namespace EmployeeRecognition.Api.Models;
 
 public class KudoDto
 {

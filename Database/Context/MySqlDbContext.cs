@@ -62,7 +62,7 @@ public class MySqlDbContext : DbContext
             entity.ToTable("comments");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.KudosId).IsRequired();
+            entity.Property(e => e.KudoId).IsRequired().HasColumnName("KudosId"); //FIXME remove HasColumnName when I reset the database
             entity.Property(e => e.SenderName).HasMaxLength(50).IsRequired();
             entity.Property(e => e.SenderId).HasMaxLength(50).IsRequired();
             entity.Property(e => e.SenderAvatar).HasMaxLength(50).IsRequired();
