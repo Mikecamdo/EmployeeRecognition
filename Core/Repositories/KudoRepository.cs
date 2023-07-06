@@ -18,6 +18,17 @@ public class KudoRepository : IKudoRepository
     {
         return await _mySqlDbContext.Kudos.ToListAsync();
     }
+
+    public async Task<IEnumerable<Kudo>> GetKudosBySenderId(string senderId)
+    {
+        return await _mySqlDbContext.Kudos.Where(k => k.SenderId == senderId).ToListAsync();
+    }
+
+    public async Task<IEnumerable<Kudo>> GetKudosByReceiverId(string receiverId)
+    {
+        return await _mySqlDbContext.Kudos.Where(k => k.ReceiverId == receiverId).ToListAsync();
+    }
+
     public async Task<Kudo> AddKudoAsync(Kudo kudo)
     {
         _mySqlDbContext.Kudos.Add(kudo);

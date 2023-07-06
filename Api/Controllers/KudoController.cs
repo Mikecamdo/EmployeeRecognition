@@ -10,13 +10,19 @@ namespace EmployeeRecognition.Api.Controllers;
 public class KudoController : ControllerBase
 {
     private readonly IGetAllKudosUseCase _getAllKudosUseCase;
+    private readonly IGetKudosBySenderIdUseCase _getKudosBySenderIdUseCase;
+    private readonly IGetKudosByReceiverIdUseCase _getKudosByReceiverIdUseCase;
     private readonly IAddKudoUseCase _addKudoUseCase;
 
     public KudoController(
         IGetAllKudosUseCase getAllKudosUseCase,
+        IGetKudosBySenderIdUseCase getKudosBySenderIdUseCase,
+        IGetKudosByReceiverIdUseCase getKudosByReceiverIdUseCase,
         IAddKudoUseCase addKudoUseCase) 
     {
         _getAllKudosUseCase = getAllKudosUseCase;
+        _getKudosBySenderIdUseCase = getKudosBySenderIdUseCase;
+        _getKudosByReceiverIdUseCase = getKudosByReceiverIdUseCase;
         _addKudoUseCase = addKudoUseCase;
     }
 
@@ -25,6 +31,20 @@ public class KudoController : ControllerBase
     {
         var allKudos = await _getAllKudosUseCase.ExecuteAsync();
         return Ok(allKudos);
+    }
+
+    [HttpGet("sender/{senderId}")]
+    public async Task<IActionResult> GetKudosBySenderId([FromRoute] string senderId)
+    {
+        var senderKudos = await _getKudosBySenderIdUseCase.ExecuteAsync(senderId);
+        return Ok(senderKudos);
+    }
+
+    [HttpGet("receiver/{receiverId}")]
+    public async Task<IActionResult> GetKudosByReceiverId([FromRoute] string receiverId)
+    {
+        var receiverKudos = await _getKudosByReceiverIdUseCase.ExecuteAsync(receiverId);
+        return Ok(receiverKudos);
     }
 
     [HttpPost]
