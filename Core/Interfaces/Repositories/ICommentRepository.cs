@@ -8,5 +8,6 @@ public interface ICommentRepository
     public Task<Comment?> GetCommentByIdAsync(int commentId);
     public Task<IEnumerable<Comment>> GetCommentsByKudoIdAsync(int kudoId);
     public Task<Comment> AddCommentAsync(Comment comment);
+    public Task<Comment> UpdateCommentAsync(Comment comment);
     public Task DeleteCommentAsync(Comment comment);
 }

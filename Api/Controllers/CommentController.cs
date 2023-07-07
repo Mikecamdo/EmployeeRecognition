@@ -12,17 +12,20 @@ public class CommentController : ControllerBase
     private readonly IGetCommentsUseCase _getCommentsUseCase;
     private readonly IGetCommentsByKudoIdUseCase _getCommentsByKudoIdUseCase;
     private readonly IAddCommentUseCase _addCommentUseCase;
+    private readonly IUpdateCommentUseCase _updateCommentUseCase;
     private readonly IDeleteCommentUseCase _deleteCommentUseCase;
 
     public CommentController(
         IGetCommentsUseCase getCommentsUseCase,
         IGetCommentsByKudoIdUseCase getCommentsByKudoIdUseCase,
         IAddCommentUseCase addCommentUseCase,
+        IUpdateCommentUseCase updateCommentUseCase,
         IDeleteCommentUseCase deleteCommentUseCase)
     {
         _getCommentsUseCase = getCommentsUseCase;
         _getCommentsByKudoIdUseCase = getCommentsByKudoIdUseCase;
         _addCommentUseCase = addCommentUseCase;
+        _updateCommentUseCase = updateCommentUseCase;
         _deleteCommentUseCase = deleteCommentUseCase;
     }
 
@@ -55,6 +58,17 @@ public class CommentController : ControllerBase
 
         var addedComment = await _addCommentUseCase.ExecuteAsync(newComment);
         return Ok(addedComment);
+    }
+
+    [HttpPut("{commentId}")]
+    public async Task<IActionResult> UpdateUser([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
+    {
+        var updatedComment = await _updateCommentUseCase.ExecuteAsync(commentId, updatedCommentInfo);
+        if (updatedComment == null)
+        {
+            return Ok();
+        }
+        return Ok(updatedComment);
     }
 
     [HttpDelete("{commentId}")]

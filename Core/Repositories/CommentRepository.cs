@@ -36,6 +36,13 @@ public class CommentRepository : ICommentRepository
         return comment;
     }
 
+    public async Task<Comment> UpdateCommentAsync(Comment comment)
+    {
+        _mySqlDbContext.Comments.Update(comment);
+        await _mySqlDbContext.SaveChangesAsync();
+        return comment;
+    }
+
     public async Task DeleteCommentAsync(Comment comment)
     {
         _mySqlDbContext.Comments.Remove(comment);

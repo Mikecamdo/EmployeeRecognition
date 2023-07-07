@@ -40,6 +40,7 @@ builder.Services.AddScoped<IDeleteKudoUseCase, DeleteKudoUseCase>();
 builder.Services.AddScoped<IGetCommentsUseCase, GetCommentsUseCase>();
 builder.Services.AddScoped<IGetCommentsByKudoIdUseCase, GetCommentsByKudoIdUseCase>();
 builder.Services.AddScoped<IAddCommentUseCase, AddCommentUseCase>();
+builder.Services.AddScoped<IUpdateCommentUseCase, UpdateCommentUseCase>();
 builder.Services.AddScoped<IDeleteCommentUseCase, DeleteCommentUseCase>();
 
 //Repositories
