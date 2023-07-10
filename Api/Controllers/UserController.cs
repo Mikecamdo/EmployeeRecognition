@@ -54,7 +54,7 @@ public class UserController : ControllerBase
         {
             Id = userId,
             Name = user.Name,
-            Department = user.Department,
+            Password = user.Password,
             AvatarUrl = user.AvatarUrl
         };
         var addedUser = await _addUserUseCase.ExecuteAsync(newUser);
@@ -68,7 +68,7 @@ public class UserController : ControllerBase
         {
             Id = userId,
             Name = updatedUserInfo.Name,
-            Department = updatedUserInfo.Department,
+            Password = updatedUserInfo.Password,
             AvatarUrl = updatedUserInfo.AvatarUrl
         };
         var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);

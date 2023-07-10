@@ -3,7 +3,7 @@ USE railway;
 CREATE TABLE Users (
 	Id VARCHAR(50) PRIMARY KEY,
     Name VARCHAR(50) NOT NULL,
-    Department VARCHAR(50) NOT NULL,
+    Password VARCHAR(80) NOT NULL,
     AvatarURL VARCHAR(50) NOT NULL
 );
 

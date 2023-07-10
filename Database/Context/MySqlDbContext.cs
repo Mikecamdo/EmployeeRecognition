@@ -22,11 +22,11 @@ public class MySqlDbContext : DbContext
     {
         modelBuilder.Entity<User>(entity =>
         {
-            entity.ToTable("users");
+            entity.ToTable("Users");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.Department).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.Password).HasMaxLength(80).IsRequired();
             entity.Property(e => e.AvatarUrl).HasMaxLength(50).IsRequired();
 
             entity.HasKey(e => e.Id);
@@ -34,7 +34,7 @@ public class MySqlDbContext : DbContext
 
         modelBuilder.Entity<Kudo>(entity =>
         {
-            entity.ToTable("kudos");
+            entity.ToTable("Kudos");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Sender).HasMaxLength(50).IsRequired();
@@ -59,10 +59,10 @@ public class MySqlDbContext : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.ToTable("comments");
+            entity.ToTable("Comments");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.KudoId).IsRequired().HasColumnName("KudosId"); //FIXME remove HasColumnName when I reset the database
+            entity.Property(e => e.KudoId).IsRequired();
             entity.Property(e => e.SenderName).HasMaxLength(50).IsRequired();
             entity.Property(e => e.SenderId).HasMaxLength(50).IsRequired();
             entity.Property(e => e.SenderAvatar).HasMaxLength(50).IsRequired();
