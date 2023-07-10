@@ -1,38 +1,42 @@
-<ng-template #content let-modal>
+<ng-template #signIn let-modal>
     <div class="modal-header">
         <h4 class="modal-title" 
-            id="modal-basic-title">
-            Geeks of Geeks
+            id="sign-in">
+            Sign in
         </h4>
         <button type="button" class="close"
                 aria-label="Close" (click)=
                 "modal.dismiss('Cross click')">
   
             <span aria-hidden="true">
-                ×
+                X
             </span>
         </button>
     </div>
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <label for="dateOfBirth">
-                    Date of birth
+                <label for="name">
+                    Name
                 </label>
                 <div class="input-group">
-                    <input id="dateOfBirth" 
+                    <input 
+                        id="name"
+                        name="name"
                         class="form-control" 
-                        placeholder="yyyy-mm-dd" 
-                        name="dp" ngbDatepicker
-                        #dp="ngbDatepicker">
-  
-                    <div class="input-group-append">
-                        <button class="btn 
-                            btn-outline-secondary calendar"
-                            (click)="dp.toggle()"
-                            type="button">
-                        </button>
-                    </div>
+                        placeholder="Name" >
+                </div>
+
+                <label for="password">
+                    Password
+                </label>
+                <div class="input-group">
+                    <input 
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="form-control" 
+                        placeholder="Password" >
                 </div>
             </div>
         </form>
@@ -46,7 +50,70 @@
     </div>
 </ng-template>
   
-<button class="btn btn-lg btn-outline-primary" 
-    (click)="open(content)">
-    Popup using Angular and Bootstrap
-</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(signIn, 'sign-in')">Sign in</button>
+
+<ng-template #signUp let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" 
+            id="sign-up">
+            Sign up
+        </h4>
+        <button type="button" class="close"
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+  
+            <span aria-hidden="true">
+                X
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="name">
+                    Name
+                </label>
+                <div class="input-group">
+                    <input 
+                        id="name"
+                        name="name"
+                        class="form-control" 
+                        placeholder="Name" >
+                </div>
+
+                <label for="password">
+                    Password
+                </label>
+                <div class="input-group">
+                    <input 
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="form-control" 
+                        placeholder="Password" >
+                </div>
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+                <div class="input-group">
+                    <input 
+                        id="confirm_password"
+                        name="confirm_password"
+                        type="password"
+                        class="form-control" 
+                        placeholder="Confirm Password" >
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" 
+            class="btn btn-outline-dark" 
+            (click)="modal.close('Save click')">
+            Save
+        </button>
+    </div>
+</ng-template>
+  
+<button class="btn btn-lg btn-outline-primary" (click)="open(signUp, 'sign-up')">Sign up</button>
