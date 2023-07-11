@@ -69,4 +69,12 @@ export class LandingPageComponent {
       }
     });
   }
+
+  disableSignIn(): boolean {
+    return !this.signInName || !this.signInPassword;
+  }
+
+  disableSignUp(): boolean {
+    return !this.signUpName || !this.signUpPassword || !this.signUpConfirmPassword;
+  }
 }

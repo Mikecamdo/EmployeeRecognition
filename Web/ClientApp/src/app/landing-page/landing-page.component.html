@@ -64,7 +64,8 @@
                     </div>
                     <button type="button" 
                         class="btn btn-outline-dark ml-auto" 
-                        (click)="modal.close('Sign in'); attemptSignIn()">
+                        (click)="modal.close('Sign in'); attemptSignIn()"
+                        [disabled]="disableSignIn()">
                         Sign in
                     </button>
                 </div>
@@ -137,7 +138,8 @@
                     </div>
                     <button type="button" 
                         class="btn btn-outline-dark ml-auto" 
-                        (click)="modal.close('Sign up'); attemptSignUp()">
+                        (click)="modal.close('Sign up'); attemptSignUp()"
+                        [disabled]="disableSignUp()">
                         Sign up
                     </button>
                 </div>
