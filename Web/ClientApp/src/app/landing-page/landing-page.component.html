@@ -58,9 +58,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d=flex">
+                    <div class="flex-grow-1">
+                        Don't have an account? <span class="link-text" (click)="modal.close('Sign in'); open(signUp, 'sign-up')">Sign up</span>
+                    </div>
                     <button type="button" 
-                        class="btn btn-outline-dark" 
+                        class="btn btn-outline-dark ml-auto" 
                         (click)="modal.close('Sign in'); attemptSignIn()">
                         Sign in
                     </button>
@@ -128,9 +131,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex">
+                    <div class="flex-grow-1">
+                        Already have an account? <span class="link-text" (click)="modal.close('Sign up'); open(signIn, 'sign-in')">Sign in</span>
+                    </div>
                     <button type="button" 
-                        class="btn btn-outline-dark" 
+                        class="btn btn-outline-dark ml-auto" 
                         (click)="modal.close('Sign up'); attemptSignUp()">
                         Sign up
                     </button>
