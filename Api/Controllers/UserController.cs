@@ -11,18 +11,21 @@ public class UserController : ControllerBase
 {
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
     private readonly IGetUserByIdUseCase _getUserByIdUseCase;
+    private readonly IGetUserByLoginCredentialUseCase _getUserByLoginCredentialUseCase;
     private readonly IAddUserUseCase _addUserUseCase;
     private readonly IUpdateUserUseCase _updateUserUseCase;
     private readonly IDeleteUserUseCase _deleteUserUseCase;
     public UserController(
         IGetAllUsersUseCase getAllUsersUseCase,
         IGetUserByIdUseCase getUserByIdUseCase,
+        IGetUserByLoginCredentialUseCase getUserByLoginCredentialUseCase,
         IAddUserUseCase addUserUseCase,
         IUpdateUserUseCase updateUserUseCase,
         IDeleteUserUseCase deleteUserUseCase)
     {
         _getAllUsersUseCase = getAllUsersUseCase;
         _getUserByIdUseCase = getUserByIdUseCase;
+        _getUserByLoginCredentialUseCase = getUserByLoginCredentialUseCase;
         _addUserUseCase = addUserUseCase;
         _updateUserUseCase = updateUserUseCase;
         _deleteUserUseCase = deleteUserUseCase;
@@ -39,6 +42,17 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserById([FromRoute] string userId)
     {
         var currentUser = await _getUserByIdUseCase.ExecuteAsync(userId);
+        if (currentUser == null)
+        {
+            return Ok();
+        }
+        return Ok(currentUser);
+    }
+
+    [HttpGet("{loginCredential}")]
+    public async Task<IActionResult> GetUserByLoginCredentials([FromRoute] LoginCredential loginCredential)
+    {
+        var currentUser = await _getUserByLoginCredentialUseCase.ExecuteAsync(loginCredential);
         if (currentUser == null)
         {
             return Ok();

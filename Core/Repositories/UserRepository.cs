@@ -2,6 +2,7 @@
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Database.Context;
+using EmployeeRecognition.Api.Models;
 
 namespace EmployeeRecognition.Core.Repositories;
 
@@ -22,6 +23,12 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetUserByIdAsync(string userId)
     {
         return await _mySqlDbContext.Users.FirstOrDefaultAsync(e => e.Id == userId);
+    }
+
+    public async Task<User?> GetUserByLoginCredentialAsync(LoginCredential loginCredential)
+    {
+        return await _mySqlDbContext.Users
+            .FirstOrDefaultAsync(e => e.Name == loginCredential.Name && e.Password == loginCredential.Password);
     }
 
     public async Task<User> AddUserAsync(User user)
