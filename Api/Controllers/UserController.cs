@@ -49,8 +49,8 @@ public class UserController : ControllerBase
         return Ok(currentUser);
     }
 
-    [HttpGet("{loginCredential}")]
-    public async Task<IActionResult> GetUserByLoginCredentials([FromRoute] LoginCredential loginCredential)
+    [HttpGet("login")]
+    public async Task<IActionResult> GetUserByLoginCredentials([FromQuery] LoginCredential loginCredential)
     {
         var currentUser = await _getUserByLoginCredentialUseCase.ExecuteAsync(loginCredential);
         if (currentUser == null)

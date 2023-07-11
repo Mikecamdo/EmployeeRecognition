@@ -18,8 +18,8 @@ export class UsersService {
     return this.httpClient.post<User>(this.apiRoot, newUser);
   }
 
-  getUserBySignIn(loginCredential: LoginCredentials): Observable<User> { //FIXME need to figure out where to hash the password
-    return this.httpClient.get<User>(`${this.apiRoot}/${loginCredential}`); 
+  getUserBySignIn(loginCredential: LoginCredential): Observable<User> { //FIXME need to figure out where to hash the password
+    return this.httpClient.get<User>(`${this.apiRoot}/login`, { params: {name: loginCredential.name, password: loginCredential.password }}); 
   }
 
   getAllUsers(): Observable<User[]> {
@@ -40,7 +40,7 @@ export interface User {
   avatarUrl: string;
 }
 
-export interface LoginCredentials {
+export interface LoginCredential {
   name: string;
   password: string;
 }

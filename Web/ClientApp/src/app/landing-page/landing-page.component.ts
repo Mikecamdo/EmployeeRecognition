@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { UserDto, UsersService } from '../services/users.service';
+import { LoginCredential, UserDto, UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -50,10 +50,23 @@ export class LandingPageComponent {
         console.log("Error while signing up");
         console.log(error);
       }
-    })
+    });
   }
 
   attemptSignIn(): void {
-    console.log("SIGNING IN");
+    let loginAttempt: LoginCredential = {
+      name: this.signInName,
+      password: this.signInPassword
+    }
+    this.usersService.getUserBySignIn(loginAttempt).subscribe({
+      next: response => {
+        console.log("Successfully signed in!");
+        console.log(response);
+      },
+      error: error => {
+        console.log("Error while signing in");
+        console.log(error);
+      }
+    });
   }
 }
