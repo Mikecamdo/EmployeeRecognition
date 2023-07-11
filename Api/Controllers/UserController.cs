@@ -1,11 +1,11 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using System.Web.Http.Cors;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
-[ApiController]
 [Route("users")]
 public class UserController : ControllerBase
 {

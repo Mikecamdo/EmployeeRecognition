@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
-[ApiController]
 [Route("comment")]
 public class CommentController : ControllerBase
 {

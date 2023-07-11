@@ -39,7 +39,8 @@
                                     id="name"
                                     name="name"
                                     class="form-control" 
-                                    placeholder="Name" >
+                                    placeholder="Name"
+                                    [(ngModel)]="signInName" >
                             </div>
             
                             <label for="password">
@@ -51,7 +52,8 @@
                                     name="password"
                                     type="password"
                                     class="form-control" 
-                                    placeholder="Password" >
+                                    placeholder="Password"
+                                    [(ngModel)]="signInPassword" >
                             </div>
                         </div>
                     </form>
@@ -59,8 +61,8 @@
                 <div class="modal-footer">
                     <button type="button" 
                         class="btn btn-outline-dark" 
-                        (click)="modal.close('Save click')">
-                        Save
+                        (click)="modal.close('Sign in'); attemptSignIn()">
+                        Sign in
                     </button>
                 </div>
             </ng-template>
@@ -94,7 +96,8 @@
                                     id="name"
                                     name="name"
                                     class="form-control" 
-                                    placeholder="Name" >
+                                    placeholder="Name"
+                                    [(ngModel)]="signUpName" >
                             </div>
             
                             <label for="password">
@@ -106,7 +109,8 @@
                                     name="password"
                                     type="password"
                                     class="form-control" 
-                                    placeholder="Password" >
+                                    placeholder="Password"
+                                    [(ngModel)]="signUpPassword" >
                             </div>
             
                             <label for="confirm_password">
@@ -118,7 +122,8 @@
                                     name="confirm_password"
                                     type="password"
                                     class="form-control" 
-                                    placeholder="Confirm Password" >
+                                    placeholder="Confirm Password"
+                                    [(ngModel)]="signUpConfirmPassword" >
                             </div>
                         </div>
                     </form>
@@ -126,8 +131,8 @@
                 <div class="modal-footer">
                     <button type="button" 
                         class="btn btn-outline-dark" 
-                        (click)="modal.close('Save click')">
-                        Save
+                        (click)="modal.close('Sign up'); attemptSignUp()">
+                        Sign up
                     </button>
                 </div>
             </ng-template>

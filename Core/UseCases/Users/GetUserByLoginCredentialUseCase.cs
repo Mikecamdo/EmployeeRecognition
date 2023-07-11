@@ -12,7 +12,7 @@ public class GetUserByLoginCredentialUseCase : IGetUserByLoginCredentialUseCase
     {
         _userRepository = userRepository;
     }
-    public Task<User?> ExecuteAsync(LoginCredential loginCredential)
+    public async Task<User?> ExecuteAsync(LoginCredential loginCredential)
     {
         return await _userRepository.GetUserByLoginCredentialAsync(loginCredential);
     }

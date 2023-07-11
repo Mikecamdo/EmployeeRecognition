@@ -10,7 +10,8 @@ export class UsersService {
   apiRoot: string;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.apiRoot = baseUrl + '/users';
+    //this.apiRoot = baseUrl + 'users';
+    this.apiRoot = 'https://localhost:7140' + '/users';
   }
 
   addUser(newUser: UserDto): Observable<User> {
