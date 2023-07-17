@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 
@@ -15,7 +16,7 @@ export class LandingPageComponent {
   signInName: string = '';
   signInPassword: string = '';
   
-  constructor(private modalService: NgbModal, private usersService: UsersService) { }
+  constructor(private modalService: NgbModal, private usersService: UsersService, private router: Router) { }
   
   open(content: any, label: string) {
     const modalRef = this.modalService.open(content, {ariaLabelledBy: label});
@@ -63,6 +64,8 @@ export class LandingPageComponent {
         console.log("Successfully signed in!");
         console.log(response);
         localStorage.setItem("token", response.token);
+        this.modalService.dismissAll();
+        this.router.navigate(['/home']);
       },
       error: error => {
         console.log("Error while signing in");
