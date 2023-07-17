@@ -11,6 +11,10 @@ using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using EmployeeRecognition.Api.JwtFeatures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,28 @@ DotNetEnv.Env.Load();
 var connectionString = $"Server={Env.GetString("MYSQLHOST")};Port={Env.GetString("MYSQLPORT")};Database={Env.GetString("MYSQLDATABASE")};Uid={Env.GetString("MYSQLUSER")};Pwd={Env.GetString("MYSQLPASSWORD")};Charset=utf8;";
 builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["validIssuer"],
+        ValidAudience = jwtSettings["validAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
+    };
+});
+
+//JWT Authentication
+builder.Services.AddScoped<JwtHandler>();
 
 //Use cases
 builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
@@ -86,6 +112,9 @@ app.UseSwaggerUI(c =>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

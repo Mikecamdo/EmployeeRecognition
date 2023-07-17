@@ -1,10 +1,12 @@
 ﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
+[Authorize]
 [Route("comment")]
 public class CommentController : ControllerBase
 {

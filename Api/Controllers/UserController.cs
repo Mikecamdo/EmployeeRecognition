@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Cors;
+﻿using System.IdentityModel.Tokens.Jwt;
+using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
@@ -9,6 +10,8 @@ namespace EmployeeRecognition.Api.Controllers;
 [Route("users")]
 public class UserController : ControllerBase
 {
+    private readonly JwtHandler _jwtHandler;
+
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
     private readonly IGetUserByIdUseCase _getUserByIdUseCase;
     private readonly IGetUserByLoginCredentialUseCase _getUserByLoginCredentialUseCase;
@@ -16,6 +19,7 @@ public class UserController : ControllerBase
     private readonly IUpdateUserUseCase _updateUserUseCase;
     private readonly IDeleteUserUseCase _deleteUserUseCase;
     public UserController(
+        JwtHandler jwtHandler,
         IGetAllUsersUseCase getAllUsersUseCase,
         IGetUserByIdUseCase getUserByIdUseCase,
         IGetUserByLoginCredentialUseCase getUserByLoginCredentialUseCase,
@@ -23,6 +27,8 @@ public class UserController : ControllerBase
         IUpdateUserUseCase updateUserUseCase,
         IDeleteUserUseCase deleteUserUseCase)
     {
+        _jwtHandler = jwtHandler;
+
         _getAllUsersUseCase = getAllUsersUseCase;
         _getUserByIdUseCase = getUserByIdUseCase;
         _getUserByLoginCredentialUseCase = getUserByLoginCredentialUseCase;
@@ -49,15 +55,28 @@ public class UserController : ControllerBase
         return Ok(currentUser);
     }
 
-    [HttpGet("login")]
+    //FIXME would need to have user registration in the same controller as login (so its not behind an [Authorize] tag
+    [HttpGet("login")] //FIXME need to move login to its own controller (so the rest of the users' HTTP request can be behind an [Authorize] tag)
     public async Task<IActionResult> GetUserByLoginCredentials([FromQuery] LoginCredential loginCredential)
     {
         var currentUser = await _getUserByLoginCredentialUseCase.ExecuteAsync(loginCredential);
         if (currentUser == null)
         {
-            return Ok();
+            return Unauthorized(new LoginResponse { ErrorMessage = "Invalid Login" });
         }
-        return Ok(currentUser);
+
+        var signingCredentials = _jwtHandler.GetSigningCredentials();
+        var claims = _jwtHandler.GetClaims(currentUser);
+        var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+        var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+        var loginResponse = new LoginResponse()
+        {
+            IsLoginSuccessful = true,
+            Token = token
+        };
+
+        return Ok(loginResponse);
     }
 
     [HttpPost]
@@ -88,7 +107,7 @@ public class UserController : ControllerBase
         var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);
         if (updatedUser == null)
         {
-            return Ok();
+            return Ok(); //FIXME only return OK if doing what the user expects to happen
         }
         return Ok(updatedUser);
     }

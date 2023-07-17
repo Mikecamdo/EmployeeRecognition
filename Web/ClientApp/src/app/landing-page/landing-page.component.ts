@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { LoginCredential, UserDto, UsersService } from '../services/users.service';
+import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -59,13 +59,14 @@ export class LandingPageComponent {
       password: this.signInPassword
     }
     this.usersService.getUserBySignIn(loginAttempt).subscribe({
-      next: response => {
+      next: (response:LoginResponse) => {
         console.log("Successfully signed in!");
         console.log(response);
+        localStorage.setItem("token", response.token);
       },
       error: error => {
         console.log("Error while signing in");
-        console.log(error);
+        console.log(error.error.errorMessage);
       }
     });
   }
