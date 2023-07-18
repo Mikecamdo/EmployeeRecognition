@@ -16,7 +16,8 @@ export class LandingPageComponent {
   signInName: string = '';
   signInPassword: string = '';
   
-  constructor(private modalService: NgbModal, private usersService: UsersService, private router: Router) { }
+  constructor(private modalService: NgbModal, private usersService: UsersService,
+     private router: Router) { }
   
   open(content: any, label: string) {
     const modalRef = this.modalService.open(content, {ariaLabelledBy: label});
