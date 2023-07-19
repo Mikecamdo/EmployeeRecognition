@@ -10,13 +10,15 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './auth/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { RecognizeComponent } from './recognize/recognize.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    RecognizeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,6 +27,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     RouterModule.forRoot([
       { path: '', component: LandingPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]}
     ]),
     NgbModule
   ],
