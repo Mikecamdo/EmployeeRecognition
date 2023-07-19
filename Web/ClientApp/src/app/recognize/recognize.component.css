@@ -1,0 +1,20 @@
+.noResize {
+    resize: none;
+}
+
+.hashtagStylize {
+    border-width: 3px;
+    --bs-btn-border-color: #15AE5D;
+    --bs-btn-color: black;
+    background-image: none;
+    border-radius: 1.2rem;
+    margin-right: 5px;
+}
+
+.hashtagStylizeSelected {
+    border-width: 3px;
+    --bs-btn-active-border-color: none;
+    background-image: linear-gradient(to bottom, #01AFD0, #14AF62);
+    border-radius: 1.2rem;
+    margin-right: 5px;
+}

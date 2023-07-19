@@ -8,6 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './auth/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { RecognizeComponent } from './recognize/recognize.component';
@@ -29,7 +30,8 @@ import { RecognizeComponent } from './recognize/recognize.component';
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]}
     ]),
-    NgbModule
+    NgbModule,
+    NgbTypeaheadModule
   ],
   providers: [
     AuthGuard,

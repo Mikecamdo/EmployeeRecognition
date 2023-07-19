@@ -1,1 +1,133 @@
-<p>recognize works!</p>
+<div class="container">
+    <div class="my-4">
+        <h1>Give Kudos</h1>
+    </div>
+    <div class="mb-5">
+        <form>
+            <label for="to" class="mb-2">To</label>
+            <br/>
+            <input type="text" id="to" name="to" class="form-control"
+            placeholder="Type a name" maxlength="50" [(ngModel)]="receiver"
+            [ngbTypeahead]="autofillNames"
+            />
+        </form>
+    </div>
+    <div>
+        <form>
+            <label for="title" class="mb-2">Title</label>
+            <br/>
+            <input type="text" id="title" name="title" class="form-control"
+            maxlength="40" [(ngModel)]="title"
+            />
+            <br/>
+
+            <label for="note" class="mb-2">Note</label>
+            <br/>
+            <textarea id="note" name="note" class="form-control noResize" placeholder="Detailed praise..."
+            rows="4" cols="50" maxlength="500" [(ngModel)]="message"></textarea>
+
+            <div class="text-center">
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 1"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 1)"
+                />
+                <label
+                    [ngClass]="teamPlayer ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 1"
+                    >#🏆teamplayer</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 2"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 2)"
+                />
+                <label
+                    [ngClass]="oneOfAKind ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 2"
+                    >#🎲oneofakind</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 3"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 3)"
+                />
+                <label
+                    [ngClass]="creative ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 3"
+                    >#🎨creative</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 4"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 4)"
+                />
+                <label
+                    [ngClass]="highEnergy ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 4"
+                    >#🎭highenergy</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 5"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 5)"
+                />
+                <label
+                    [ngClass]="awesome ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 5"
+                    >#🎸awesome</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 6"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 6)"
+                />
+                <label
+                    [ngClass]="achiever ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 6"
+                    >#🏅achiever</label
+                >
+
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="btn-check-outlined 7"
+                    autocomplete="off"
+                    (change)="changeStatus($event, 7)"
+                />
+                <label
+                    [ngClass]="sweetness ? 'hashtagStylizeSelected' : 'hashtagStylize'"
+                    class="btn btn-outline-primary mt-1 mx-2"
+                    for="btn-check-outlined 7"
+                    >#🍪sweetness</label
+                >
+            </div>
+
+            <input class="btn btn-primary mt-5" type="submit" value="Post"
+            />
+        </form>
+    </div>
+</div>
