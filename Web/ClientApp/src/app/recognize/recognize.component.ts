@@ -67,6 +67,10 @@ export class RecognizeComponent implements OnInit {
     }
   }
 
+  activateButton(): boolean {
+    return !!this.receiver && !!this.title && !!this.message && !! this.allUsers.map(user => user.name).find(x => x === this.receiver);
+  }
+
   autofillNames: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),

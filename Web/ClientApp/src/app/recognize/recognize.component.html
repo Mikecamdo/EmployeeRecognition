@@ -126,7 +126,7 @@
                 >
             </div>
 
-            <input class="btn btn-primary mt-5" type="submit" value="Post"
+            <input [disabled]="!activateButton()" class="btn btn-primary mt-5" type="submit" value="Post"
             />
         </form>
     </div>
