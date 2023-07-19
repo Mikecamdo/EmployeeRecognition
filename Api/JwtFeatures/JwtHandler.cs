@@ -30,7 +30,8 @@ public class JwtHandler
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.Name)
+            new Claim("id", user.Id),
+            new Claim("name", user.Name)
         };
 
         return claims;
@@ -38,6 +39,7 @@ public class JwtHandler
 
     public JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
     {
+
         var tokenOptions = new JwtSecurityToken(
             issuer: _jwtSettings["validIssuer"],
             audience: _jwtSettings["validAudience"],

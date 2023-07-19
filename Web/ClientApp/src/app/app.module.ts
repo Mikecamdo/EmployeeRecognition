@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './auth/auth.guard';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { AuthGuard } from './auth/auth.guard';
     ]),
     NgbModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
