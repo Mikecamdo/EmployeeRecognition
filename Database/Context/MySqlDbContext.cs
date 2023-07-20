@@ -51,6 +51,14 @@ public class MySqlDbContext : DbContext
             entity.Property(e => e.TheDate).IsRequired();
 
             entity.HasKey(e => e.Id);
+
+            entity.HasOne(e => e.Sender)
+                .WithMany(s => s.KudosSent)
+                .HasForeignKey(e => e.SenderId);
+
+            entity.HasOne(e => e.Receiver)
+                .WithMany(s => s.KudosReceived)
+                .HasForeignKey(e => e.ReceiverId);
         });
 
         modelBuilder.Entity<Comment>(entity =>

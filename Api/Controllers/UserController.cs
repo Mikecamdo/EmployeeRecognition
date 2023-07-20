@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
@@ -41,7 +42,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUsers()
     {
         var allUsers = await _getAllUsersUseCase.ExecuteAsync();
-        return Ok(allUsers);
+        return Ok(UserModelConverter.ToModel(allUsers));
     }
 
     [HttpGet("{userId}")]
@@ -52,7 +53,7 @@ public class UserController : ControllerBase
         {
             return Ok();
         }
-        return Ok(currentUser);
+        return Ok(UserModelConverter.ToModel(currentUser));
     }
 
     //FIXME would need to have user registration in the same controller as login (so its not behind an [Authorize] tag
@@ -91,7 +92,7 @@ public class UserController : ControllerBase
             AvatarUrl = user.AvatarUrl
         };
         var addedUser = await _addUserUseCase.ExecuteAsync(newUser);
-        return Ok(addedUser);
+        return Ok(UserModelConverter.ToModel(addedUser));
     }
 
     [HttpPut("{userId}")]
@@ -109,7 +110,7 @@ public class UserController : ControllerBase
         {
             return Ok(); //FIXME only return OK if doing what the user expects to happen
         }
-        return Ok(updatedUser);
+        return Ok(UserModelConverter.ToModel(updatedUser));
     }
 
     [HttpDelete("{userId}")]

@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace EmployeeRecognition.Api.Models;
 
-namespace EmployeeRecognition.Core.Entities;
-
-
-[Table("kudos")]
-public class Kudo
+public class KudoModel
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
+    public required string? SenderName { get; set; }
     public required string SenderId { get; set; }
+    public required string? SenderAvatarUrl { get; set; }
+    public required string? ReceiverName { get; set; }
     public required string ReceiverId { get; set; }
+    public required string? ReceiverAvatarUrl { get; set; }
     public required string Title { get; set; }
     public required string Message { get; set; }
     public required bool TeamPlayer { get; set; }
@@ -19,7 +19,4 @@ public class Kudo
     public required bool Achiever { get; set; }
     public required bool Sweetness { get; set; }
     public required DateOnly TheDate { get; set; }
-
-    public User? Sender { get; set; }
-    public User? Receiver { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using Microsoft.AspNetCore.Authorization;
@@ -34,21 +35,21 @@ public class KudoController : ControllerBase
     public async Task<IActionResult> GetKudos()
     {
         var allKudos = await _getAllKudosUseCase.ExecuteAsync();
-        return Ok(allKudos);
+        return Ok(KudoModelConverter.ToModel(allKudos));
     }
 
     [HttpGet("sender/{senderId}")]
     public async Task<IActionResult> GetKudosBySenderId([FromRoute] string senderId)
     {
         var senderKudos = await _getKudosBySenderIdUseCase.ExecuteAsync(senderId);
-        return Ok(senderKudos);
+        return Ok(KudoModelConverter.ToModel(senderKudos));
     }
 
     [HttpGet("receiver/{receiverId}")]
     public async Task<IActionResult> GetKudosByReceiverId([FromRoute] string receiverId)
     {
         var receiverKudos = await _getKudosByReceiverIdUseCase.ExecuteAsync(receiverId);
-        return Ok(receiverKudos);
+        return Ok(KudoModelConverter.ToModel(receiverKudos));
     }
 
     [HttpPost]
@@ -71,7 +72,7 @@ public class KudoController : ControllerBase
         };
 
         var addedKudo = await _addKudoUseCase.ExecuteAsync(newKudo);
-        return Ok(addedKudo);
+        return Ok(KudoModelConverter.ToModel(addedKudo));
     }
 
     [HttpDelete("{kudoId}")]

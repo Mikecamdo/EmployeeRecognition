@@ -16,7 +16,10 @@ public class KudoRepository : IKudoRepository
 
     public async Task<IEnumerable<Kudo>> GetAllKudosAsync()
     {
-        return await _mySqlDbContext.Kudos.ToListAsync();
+        return await _mySqlDbContext.Kudos
+            .Include(s => s.Sender)
+            .Include(r => r.Receiver)
+            .ToListAsync();
     }
 
     public async Task<Kudo?> GetKudoByIdAsync(int kudoId)
@@ -26,12 +29,20 @@ public class KudoRepository : IKudoRepository
 
     public async Task<IEnumerable<Kudo>> GetKudosBySenderIdAsync(string senderId)
     {
-        return await _mySqlDbContext.Kudos.Where(k => k.SenderId == senderId).ToListAsync();
+        return await _mySqlDbContext.Kudos
+            .Where(k => k.SenderId == senderId)
+            .Include(s => s.Sender)
+            .Include(r => r.Receiver)
+            .ToListAsync();
     }
 
     public async Task<IEnumerable<Kudo>> GetKudosByReceiverIdAsync(string receiverId)
     {
-        return await _mySqlDbContext.Kudos.Where(k => k.ReceiverId == receiverId).ToListAsync();
+        return await _mySqlDbContext.Kudos
+            .Where(k => k.ReceiverId == receiverId)
+            .Include(s => s.Sender)
+            .Include(r => r.Receiver)
+            .ToListAsync();
     }
 
     public async Task<Kudo> AddKudoAsync(Kudo kudo)
