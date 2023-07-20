@@ -1,7 +1,3 @@
-<h1 class="text-center">The Homepage</h1>
-<p class="text-center">Welcome {{userName}}</p>
-<p class="text-center">Your Id is {{userId}}</p>
-<br/>
 <div class="container">
     <div class="d-flex align-items-center my-4">
         <h1>Recognition Feed</h1>
@@ -25,11 +21,11 @@
         <div class="card my-5">
             <div class="card-body">
                 <h6 class="card-title">
-                    <b>{{ kudo.senderId }}</b> recognized
+                    <b>{{ kudo.senderName }}</b> recognized
                 </h6>
                 <p class="card-text">
                     <!-- <img /> -->
-                    <b>{{ kudo.receiverId }}</b>
+                    <b>{{ kudo.receiverName }}</b>
                     <span *ngIf="kudo.teamPlayer" class="tag"> <i>#🏆teamplayer</i></span>
                     <span *ngIf="kudo.oneOfAKind" class="tag"> <i>#🎲oneofakind </i></span>
                     <span *ngIf="kudo.creative" class="tag"> <i>#🎨creative</i> </span>

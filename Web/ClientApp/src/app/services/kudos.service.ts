@@ -43,10 +43,10 @@ export interface KudoDto {
 
 export interface Kudo {
   id: number;
-  sender: string;
+  senderName: string;
   senderId: string;
   senderAvatar: string;
-  receiver: string;
+  receiverName: string;
   receiverId: string;
   receiverAvatar: string;
   title: string;
