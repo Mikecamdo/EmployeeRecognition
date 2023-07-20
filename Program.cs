@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EmployeeRecognition.Api.JwtFeatures;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +79,43 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "employee-recognition", Version = "v1" });
+
+    //Resolve apiDescriptions conflict
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlFilePath))
+        c.IncludeXmlComments(xmlFilePath);
+
+    //Settings for token authentication
+    c.AddSecurityDefinition("Bearer",
+        new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Please enter into field the word 'Bearer' following by space and JWT",
+            Name = "Authorization",
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
 });
 
 builder.Services.AddCors(options =>
@@ -107,6 +145,9 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "employee-recognition v1");
+    c.InjectStylesheet("/swagger/swagger.css");
+    c.InjectJavascript("/swagger/swagger.js");
+    c.DefaultModelsExpandDepth(-1);
 });
 
 app.UseHttpsRedirection();
