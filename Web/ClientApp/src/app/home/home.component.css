@@ -1,0 +1,15 @@
+.tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 13px;
+    border: 2px  solid #15ae5c;
+    background-color: #ffffff;
+    margin-left: 7px;
+    font-size: 12px;
+}
+
+.small-image {
+    border-radius: 100%;
+    height: 2.5rem;
+    width: 2.5rem;
+}

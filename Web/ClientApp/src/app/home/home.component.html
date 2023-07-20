@@ -1,3 +1,48 @@
 <h1 class="text-center">The Homepage</h1>
 <p class="text-center">Welcome {{userName}}</p>
 <p class="text-center">Your Id is {{userId}}</p>
+<br/>
+<div class="container">
+    <div class="d-flex align-items-center my-4">
+        <h1>Recognition Feed</h1>
+    </div>
+
+    <div class="card my-5" style="border: 2px solid #15ae5d;">
+        <div class="card-body pb-0">
+            <h4 class="card-title" style="color: #15ae5d;">Send a Kudo</h4>
+            <p class="card-text">
+                A Kudo lets you acknowledge when a coworker does an excellend job, <br/>
+                helps you out, or is overall awesome.
+            </p>
+            <p class="card-text">
+                <button class="tag" [routerLink]="['/recognize']">+New Kudo</button>
+            </p>
+            <!-- <img class="image" src="suhcs18b.png" alt="Image" style="max-width: 40%; height: auto; margin-top: -15%;"> -->
+        </div>
+    </div>
+
+    <div *ngFor="let kudo of allKudos">
+        <div class="card my-5">
+            <div class="card-body">
+                <h6 class="card-title">
+                    <b>{{ kudo.senderId }}</b> recognized
+                </h6>
+                <p class="card-text">
+                    <!-- <img /> -->
+                    <b>{{ kudo.receiverId }}</b>
+                    <span *ngIf="kudo.teamPlayer" class="tag"> <i>#🏆teamplayer</i></span>
+                    <span *ngIf="kudo.oneOfAKind" class="tag"> <i>#🎲oneofakind </i></span>
+                    <span *ngIf="kudo.creative" class="tag"> <i>#🎨creative</i> </span>
+                    <span *ngIf="kudo.highEnergy" class="tag"> <i>#🎭highenergy</i> </span>
+                    <span *ngIf="kudo.awesome" class="tag"> <i>#🎸awesome</i> </span>
+                    <span *ngIf="kudo.achiever" class="tag"> <i>#🏅achiever</i> </span>
+                    <span *ngIf="kudo.sweetness" class="tag"> <i>#🍪sweetness</i> </span>
+                </p>
+                <h5>{{ kudo.title }}</h5>
+                <p class="card-text">
+                    {{ kudo.message }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
