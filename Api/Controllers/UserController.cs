@@ -94,7 +94,23 @@ public class UserController : ControllerBase
             AvatarUrl = user.AvatarUrl
         };
         var addedUser = await _addUserUseCase.ExecuteAsync(newUser);
-        return Ok(UserModelConverter.ToModel(addedUser));
+        if (addedUser == null)
+        {
+            return BadRequest(new SignupResponse { IsSignupSuccessful = false, ErrorMessage = "Signup failed"});
+        }
+
+        var signingCredentials = _jwtHandler.GetSigningCredentials();
+        var claims = _jwtHandler.GetClaims(addedUser);
+        var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+        var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+        var signupResponse = new SignupResponse()
+        {
+            IsSignupSuccessful = true,
+            Token = token
+        };
+
+        return Ok(signupResponse);
     }
 
     [Authorize]

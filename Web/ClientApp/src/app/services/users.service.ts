@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,14 +8,17 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   apiRoot: string;
+  headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     //this.apiRoot = baseUrl + 'users';
     this.apiRoot = 'https://localhost:7140' + '/users';
+    const token: any = localStorage.getItem('token');
+    this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }
 
-  addUser(newUser: UserDto): Observable<User> {
-    return this.httpClient.post<User>(this.apiRoot, newUser);
+  addUser(newUser: UserDto): Observable<SignupResponse> {
+    return this.httpClient.post<SignupResponse>(this.apiRoot, newUser);
   }
 
   getUserBySignIn(loginCredential: LoginCredential): Observable<LoginResponse> { //FIXME need to figure out where to hash the password
@@ -23,7 +26,7 @@ export class UsersService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.apiRoot);
+    return this.httpClient.get<User[]>(this.apiRoot, {headers: this.headers });
   }
 }
 
@@ -47,6 +50,12 @@ export interface LoginCredential {
 
 export interface LoginResponse {
   isLoginSuccessful: boolean;
+  errorMessage: string;
+  token: string;
+}
+
+export interface SignupResponse {
+  isSignupSuccessful: boolean;
   errorMessage: string;
   token: string;
 }

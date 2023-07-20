@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
+import { LoginCredential, LoginResponse, SignupResponse, UserDto, UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -44,9 +44,12 @@ export class LandingPageComponent {
       avatarUrl: "placeholder"
     }
     this.usersService.addUser(newUser).subscribe({
-      next: response => {
+      next: (response:SignupResponse) => {
         console.log("Successfully signed up!");
         console.log(response);
+        localStorage.setItem("token", response.token);
+        this.modalService.dismissAll();
+        this.router.navigate(['/home']);
       },
       error: error => {
         console.log("Error while signing up");
