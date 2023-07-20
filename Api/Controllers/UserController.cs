@@ -4,6 +4,7 @@ using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
@@ -38,6 +39,7 @@ public class UserController : ControllerBase
         _deleteUserUseCase = deleteUserUseCase;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
@@ -45,6 +47,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(allUsers));
     }
 
+    [Authorize]
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] string userId)
     {
@@ -56,8 +59,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(currentUser));
     }
 
-    //FIXME would need to have user registration in the same controller as login (so its not behind an [Authorize] tag
-    [HttpGet("login")] //FIXME need to move login to its own controller (so the rest of the users' HTTP request can be behind an [Authorize] tag)
+    [HttpGet("login")]
     public async Task<IActionResult> GetUserByLoginCredentials([FromQuery] LoginCredential loginCredential)
     {
         var currentUser = await _getUserByLoginCredentialUseCase.ExecuteAsync(loginCredential);
@@ -95,6 +97,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(addedUser));
     }
 
+    [Authorize]
     [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
@@ -113,6 +116,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(updatedUser));
     }
 
+    [Authorize]
     [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {
