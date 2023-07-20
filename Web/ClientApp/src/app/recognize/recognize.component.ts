@@ -115,6 +115,7 @@ export class RecognizeComponent implements OnInit {
       next: addedKudo => {
         console.log("Added:");
         console.log(addedKudo);
+        this.router.navigate(["/home"]);
       },
       error: error => {
         console.log(error);
