@@ -83,6 +83,13 @@ export class LandingPageComponent {
   }
 
   disableSignUp(): boolean {
-    return !this.signUpName || !this.signUpPassword || !this.signUpConfirmPassword;
+    return !this.signUpName || !this.signUpPassword || !this.signUpConfirmPassword || this.invalidPassword();
+  }
+
+  invalidPassword(): boolean {
+    if (this.signUpConfirmPassword !== '' && this.signUpConfirmPassword !== this.signUpPassword) {
+      return true;
+    }
+    return false;
   }
 }

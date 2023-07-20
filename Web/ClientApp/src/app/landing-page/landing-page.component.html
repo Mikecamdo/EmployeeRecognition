@@ -31,7 +31,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="name">
+                            <label for="name" class="form-label">
                                 Name
                             </label>
                             <div class="input-group">
@@ -43,7 +43,7 @@
                                     [(ngModel)]="signInName" >
                             </div>
             
-                            <label for="password">
+                            <label for="password" class="form-label">
                                 Password
                             </label>
                             <div class="input-group">
@@ -92,7 +92,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="name">
+                            <label for="name" class="form-label">
                                 Name
                             </label>
                             <div class="input-group">
@@ -104,7 +104,7 @@
                                     [(ngModel)]="signUpName" >
                             </div>
             
-                            <label for="password">
+                            <label for="password" class="form-label">
                                 Password
                             </label>
                             <div class="input-group">
@@ -117,7 +117,7 @@
                                     [(ngModel)]="signUpPassword" >
                             </div>
             
-                            <label for="confirm_password">
+                            <label for="confirm_password" class="form-label">
                                 Confirm Password
                             </label>
                             <div class="input-group">
@@ -127,7 +127,13 @@
                                     type="password"
                                     class="form-control" 
                                     placeholder="Confirm Password"
-                                    [(ngModel)]="signUpConfirmPassword" >
+                                    [(ngModel)]="signUpConfirmPassword"
+                                    [ngClass]="{'is-invalid': invalidPassword()}"
+                                    aria-describedby="invalid-password" >
+
+                                    <div id="invalid-password" class="invalid-feedback">
+                                        Passwords don't match
+                                    </div>
                             </div>
                         </div>
                     </form>
