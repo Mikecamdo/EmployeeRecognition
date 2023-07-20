@@ -9,12 +9,8 @@ CREATE TABLE Users (
 
 CREATE TABLE Kudos (
 	Id INT AUTO_INCREMENT PRIMARY KEY,
-    Sender VARCHAR(50) NOT NULL,
-    SenderId VARCHAR(50) NOT NULL,
-    SenderAvatar VARCHAR(50) NOT NULL,
-    Receiver VARCHAR(50) NOT NULL,
+    SenderId VARCHAR(50),
     ReceiverId VARCHAR(50) NOT NULL,
-    ReceiverAvatar VARCHAR(50) NOT NULL,
     Title VARCHAR(50) NOT NULL,
     Message VARCHAR(200) NOT NULL,
     TeamPlayer BIT NOT NULL,
