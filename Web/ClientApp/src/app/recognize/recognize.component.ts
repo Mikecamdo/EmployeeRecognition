@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UsersService } from '../services/users.service';
 import { Observable, OperatorFunction, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { KudoDto, KudosService } from '../services/kudos.service';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-recognize',
@@ -22,9 +25,21 @@ export class RecognizeComponent implements OnInit {
   achiever: boolean = false;
   sweetness: boolean = false;
 
-  constructor(private usersService: UsersService) { }
+  senderId: string = '';
+
+  constructor(private usersService: UsersService, 
+              private kudosService: KudosService,
+              private router: Router,
+              private jwtHelper: JwtHelperService) 
+  {
+    this.jwtHelper = new JwtHelperService();
+  }
 
   ngOnInit(): void {
+    const token: any = localStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    this.senderId = decodedToken.id;
+
     this.usersService.getAllUsers().subscribe({
       next: users => {
         this.allUsers = users;
@@ -79,4 +94,31 @@ export class RecognizeComponent implements OnInit {
         term.length < 2 ? [] : this.allUsers.map(user => user.name).filter((name) => name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
+
+  addKudo(): void {
+    let receiverId: any = this.allUsers.find(user => user.name === this.receiver)?.id;
+    let newKudo: KudoDto = {
+      senderId: this.senderId,
+      receiverId: receiverId,
+      title: this.title,
+      message: this.message,
+      teamPlayer: this.teamPlayer,
+      oneOfAKind: this.oneOfAKind,
+      creative: this.creative,
+      highEnergy: this.highEnergy,
+      awesome: this.awesome,
+      achiever: this.achiever,
+      sweetness: this.sweetness
+    };
+
+    this.kudosService.addKudo(newKudo).subscribe({
+      next: addedKudo => {
+        console.log("Added:");
+        console.log(addedKudo);
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,29 +8,28 @@ import { Observable } from 'rxjs';
 export class KudosService {
 
   apiRoot: string;
+  headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     //this.apiRoot = baseUrl + 'kudos';
     this.apiRoot = 'https://localhost:7140' + '/kudos';
+    const token: any = localStorage.getItem('token');
+    this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }
 
   addKudo(newKudo: KudoDto): Observable<Kudo> {
-    return this.httpClient.post<Kudo>(this.apiRoot, newKudo);
+    return this.httpClient.post<Kudo>(this.apiRoot, newKudo, {headers: this.headers });
   }
 
   getAllKudos(): Observable<Kudo[]> {
-    return this.httpClient.get<Kudo[]>(this.apiRoot);
+    return this.httpClient.get<Kudo[]>(this.apiRoot, {headers: this.headers });
   }
   
 }
 
 export interface KudoDto {
-  sender: string;
   senderId: string;
-  senderAvatar: string;
-  receiver: string;
   receiverId: string;
-  receiverAvatar: string;
   title: string;
   message: string;
   teamPlayer: boolean;
@@ -40,7 +39,6 @@ export interface KudoDto {
   awesome: boolean;
   achiever: boolean;
   sweetness: boolean;
-  theDate: string;
 }
 
 export interface Kudo {

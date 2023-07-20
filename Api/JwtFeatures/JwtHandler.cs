@@ -44,9 +44,8 @@ public class JwtHandler
             issuer: _jwtSettings["validIssuer"],
             audience: _jwtSettings["validAudience"],
             claims: claims,
-            expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"])),
+            expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"])),
             signingCredentials: signingCredentials);
-
         return tokenOptions;
     }
 }

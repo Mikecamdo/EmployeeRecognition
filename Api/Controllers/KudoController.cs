@@ -56,14 +56,8 @@ public class KudoController : ControllerBase
     {
         var newKudo = new Kudo() //FIXME need to move to a converter
         {
-            Sender = kudo.Sender,
             SenderId = kudo.SenderId,
-            SenderAvatar = kudo.SenderAvatar,
-
-            Receiver = kudo.Receiver,
             ReceiverId = kudo.ReceiverId,
-            ReceiverAvatar = kudo.ReceiverAvatar,
-
             Title = kudo.Title,
             Message = kudo.Message,
             TeamPlayer = kudo.TeamPlayer,

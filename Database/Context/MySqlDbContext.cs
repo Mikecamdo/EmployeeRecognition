@@ -37,12 +37,8 @@ public class MySqlDbContext : DbContext
             entity.ToTable("Kudos");
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.Sender).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.SenderId).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.SenderAvatar).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.Receiver).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.SenderId).HasMaxLength(50);
             entity.Property(e => e.ReceiverId).HasMaxLength(50).IsRequired();
-            entity.Property(e => e.ReceiverAvatar).HasMaxLength(50).IsRequired();
             entity.Property(e => e.Title).HasMaxLength(50).IsRequired();
             entity.Property(e => e.Message).HasMaxLength(200).IsRequired();
             entity.Property(e => e.TeamPlayer).IsRequired();

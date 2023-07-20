@@ -2,12 +2,8 @@
 
 public class KudoDto
 {
-    public string Sender { get; set; }
     public string SenderId { get; set; }
-    public string SenderAvatar { get; set; }
-    public string Receiver { get; set; }
     public string ReceiverId { get; set; }
-    public string ReceiverAvatar { get; set; }
     public string Title { get; set; }
     public string Message { get; set; }
     public Boolean TeamPlayer { get; set; }
