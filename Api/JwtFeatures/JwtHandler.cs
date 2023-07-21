@@ -31,7 +31,8 @@ public class JwtHandler
         var claims = new List<Claim>
         {
             new Claim("id", user.Id),
-            new Claim("name", user.Name)
+            new Claim("name", user.Name),
+            new Claim("avatarUrl", user.AvatarUrl)
         };
 
         return claims;

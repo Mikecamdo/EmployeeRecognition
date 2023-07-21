@@ -41,7 +41,7 @@ export class LandingPageComponent {
     let newUser: UserDto = {
       name: this.signUpName,
       password: this.signUpPassword,
-      avatarUrl: "placeholder"
+      avatarUrl: "https://api.dicebear.com/6.x/miniavs/svg?seed=" + this.signUpName
     }
     this.usersService.addUser(newUser).subscribe({
       next: (response:SignupResponse) => {
