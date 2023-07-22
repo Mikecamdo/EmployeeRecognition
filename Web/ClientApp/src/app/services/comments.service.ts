@@ -37,6 +37,6 @@ export interface Comment {
   kudoId: number;
   senderId: string;
   senderName: string;
-  senderAvatarUrl: string;
+  senderAvatar: string;
   message: string;
 }

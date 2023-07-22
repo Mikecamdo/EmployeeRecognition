@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Kudo, KudosService } from '../services/kudos.service';
 import { Comment, CommentDto, CommentsService } from '../services/comments.service';
+import { catchError, mergeMap, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,15 @@ import { Comment, CommentDto, CommentsService } from '../services/comments.servi
 })
 export class HomeComponent implements OnInit {
 
-  allKudos: Kudo[] = [];
+  everythingLoaded: boolean = false;
+  criticalError: boolean = false;
 
+  allKudos: Kudo[] = [];
   allComments: Comment[] = [];
+
   commentMessage: string[] = [];
+  hasComments: boolean[] = [];
+  showComments: boolean[] = [];
 
   userId: string = '';
   userName: string = '';
@@ -33,28 +39,36 @@ export class HomeComponent implements OnInit {
     this.userName = decodedToken.name;
     this.userAvatar = decodedToken.avatarUrl;
 
-    this.kudosService.getAllKudos().subscribe({
-      next: kudos => {
+    this.kudosService.getAllKudos().pipe(
+      tap(kudos => {
         this.allKudos = kudos.reverse(); //FIXME I think I can reverse this in the backend database call
         this.commentMessage = new Array(kudos.length).fill("");
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
-
-    this.commentsService.getAllComments().subscribe({
-      next: comments => {
+      }),
+      mergeMap(() => this.commentsService.getAllComments()),
+      tap(comments => {
         this.allComments = comments;
-      },
-      error: error => {
+        let kudoIds = this.allKudos.map(kudo => kudo.id);
+        comments.forEach((comment, index) => {
+          if (kudoIds.includes(comment.kudoId)) {
+            this.hasComments[index] = true;
+          }
+        });
+        this.everythingLoaded = true;
+      }),
+      catchError(error => {
+        this.criticalError = true;
         console.log(error);
-      }
-    });
+        return of([]);
+      })
+    ).subscribe();
   }
 
   activateButton(iteration: number): boolean {
     return !this.commentMessage[iteration];
+  }
+
+  activateComments(iteration: number): void {
+    this.showComments[iteration] = !this.showComments[iteration];
   }
 
   addComment(id: number, iteration: number): void {

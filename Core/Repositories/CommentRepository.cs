@@ -18,6 +18,7 @@ public class CommentRepository : ICommentRepository
     {
         return await _mySqlDbContext.Comments
             .Include(k => k.Kudo)
+                .ThenInclude(k => k.Sender)
             .ToListAsync();
     }
 
@@ -25,6 +26,7 @@ public class CommentRepository : ICommentRepository
     {
         return await _mySqlDbContext.Comments
             .Include(k => k.Kudo)
+                .ThenInclude(k => k.Sender)
             .FirstOrDefaultAsync(c => c.Id == commentId);
     }
 
@@ -32,14 +34,20 @@ public class CommentRepository : ICommentRepository
     {
         return await _mySqlDbContext.Comments
             .Include(k => k.Kudo)
+                .ThenInclude(k => k.Sender)
             .Where(c => c.KudoId == kudoId)
             .ToListAsync();
     }
 
     public async Task<Comment> AddCommentAsync(Comment comment)
     {
+        var kudo = await _mySqlDbContext.Kudos
+            .Include(k => k.Sender)
+            .FirstOrDefaultAsync(k => k.Id == comment.KudoId);
+
         _mySqlDbContext.Comments.Add(comment);
         await _mySqlDbContext.SaveChangesAsync();
+        comment.Kudo = kudo;
         return comment;
     }
 
