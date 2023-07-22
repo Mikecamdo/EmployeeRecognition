@@ -8,8 +8,7 @@ public class Comment
     public int Id { get; set; }
     public required int KudoId { get; set; }
     public required string SenderId { get; set; }
-    public required string SenderName { get; set; }
-    public required string SenderAvatar { get; set; }
     public required string Message { get; set; }
 
+    public Kudo? Kudo { get; set; }
 }

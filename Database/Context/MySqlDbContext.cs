@@ -17,7 +17,6 @@ public class MySqlDbContext : DbContext
         CreateEmployeeRecognitionComponents(modelBuilder);
     }
 
-    //FIXME eventually need to update this and the database to use foreign keys
     private void CreateEmployeeRecognitionComponents(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(entity =>
@@ -71,6 +70,10 @@ public class MySqlDbContext : DbContext
             entity.Property(e => e.Message).HasMaxLength(200).IsRequired();
 
             entity.HasKey(e => e.Id);
+
+            entity.HasOne(e => e.Kudo)
+                .WithMany(k => k.Comments)
+                .HasForeignKey(e => e.KudoId);
         });
     }
     

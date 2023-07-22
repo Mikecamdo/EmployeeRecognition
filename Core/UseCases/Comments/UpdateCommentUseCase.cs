@@ -24,8 +24,6 @@ public class UpdateCommentUseCase : IUpdateCommentUseCase
 
         toBeUpdated.KudoId = updatedCommentInfo.KudoId;
         toBeUpdated.SenderId = updatedCommentInfo.SenderId;
-        toBeUpdated.SenderName = updatedCommentInfo.SenderName;
-        toBeUpdated.SenderAvatar = updatedCommentInfo.SenderAvatar;
         toBeUpdated.Message = updatedCommentInfo.Message;
 
         return await _commentRepository.UpdateCommentAsync(toBeUpdated);

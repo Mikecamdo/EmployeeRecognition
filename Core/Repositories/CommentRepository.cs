@@ -16,17 +16,24 @@ public class CommentRepository : ICommentRepository
 
     public async Task<IEnumerable<Comment>> GetCommentsAsync()
     {
-        return await _mySqlDbContext.Comments.ToListAsync();
+        return await _mySqlDbContext.Comments
+            .Include(k => k.Kudo)
+            .ToListAsync();
     }
 
     public async Task<Comment?> GetCommentByIdAsync(int commentId)
     {
-        return await _mySqlDbContext.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+        return await _mySqlDbContext.Comments
+            .Include(k => k.Kudo)
+            .FirstOrDefaultAsync(c => c.Id == commentId);
     }
 
     public async Task<IEnumerable<Comment>> GetCommentsByKudoIdAsync(int kudoId)
     {
-        return await _mySqlDbContext.Comments.Where(c => c.KudoId == kudoId).ToListAsync();
+        return await _mySqlDbContext.Comments
+            .Include(k => k.Kudo)
+            .Where(c => c.KudoId == kudoId)
+            .ToListAsync();
     }
 
     public async Task<Comment> AddCommentAsync(Comment comment)

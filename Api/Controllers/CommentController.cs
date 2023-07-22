@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using Microsoft.AspNetCore.Authorization;
@@ -34,7 +35,7 @@ public class CommentController : ControllerBase
     public async Task<IActionResult> GetAllComments()
     {
         var allComments = await _getCommentsUseCase.ExecuteAsync();
-        return Ok(allComments);
+        return Ok(CommentModelConverter.ToModel(allComments));
 
     }
 
@@ -42,7 +43,7 @@ public class CommentController : ControllerBase
     public async Task<IActionResult> GetCommentsByKudoId([FromRoute] int kudoId)
     {
         var kudoComments = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
-        return Ok(kudoComments);
+        return Ok(CommentModelConverter.ToModel(kudoComments));
     }
 
     [HttpPost]
@@ -52,13 +53,11 @@ public class CommentController : ControllerBase
         {
             KudoId = comment.KudoId,
             SenderId = comment.SenderId,
-            SenderName = comment.SenderName,
-            SenderAvatar = comment.SenderAvatar,
             Message = comment.Message,
         };
 
         var addedComment = await _addCommentUseCase.ExecuteAsync(newComment);
-        return Ok(addedComment);
+        return Ok(CommentModelConverter.ToModel(addedComment));
     }
 
     [HttpPut("{commentId}")]
@@ -69,7 +68,7 @@ public class CommentController : ControllerBase
         {
             return Ok();
         }
-        return Ok(updatedComment);
+        return Ok(CommentModelConverter.ToModel(updatedComment));
     }
 
     [HttpDelete("{commentId}")]

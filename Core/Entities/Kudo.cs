@@ -22,4 +22,5 @@ public class Kudo
 
     public User? Sender { get; set; }
     public User? Receiver { get; set; }
+    public IEnumerable<Comment>? Comments { get; set; }
 }
