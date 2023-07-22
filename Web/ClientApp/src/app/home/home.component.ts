@@ -47,11 +47,10 @@ export class HomeComponent implements OnInit {
       mergeMap(() => this.commentsService.getAllComments()),
       tap(comments => {
         this.allComments = comments;
-        let kudoIds = this.allKudos.map(kudo => kudo.id);
-        comments.forEach((comment, index) => {
-          if (kudoIds.includes(comment.kudoId)) {
-            this.hasComments[index] = true;
-          }
+        let kudoIds = comments.map(comment => comment.kudoId);
+        //let kudoIds = this.allKudos.map(kudo => kudo.id);
+        this.allKudos.forEach((kudo, index) => {
+          this.hasComments[index] = kudoIds.includes(kudo.id);
         });
         this.everythingLoaded = true;
       }),
@@ -81,6 +80,7 @@ export class HomeComponent implements OnInit {
     this.commentsService.addComment(comment).subscribe({
       next: comment => {
         this.commentMessage[iteration] = '';
+        this.hasComments[iteration] = true;
         this.allComments.push(comment); //FIXME make sure this works
       },
       error: error => {
