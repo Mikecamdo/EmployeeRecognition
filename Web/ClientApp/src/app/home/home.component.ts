@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Kudo, KudosService } from '../services/kudos.service';
 
@@ -36,5 +36,19 @@ export class HomeComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  isXsViewport(): boolean {
+    return window.innerWidth < 768;
+  }
+
+  isMdViewport(): boolean {
+    return window.innerWidth >= 768;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event): void {
+    this.isXsViewport();
+    this.isMdViewport();
   }
 }
