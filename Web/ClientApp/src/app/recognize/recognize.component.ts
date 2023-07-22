@@ -83,7 +83,7 @@ export class RecognizeComponent implements OnInit {
   }
 
   activateButton(): boolean {
-    return !!this.receiver && !!this.title && !!this.message && !! this.allUsers.map(user => user.name).find(x => x === this.receiver);
+    return !!this.receiver && !!this.title && !!this.message && !! this.allUsers.map((user) => {if (user.id !== this.senderId) {return user.name} return ""}).find(x => x === this.receiver);
   }
 
   autofillNames: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
@@ -91,7 +91,7 @@ export class RecognizeComponent implements OnInit {
       debounceTime(200),
       distinctUntilChanged(),
       map((term) =>
-        term.length < 2 ? [] : this.allUsers.map(user => user.name).filter((name) => name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
+        term.length < 2 ? [] : this.allUsers.map((user) => {if (user.id !== this.senderId) {return user.name} return ""}).filter((name) => name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10),
       ),
     );
 
