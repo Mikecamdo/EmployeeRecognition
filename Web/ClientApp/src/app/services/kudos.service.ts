@@ -45,10 +45,10 @@ export interface Kudo {
   id: number;
   senderName: string;
   senderId: string;
-  senderAvatar: string;
+  senderAvatarUrl: string;
   receiverName: string;
   receiverId: string;
-  receiverAvatar: string;
+  receiverAvatarUrl: string;
   title: string;
   message: string;
   teamPlayer: boolean;

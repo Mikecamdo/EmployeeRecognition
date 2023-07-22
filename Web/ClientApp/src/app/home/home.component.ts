@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   userId: string = '';
   userName: string = '';
+  userAvatar: string = '';
 
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService) {
     this.jwtHelper = new JwtHelperService();
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
 
     this.userId = decodedToken.id;
     this.userName = decodedToken.name;
+    this.userAvatar = decodedToken.avatarUrl;
 
     this.kudosService.getAllKudos().subscribe({
       next: kudos => {
