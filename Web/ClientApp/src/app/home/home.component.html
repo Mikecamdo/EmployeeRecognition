@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div *ngFor="let kudo of allKudos">
+    <div *ngFor="let kudo of allKudos; let i = index">
         <div class="card my-5"> <!-- Make kudo its own component (??) -->
             <div class="card-body">
                 <h6 class="card-title">
@@ -53,13 +53,14 @@
                             'col-10': isMdViewport()
                         }">
                             <input class="form-control" placeholder="Add comment" type="text"
-                            id="comment" name="comment" maxlength="200" />
+                            id="comment" name="comment" maxlength="200" [(ngModel)]="commentMessage[i]" />
                         </div>
                         <div [ngClass]="{
                             'col-3': isXsViewport(),
                             'col-1': isMdViewport()
                         }">
-                            <input class="btn btn-primary" type="submit" value="Post" />
+                            <input class="btn btn-primary" type="submit" value="Post"
+                            [disabled]="activateButton(i)" (click)="addComment(kudo.id, i)" />
                         </div>
                     </div>
                 </div>
