@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EmployeeRecognition.Api.Controllers;
 
 [Authorize]
-[Route("comment")]
+[Route("comments")]
 public class CommentController : ControllerBase
 {
     private readonly IGetCommentsUseCase _getCommentsUseCase;
