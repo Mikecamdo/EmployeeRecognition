@@ -1,9 +1,9 @@
 ﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Entities;
+using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
 public interface IUpdateCommentUseCase
 {
-    Task<Comment?> ExecuteAsync(int commentId, CommentDto updatedCommentInfo);
+    Task<UpdateCommentResponse> ExecuteAsync(int commentId, CommentDto updatedCommentInfo);
 }

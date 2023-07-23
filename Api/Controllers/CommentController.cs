@@ -5,6 +5,7 @@ using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
 using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,12 +80,14 @@ public class CommentController : ControllerBase
     [HttpPut("{commentId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
     {
-        var updatedComment = await _updateCommentUseCase.ExecuteAsync(commentId, updatedCommentInfo);
-        if (updatedComment == null)
+        var updateCommentResponse = await _updateCommentUseCase.ExecuteAsync(commentId, updatedCommentInfo);
+
+        return updateCommentResponse switch
         {
-            return Ok();
-        }
-        return Ok(CommentModelConverter.ToModel(updatedComment));
+            UpdateCommentResponse.Success success => Ok(success.UpdatedComment),
+            UpdateCommentResponse.CommentNotFound => NotFound(updateCommentResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpDelete("{commentId}")]

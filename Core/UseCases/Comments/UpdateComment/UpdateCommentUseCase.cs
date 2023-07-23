@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
@@ -13,19 +14,18 @@ public class UpdateCommentUseCase : IUpdateCommentUseCase
     {
         _commentRepository = commentRepository;
     }
-    public async Task<Comment?> ExecuteAsync(int commentId, CommentDto updatedCommentInfo)
+    public async Task<UpdateCommentResponse> ExecuteAsync(int commentId, CommentDto updatedCommentInfo)
     {
         var toBeUpdated = await _commentRepository.GetCommentByIdAsync(commentId);
 
         if (toBeUpdated == null)
         {
-            return null;
+            return new UpdateCommentResponse.CommentNotFound();
         }
 
-        toBeUpdated.KudoId = updatedCommentInfo.KudoId;
-        toBeUpdated.SenderId = updatedCommentInfo.SenderId;
         toBeUpdated.Message = updatedCommentInfo.Message;
 
-        return await _commentRepository.UpdateCommentAsync(toBeUpdated);
+        var updatedComment = await _commentRepository.UpdateCommentAsync(toBeUpdated);
+        return new UpdateCommentResponse.Success(CommentModelConverter.ToModel(updatedComment));
     }
 }
