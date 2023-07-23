@@ -28,7 +28,8 @@ import { RecognizeComponent } from './recognize/recognize.component';
     RouterModule.forRoot([
       { path: '', component: LandingPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-      { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]}
+      { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      { path: '**', redirectTo: ''}
     ]),
     NgbModule,
     NgbTypeaheadModule
