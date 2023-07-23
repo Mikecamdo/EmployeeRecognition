@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
 public interface IGetCommentsByKudoIdUseCase
 {
-    Task<IEnumerable<Comment>> ExecuteAsync(int kudoId);
+    Task<GetCommentsByKudoIdResponse> ExecuteAsync(int kudoId);
 }

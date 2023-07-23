@@ -3,6 +3,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
+using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,8 +44,14 @@ public class CommentController : ControllerBase
     [HttpGet("{kudoId}")]
     public async Task<IActionResult> GetCommentsByKudoId([FromRoute] int kudoId)
     {
-        var kudoComments = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
-        return Ok(CommentModelConverter.ToModel(kudoComments));
+        var getCommentsByKudoIdResponse = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
+
+        return getCommentsByKudoIdResponse switch
+        {
+            GetCommentsByKudoIdResponse.Success success => Ok(success.Comments),
+            GetCommentsByKudoIdResponse.KudoNotFound => BadRequest(getCommentsByKudoIdResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpPost]
