@@ -1,6 +1,8 @@
-﻿namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+﻿using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
+
+namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
 public interface IDeleteCommentUseCase
 {
-    Task ExecuteAsync(int commentId);
+    Task<DeleteCommentResponse> ExecuteAsync(int commentId);
 }

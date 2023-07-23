@@ -12,15 +12,16 @@ public class DeleteCommentUseCase : IDeleteCommentUseCase
     {
         _commentRepository = commentRepository;
     }
-    public async Task ExecuteAsync(int commentId)
+    public async Task<DeleteCommentResponse> ExecuteAsync(int commentId)
     {
         var toBeDeleted = await _commentRepository.GetCommentByIdAsync(commentId);
 
         if (toBeDeleted == null)
         {
-            return;
+            return new DeleteCommentResponse.CommentNotFound();
         }
 
         await _commentRepository.DeleteCommentAsync(toBeDeleted);
+        return new DeleteCommentResponse.Success();
     }
 }

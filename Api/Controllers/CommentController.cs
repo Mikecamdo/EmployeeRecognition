@@ -3,6 +3,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
+using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
 using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -89,7 +90,13 @@ public class CommentController : ControllerBase
     [HttpDelete("{commentId}")]
     public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
     {
-        await _deleteCommentUseCase.ExecuteAsync(commentId);
-        return NoContent();
+        var deleteCommentResponse = await _deleteCommentUseCase.ExecuteAsync(commentId);
+
+        return deleteCommentResponse switch //FIXME maybe add business logic to make sure users can only delete their own comments???
+        {
+            DeleteCommentResponse.Success => NoContent(),
+            DeleteCommentResponse.CommentNotFound => NotFound(deleteCommentResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 }
