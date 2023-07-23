@@ -39,7 +39,7 @@ public class UserController : ControllerBase
         _deleteUserUseCase = deleteUserUseCase;
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
@@ -47,7 +47,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(allUsers));
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] string userId)
     {
@@ -113,7 +113,7 @@ public class UserController : ControllerBase
         return Ok(signupResponse);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
@@ -132,7 +132,7 @@ public class UserController : ControllerBase
         return Ok(UserModelConverter.ToModel(updatedUser));
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
-[Authorize]
+//[Authorize]
 [Route("kudos")]
 public class KudoController : ControllerBase
 {

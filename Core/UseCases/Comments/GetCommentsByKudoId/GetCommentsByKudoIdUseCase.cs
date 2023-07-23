@@ -2,7 +2,7 @@
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
-namespace EmployeeRecognition.Core.UseCases.Comments;
+namespace EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
 
 public class GetCommentsByKudoIdUseCase : IGetCommentsByKudoIdUseCase
 {

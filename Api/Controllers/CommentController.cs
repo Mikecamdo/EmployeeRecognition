@@ -2,12 +2,13 @@
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
-[Authorize]
+//[Authorize]
 [Route("comments")]
 public class CommentController : ControllerBase
 {
@@ -56,8 +57,15 @@ public class CommentController : ControllerBase
             Message = comment.Message,
         };
 
-        var addedComment = await _addCommentUseCase.ExecuteAsync(newComment);
-        return Ok(CommentModelConverter.ToModel(addedComment));
+        var addCommentResponse = await _addCommentUseCase.ExecuteAsync(newComment);
+
+        return addCommentResponse switch
+        {
+            AddCommentResponse.Success success => Ok(success.NewComment),
+            AddCommentResponse.InvalidRequest => BadRequest(addCommentResponse.Message),
+            AddCommentResponse.KudoNotFound => BadRequest(addCommentResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpPut("{commentId}")]

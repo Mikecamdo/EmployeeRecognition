@@ -3,7 +3,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
-namespace EmployeeRecognition.Core.UseCases.Comments;
+namespace EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 
 public class UpdateCommentUseCase : IUpdateCommentUseCase
 {

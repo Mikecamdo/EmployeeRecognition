@@ -10,12 +10,16 @@ using EmployeeRecognition.Core.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
-using EmployeeRecognition.Core.UseCases.Comments;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EmployeeRecognition.Api.JwtFeatures;
 using System.Reflection;
+using EmployeeRecognition.Core.UseCases.Comments.AddComment;
+using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
+using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+using EmployeeRecognition.Core.UseCases.Comments.GetComments;
+using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 
 var builder = WebApplication.CreateBuilder(args);
 
