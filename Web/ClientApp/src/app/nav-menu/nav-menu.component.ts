@@ -23,7 +23,7 @@ export class NavMenuComponent implements OnInit {
     const decodedToken = this.jwtHelper.decodeToken(token);
 
     this.userName = decodedToken.name;
-    this.userAvatar = decodedToken.avatarUrl;
+    this.userAvatar = decodedToken.avatarUrl + '&flip=true';
   }
 
   collapse() {
