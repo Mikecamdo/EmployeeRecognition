@@ -3,9 +3,9 @@
         <h1>Recognition Feed</h1>
     </div>
 
-    <div class="card my-5" style="border: 2px solid #15ae5d;">
+    <div class="card my-5">
         <div class="card-body pb-0">
-            <h4 class="card-title" style="color: #15ae5d;">Send a Kudo</h4>
+            <h4 class="card-title">Send a Kudo</h4>
             <p class="card-text">
                 A Kudo lets you acknowledge when a coworker does an excellent job, <br/>
                 helps you out, or is overall awesome.
@@ -21,6 +21,7 @@
         <div class="card my-5"> <!-- Make kudo its own component (??) -->
             <div class="card-body">
                 <h6 class="card-title">
+                    <img class="small-image me-2" [src]="kudo.senderAvatarUrl"/>
                     <b>{{ kudo.senderName }}</b> recognized
                 </h6>
                 <p class="card-text">

@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
       next: comment => {
         this.commentMessage[iteration] = '';
         this.hasComments[iteration] = true;
-        this.allComments.push(comment); //FIXME make sure this works
+        this.allComments.push(comment);
       },
       error: error => {
         console.log(error);

@@ -2,8 +2,8 @@
     display: inline-block;
     padding: 3px 10px;
     border-radius: 13px;
-    border: 2px  solid #15ae5c;
-    background-color: #ffffff;
+    border: 1px solid #551E19;
+    background-color: #E6B17E;
     margin-left: 7px;
     font-size: 12px;
 }
@@ -38,4 +38,25 @@
 
 .text-red {
     color: rgb(223, 9, 9);
+}
+
+.card {
+    background-color: #C56E33;
+    color: #551E19;
+    border: 2px solid #551E19;
+}
+
+.btn.btn-primary {
+    color: #551E19;
+    background-color: #E6B17E;
+    border: none;
+}
+
+.btn.btn-outline-primary {
+    color: #551E19;
+    border-color: #E6B17E;
+}
+
+.btn.btn-outline-primary:hover {
+    background-color: #E6B17E;
 }
