@@ -2,7 +2,7 @@
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos;
+namespace EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
 
 public class GetAllKudosUseCase : IGetAllKudosUseCase
 {

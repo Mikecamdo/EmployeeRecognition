@@ -2,6 +2,7 @@
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,11 @@ public class KudoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddKudo([FromBody] KudoDto kudo)
     {
+        if (kudo == null)
+        {
+            return BadRequest("Missing/invalid parameters");
+        }
+
         var newKudo = new Kudo() //FIXME need to move to a converter
         {
             SenderId = kudo.SenderId,
@@ -71,8 +77,14 @@ public class KudoController : ControllerBase
             TheDate = DateOnly.FromDateTime(DateTime.Now)
         };
 
-        var addedKudo = await _addKudoUseCase.ExecuteAsync(newKudo);
-        return Ok(KudoModelConverter.ToModel(addedKudo));
+        var addKudoResponse = await _addKudoUseCase.ExecuteAsync(newKudo);
+
+        return addKudoResponse switch
+        {
+            AddKudoResponse.Success success => Ok(success.NewKudo),
+            AddKudoResponse.InvalidRequest => BadRequest(addKudoResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpDelete("{kudoId}")]

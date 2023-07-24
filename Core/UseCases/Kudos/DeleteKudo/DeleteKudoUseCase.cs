@@ -1,7 +1,7 @@
 ﻿using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos;
+namespace EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 
 public class DeleteKudoUseCase : IDeleteKudoUseCase
 {
