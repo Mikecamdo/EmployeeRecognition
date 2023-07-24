@@ -5,6 +5,7 @@ using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
+using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,8 +45,14 @@ public class KudoController : ControllerBase
     [HttpGet("sender/{senderId}")]
     public async Task<IActionResult> GetKudosBySenderId([FromRoute] string senderId)
     {
-        var senderKudos = await _getKudosBySenderIdUseCase.ExecuteAsync(senderId);
-        return Ok(KudoModelConverter.ToModel(senderKudos));
+        var getKudosBySenderIdResponse = await _getKudosBySenderIdUseCase.ExecuteAsync(senderId);
+
+        return getKudosBySenderIdResponse switch
+        {
+            GetKudosBySenderIdResponse.Success success => Ok(success.SenderKudos),
+            GetKudosBySenderIdResponse.UserNotFound => BadRequest(getKudosBySenderIdResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpGet("receiver/{receiverId}")]
