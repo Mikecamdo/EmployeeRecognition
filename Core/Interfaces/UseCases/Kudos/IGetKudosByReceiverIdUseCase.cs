@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
 public interface IGetKudosByReceiverIdUseCase
 {
-    Task<IEnumerable<Kudo>> ExecuteAsync(string receiverId);
+    Task<GetKudosByReceiverIdResponse> ExecuteAsync(string receiverId);
 }
