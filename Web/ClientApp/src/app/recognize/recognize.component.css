@@ -1,20 +1,30 @@
-.noResize {
+.no-resize {
     resize: none;
 }
 
-.hashtagStylize {
+.btn.btn-outline-primary {
     border-width: 3px;
-    --bs-btn-border-color: #15AE5D;
-    --bs-btn-color: black;
-    background-image: none;
     border-radius: 1.2rem;
-    margin-right: 5px;
+    border-color: #C56E33;
+    color: #551E19;
+    --bs-btn-active-bg: #C56E33;
 }
 
-.hashtagStylizeSelected {
-    border-width: 3px;
-    --bs-btn-active-border-color: none;
-    background-image: linear-gradient(to bottom, #01AFD0, #14AF62);
-    border-radius: 1.2rem;
-    margin-right: 5px;
+.brown-text {
+    color: #551E19;
+}
+
+.btn.btn-primary {
+    color: #551E19;
+    background-color: #C56E33;
+    border: none;
+}
+
+::ng-deep .dropdown-menu.show {
+    background-color: #E6B17E;
+}
+
+::ng-deep .dropdown-item.active {
+    color: #551E19;
+    background-color: #C56E33;
 }
