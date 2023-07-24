@@ -20,7 +20,7 @@ export class LandingPageComponent {
      private router: Router) { }
   
   open(content: any, label: string) {
-    const modalRef = this.modalService.open(content, {ariaLabelledBy: label});
+    const modalRef = this.modalService.open(content, {ariaLabelledBy: label, windowClass: 'custom-modal'});
     
     modalRef.result.then((result) => {
       this.signUpName = '';

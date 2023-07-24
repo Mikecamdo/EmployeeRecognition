@@ -3,5 +3,29 @@
 }
   
 .link-text:hover {
-    color: darkslategray;
+    color: #C56E33;
+}
+
+.btn.btn-outline-primary {
+    color: #551E19;
+    border-color: #C56E33;
+}
+
+.btn.btn-outline-primary:hover {
+    background-color: #C56E33;
+}
+
+.btn.btn-primary {
+    background-color: #E6B17E;
+    border: none;
+    color: #551E19;
+}
+
+::ng-deep .modal-content {
+    background-color: #E6B17E;
+    color: #551E19;
+}
+
+::ng-deep .modal-header, .modal-footer {
+    border: none;
 }

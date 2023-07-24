@@ -19,7 +19,7 @@
                         id="sign-in">
                         Sign in
                     </h4>
-                    <button type="button" class="close"
+                    <button type="button" class="btn btn-primary close"
                             aria-label="Close" (click)=
                             "modal.dismiss('Cross click')">
               
@@ -63,7 +63,7 @@
                         Don't have an account? <span class="link-text" (click)="modal.close('Sign in'); open(signUp, 'sign-up')">Sign up</span>
                     </div>
                     <button type="button" 
-                        class="btn btn-outline-dark ml-auto" 
+                        class="btn btn-outline-primary ml-auto" 
                         (click)="attemptSignIn()"
                         [disabled]="disableSignIn()">
                         Sign in
@@ -75,12 +75,12 @@
 
         <div class="col-6 text-start">
             <ng-template #signUp let-modal>
-                <div class="modal-header">
+                <div class="modal-header temp">
                     <h4 class="modal-title" 
                         id="sign-up">
                         Sign up
                     </h4>
-                    <button type="button" class="close"
+                    <button type="button" class="btn btn-primary close"
                             aria-label="Close" (click)=
                             "modal.dismiss('Cross click')">
               
@@ -143,7 +143,7 @@
                         Already have an account? <span class="link-text" (click)="modal.close('Sign up'); open(signIn, 'sign-in')">Sign in</span>
                     </div>
                     <button type="button" 
-                        class="btn btn-outline-dark ml-auto" 
+                        class="btn btn-outline-primary ml-auto" 
                         (click)="attemptSignUp()"
                         [disabled]="disableSignUp()">
                         Sign up
