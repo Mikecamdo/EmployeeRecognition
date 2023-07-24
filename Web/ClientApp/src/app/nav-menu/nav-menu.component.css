@@ -28,5 +28,10 @@ html {
 }
 
 nav {
-  background-color: #C56E33;
+  background-color: #E6B17E;
+  border-bottom: 1px solid #551E19;
+}
+
+.navbar-brand {
+  width: 100px;
 }
