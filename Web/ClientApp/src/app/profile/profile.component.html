@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="brown-text">Profile Details</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <img id="profile-picture" [src]="userAvatar"/>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" (click)="generateNewAvatar()">
+                Generate New Avatar
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="name" class="form-label">
+                Name
+            </label>
+            <input id="name" name="name" class="form-control" 
+             placeholder="Name" [(ngModel)]="userName" >
+        </div>
+    </div>
+
+    <div *ngIf="changesSaved" class="text-center">Changes Saved!</div>
+
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" (click)="saveChanges()">
+                Save Changes
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+#profile-picture {
+    max-height: 250px;
+    border: 2px solid #551E19;
+    border-radius: 100%;
+}
+
+.brown-text {
+    color: #551E19;
+}
+
+.btn.btn-primary {
+    color: #551E19;
+    background-color: #C56E33;
+    border: none;
+}

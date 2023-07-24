@@ -28,6 +28,11 @@ export class UsersService {
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.apiRoot, {headers: this.headers });
   }
+
+  updateUser(currentUserId: string, currentUser: UserDto): Observable<User> {
+    let route: string = this.apiRoot + '/' + currentUserId;
+    return this.httpClient.put<User>(route, currentUser, {headers: this.headers });
+  }
 }
 
 export interface UserDto { //FIXME eventually want to move this to its own file

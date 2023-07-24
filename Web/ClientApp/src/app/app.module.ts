@@ -12,6 +12,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './auth/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { RecognizeComponent } from './recognize/recognize.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RecognizeComponent } from './recognize/recognize.component';
     NavMenuComponent,
     HomeComponent,
     LandingPageComponent,
-    RecognizeComponent
+    RecognizeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { RecognizeComponent } from './recognize/recognize.component';
       { path: '', component: LandingPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      { path: 'profile', component: ProfileComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       { path: '**', redirectTo: ''}
     ]),
     NgbModule,
