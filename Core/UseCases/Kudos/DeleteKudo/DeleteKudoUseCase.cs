@@ -10,15 +10,16 @@ public class DeleteKudoUseCase : IDeleteKudoUseCase
     {
         _kudoRepository = kudoRepository;
     }
-    public async Task ExecuteAsync(int kudoId)
+    public async Task<DeleteKudoResponse> ExecuteAsync(int kudoId)
     {
         var toBeDeleted = await _kudoRepository.GetKudoByIdAsync(kudoId);
 
         if (toBeDeleted == null)
         {
-            return;
+            return new DeleteKudoResponse.KudoNotFound();
         }
 
         await _kudoRepository.DeleteKudoAsync(toBeDeleted);
+        return new DeleteKudoResponse.Success();
     }
 }

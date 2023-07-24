@@ -1,6 +1,8 @@
-﻿namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+﻿using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
+
+namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
 public interface IDeleteKudoUseCase
 {
-    Task ExecuteAsync(int kudoId);
+    Task<DeleteKudoResponse> ExecuteAsync(int kudoId);
 }

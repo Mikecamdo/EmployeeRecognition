@@ -3,6 +3,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
+using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -90,7 +91,13 @@ public class KudoController : ControllerBase
     [HttpDelete("{kudoId}")]
     public async Task<IActionResult> DeleteKudo([FromRoute] int kudoId)
     {
-        await _deleteKudoUseCase.ExecuteAsync(kudoId);
-        return NoContent();
+        var deleteKudoResponse = await _deleteKudoUseCase.ExecuteAsync(kudoId);
+
+        return deleteKudoResponse switch
+        {
+            DeleteKudoResponse.Success => NoContent(),
+            DeleteKudoResponse.KudoNotFound => NotFound(deleteKudoResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 }
