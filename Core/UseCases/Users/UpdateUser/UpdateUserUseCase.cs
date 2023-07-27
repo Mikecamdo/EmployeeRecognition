@@ -2,7 +2,7 @@
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users;
+namespace EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 
 public class UpdateUserUseCase : IUpdateUserUseCase
 {

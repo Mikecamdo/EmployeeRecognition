@@ -3,7 +3,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users;
+namespace EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
 
 public class GetUserByLoginCredentialUseCase : IGetUserByLoginCredentialUseCase
 {

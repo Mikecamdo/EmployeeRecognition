@@ -5,7 +5,6 @@ using Microsoft.OpenApi.Models;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Database.Context;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
-using EmployeeRecognition.Core.UseCases.Users;
 using EmployeeRecognition.Core.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
@@ -24,6 +23,12 @@ using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
 using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
 using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
+using EmployeeRecognition.Core.UseCases.Users.AddUser;
+using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
+using EmployeeRecognition.Core.UseCases.Users.GetUserById;
+using EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
+using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 
 var builder = WebApplication.CreateBuilder(args);
 

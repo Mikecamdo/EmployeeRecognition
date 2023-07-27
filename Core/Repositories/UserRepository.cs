@@ -25,6 +25,12 @@ public class UserRepository : IUserRepository
         return await _mySqlDbContext.Users.FirstOrDefaultAsync(e => e.Id == userId);
     }
 
+    public async Task<User?> GetUserByNameAsync(string name)
+    {
+        return await _mySqlDbContext.Users.FirstOrDefaultAsync(e => e.Name == name);
+    }
+
+
     public async Task<User?> GetUserByLoginCredentialAsync(LoginCredential loginCredential)
     {
         return await _mySqlDbContext.Users

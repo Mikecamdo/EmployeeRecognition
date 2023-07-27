@@ -1,8 +1,9 @@
 ﻿using EmployeeRecognition.Core.Entities;
+using EmployeeRecognition.Core.UseCases.Users.AddUser;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
 public interface IAddUserUseCase
 {
-    Task<User> ExecuteAsync(User user);
+    Task<AddUserResponse> ExecuteAsync(User user);
 }

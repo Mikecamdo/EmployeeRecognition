@@ -4,6 +4,7 @@ using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -93,24 +94,29 @@ public class UserController : ControllerBase
             Password = user.Password,
             AvatarUrl = user.AvatarUrl
         };
-        var addedUser = await _addUserUseCase.ExecuteAsync(newUser);
-        if (addedUser == null)
+
+        var addUserResponse = await _addUserUseCase.ExecuteAsync(newUser);
+
+        switch (addUserResponse)
         {
-            return BadRequest(new SignupResponse { IsSignupSuccessful = false, ErrorMessage = "Signup failed"});
+            case AddUserResponse.Success success:
+                var signingCredentials = _jwtHandler.GetSigningCredentials();
+                var claims = _jwtHandler.GetClaims(UserModelConverter.ToEntity(success.NewUser));
+                var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+                var signupResponse = new SignupResponse()
+                {
+                    IsSignupSuccessful = true,
+                    Token = token
+                };
+
+                return Ok(signupResponse);
+            case AddUserResponse.InvalidRequest:
+                return BadRequest(new SignupResponse { IsSignupSuccessful = false, ErrorMessage = addUserResponse.Message });
+            default:
+                return Problem("Unexpected result");
         }
-
-        var signingCredentials = _jwtHandler.GetSigningCredentials();
-        var claims = _jwtHandler.GetClaims(addedUser);
-        var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
-        var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-        var signupResponse = new SignupResponse()
-        {
-            IsSignupSuccessful = true,
-            Token = token
-        };
-
-        return Ok(signupResponse);
     }
 
     //[Authorize]

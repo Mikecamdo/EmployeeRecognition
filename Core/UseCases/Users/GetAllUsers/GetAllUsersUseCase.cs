@@ -2,7 +2,7 @@
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Entities;
 
-namespace EmployeeRecognition.Core.UseCases.Users;
+namespace EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
 
 public class GetAllUsersUseCase : IGetAllUsersUseCase
 {
