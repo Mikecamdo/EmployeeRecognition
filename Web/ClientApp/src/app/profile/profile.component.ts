@@ -88,6 +88,10 @@ export class ProfileComponent implements OnInit {
       },
       error: error => {
         console.log(error);
+        if (error.status == 400) {
+          this.message = "Name already in use, please choose another name";
+          this.showMessage = true;
+        }
       }
     });
   }

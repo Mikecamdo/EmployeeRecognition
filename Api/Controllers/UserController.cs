@@ -145,6 +145,8 @@ public class UserController : ControllerBase
                 };
 
                 return Ok(signupResponse);
+            case UpdateUserResponse.InvalidRequest:
+                return BadRequest(updateUserResponse.Message);
             case UpdateUserResponse.UserNotFound:
                 return NotFound(updateUserResponse.Message);
             default:

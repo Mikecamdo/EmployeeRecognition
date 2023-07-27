@@ -23,6 +23,13 @@ public class UpdateUserUseCase : IUpdateUserUseCase
             return new UpdateUserResponse.UserNotFound();
         }
 
+        var otherUser = await _userRepository.GetUserByNameAsync(updatedUserInfo.Name);
+
+        if (otherUser != null)
+        {
+            return new UpdateUserResponse.InvalidRequest("Name already in use");
+        }
+
         toBeUpdated.Name = updatedUserInfo.Name;
         if (updatedUserInfo.Password != null)
         {
