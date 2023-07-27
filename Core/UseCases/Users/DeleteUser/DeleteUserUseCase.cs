@@ -11,15 +11,17 @@ public class DeleteUserUseCase : IDeleteUserUseCase
     {
         _userRepository = userRepository;
     }
-    public async Task ExecuteAsync(string userId)
+    public async Task<DeleteUserResponse> ExecuteAsync(string userId)
     {
         var toBeDeleted = await _userRepository.GetUserByIdAsync(userId);
 
         if (toBeDeleted == null)
         {
-            return;
+            return new DeleteUserResponse.UserNotFound();
         }
 
         await _userRepository.DeleteUserAsync(toBeDeleted);
+
+        return new DeleteUserResponse.Success();
     }
 }

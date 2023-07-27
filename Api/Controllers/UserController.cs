@@ -5,6 +5,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
+using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -142,7 +143,13 @@ public class UserController : ControllerBase
     [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {
-        await _deleteUserUseCase.ExecuteAsync(userId);
-        return NoContent();
+        var deleteUserResponse = await _deleteUserUseCase.ExecuteAsync(userId);
+
+        return deleteUserResponse switch
+        {
+            DeleteUserResponse.Success => NoContent(),
+            DeleteUserResponse.UserNotFound => NotFound(deleteUserResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 }
