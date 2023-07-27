@@ -6,6 +6,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -124,19 +125,28 @@ public class UserController : ControllerBase
     [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
-        var newUser = new User() //FIXME need to move to a converter
+        var updateUserResponse = await _updateUserUseCase.ExecuteAsync(userId, updatedUserInfo);
+
+        switch (updateUserResponse)
         {
-            Id = userId,
-            Name = updatedUserInfo.Name,
-            Password = updatedUserInfo.Password,
-            AvatarUrl = updatedUserInfo.AvatarUrl
-        };
-        var updatedUser = await _updateUserUseCase.ExecuteAsync(newUser);
-        if (updatedUser == null)
-        {
-            return Ok(); //FIXME only return OK if doing what the user expects to happen
+            case UpdateUserResponse.Success success:
+                var signingCredentials = _jwtHandler.GetSigningCredentials();
+                var claims = _jwtHandler.GetClaims(UserModelConverter.ToEntity(success.UpdatedUser));
+                var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+                var signupResponse = new SignupResponse() //FIXME change name of return variable (??)
+                {
+                    IsSignupSuccessful = true,
+                    Token = token
+                };
+
+                return Ok(signupResponse);
+            case UpdateUserResponse.UserNotFound:
+                return NotFound(updateUserResponse.Message);
+            default:
+                return Problem("Unexpected result");
         }
-        return Ok(UserModelConverter.ToModel(updatedUser));
     }
 
     //[Authorize]

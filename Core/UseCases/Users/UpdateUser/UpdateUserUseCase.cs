@@ -1,4 +1,6 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
@@ -12,14 +14,20 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<User?> ExecuteAsync(User user)
+    public async Task<UpdateUserResponse> ExecuteAsync(string userId, UserDto updatedUserInfo)
     {
-        var toBeUpdated = await _userRepository.GetUserByIdAsync(user.Id);
+        var toBeUpdated = await _userRepository.GetUserByIdAsync(userId);
+        
         if (toBeUpdated == null)
         {
-            return null;
+            return new UpdateUserResponse.UserNotFound();
         }
 
-        return await _userRepository.UpdateUserAsync(user);
+        toBeUpdated.Name = updatedUserInfo.Name;
+        toBeUpdated.Password = updatedUserInfo.Password;
+        toBeUpdated.AvatarUrl = updatedUserInfo.AvatarUrl;
+
+        var updatedUser = await _userRepository.UpdateUserAsync(toBeUpdated);
+        return new UpdateUserResponse.Success(UserModelConverter.ToModel(updatedUser));
     }
 }
