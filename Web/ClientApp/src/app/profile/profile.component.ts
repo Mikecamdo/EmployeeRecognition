@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserDto, UsersService } from '../services/users.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit {
   newPassword: string = '';
   confirmNewPassword: string = '';
   
-  constructor(private jwtHelper: JwtHelperService, private usersService: UsersService) {
+  constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, private tokenService: TokenService) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -55,8 +56,9 @@ export class ProfileComponent implements OnInit {
     };
 
     this.usersService.updateUser(this.userId, userInfo).subscribe({
-      next: updatedUser => {
+      next: response => { 
         console.log("Success!");
+        this.tokenService.updateToken(response.token);
         this.changesSaved = true;
       },
       error: error => {

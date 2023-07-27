@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -13,17 +14,17 @@ export class NavMenuComponent implements OnInit {
   userName: string = '';
   userAvatar: string = '';
 
-  constructor(private router: Router, private jwtHelper: JwtHelperService) {
+  constructor(private router: Router, private jwtHelper: JwtHelperService, private tokenService: TokenService) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    const token: any = localStorage.getItem('token');
-
-    const decodedToken = this.jwtHelper.decodeToken(token);
-
-    this.userName = decodedToken.name;
-    this.userAvatar = decodedToken.avatarUrl + '&flip=true';
+    this.tokenService.token$.subscribe((token: any) => {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+  
+      this.userName = decodedToken.name;
+      this.userAvatar = decodedToken.avatarUrl + '&flip=true';
+    });
   }
 
   collapse() {

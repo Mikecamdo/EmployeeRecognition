@@ -29,9 +29,9 @@ export class UsersService {
     return this.httpClient.get<User[]>(this.apiRoot, {headers: this.headers });
   }
 
-  updateUser(currentUserId: string, currentUser: UserDto): Observable<User> {
+  updateUser(currentUserId: string, currentUser: UserDto): Observable<SignupResponse> {
     let route: string = this.apiRoot + '/' + currentUserId;
-    return this.httpClient.put<User>(route, currentUser, {headers: this.headers });
+    return this.httpClient.put<SignupResponse>(route, currentUser, {headers: this.headers });
   }
 }
 
