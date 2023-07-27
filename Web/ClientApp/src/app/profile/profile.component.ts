@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserDto, UsersService } from '../services/users.service';
+import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -12,8 +12,10 @@ export class ProfileComponent implements OnInit {
 
   characterSet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  changesSaved: boolean = false; //FIXME change this to a popup
+  showMessage: boolean = false; //FIXME change this to a popup (toastr??)
+  message: string = '';
 
+  currentUserName: string = '';
   userName: string = '';
   userAvatar: string = '';
   userId: string = '';
@@ -32,6 +34,7 @@ export class ProfileComponent implements OnInit {
     const decodedToken = this.jwtHelper.decodeToken(token);
 
     this.userName = decodedToken.name;
+    this.currentUserName = decodedToken.name;
     this.userAvatar = decodedToken.avatarUrl;
     this.userId = decodedToken.id;
   }
@@ -48,23 +51,44 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges(): void {
-    this.changesSaved = false;
+    this.showMessage = false;
+
+    if (this.oldPassword) {
+      let loginAttempt: LoginCredential = {
+        name: this.currentUserName,
+        password: this.oldPassword
+      }
+      this.usersService.getUserBySignIn(loginAttempt).subscribe({
+        next: response => {
+          this.updateUser(true);
+        },
+        error: error => {
+          console.log(error);
+          this.message = "Incorrect old password, changes not saved";
+          this.showMessage = true;
+        }
+      });
+    } else {
+      this.updateUser(false);
+    }
+  }
+
+  updateUser(updatedPassword: boolean): void {
     let userInfo: UserDto = {
       name: this.userName,
-      password: 'test', //FIXME need to fix this
+      password: updatedPassword ? this.newPassword : null,
       avatarUrl: this.userAvatar
     };
 
     this.usersService.updateUser(this.userId, userInfo).subscribe({
       next: response => { 
-        console.log("Success!");
         this.tokenService.updateToken(response.token);
-        this.changesSaved = true;
+        this.message = "Changes Saved!";
+        this.showMessage = true;
       },
       error: error => {
         console.log(error);
       }
-    })
+    });
   }
-
 }

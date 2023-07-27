@@ -37,7 +37,7 @@ export class UsersService {
 
 export interface UserDto { //FIXME eventually want to move this to its own file
   name: string;
-  password: string;
+  password: string | null;
   avatarUrl: string;
 }
 

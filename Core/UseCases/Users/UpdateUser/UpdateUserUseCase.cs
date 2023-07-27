@@ -24,7 +24,10 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         }
 
         toBeUpdated.Name = updatedUserInfo.Name;
-        toBeUpdated.Password = updatedUserInfo.Password;
+        if (updatedUserInfo.Password != null)
+        {
+            toBeUpdated.Password = updatedUserInfo.Password;
+        }
         toBeUpdated.AvatarUrl = updatedUserInfo.AvatarUrl;
 
         var updatedUser = await _userRepository.UpdateUserAsync(toBeUpdated);

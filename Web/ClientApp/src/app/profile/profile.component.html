@@ -29,7 +29,27 @@
         </div>
     </div>
 
-    <div *ngIf="changesSaved" class="text-center">Changes Saved!</div>
+    <div class="row">
+        <div class="col-12">
+            <label for="oldPassword" class="form-label">
+                Old Password
+            </label>
+            <input id="oldPassword" name="oldPassword" class="form-control" 
+             placeholder="Old Password" [(ngModel)]="oldPassword" >
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="newPassword" class="form-label">
+                New Password
+            </label>
+            <input id="newPassword" name="newPassword" class="form-control" 
+             placeholder="New Password" [(ngModel)]="newPassword" >
+        </div>
+    </div>
+
+    <div *ngIf="showMessage" class="text-center">{{ message }}</div>
 
     <div class="row mt-5">
         <div class="col-12 text-center">
