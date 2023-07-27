@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Core.UseCases.Users.GetUserById;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
 public interface IGetUserByIdUseCase
 {
-    Task<User?> ExecuteAsync(string userId);
+    Task<GetUserByIdResponse> ExecuteAsync(string userId);
 }

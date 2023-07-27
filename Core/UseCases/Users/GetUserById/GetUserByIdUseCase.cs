@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
@@ -12,8 +13,15 @@ public class GetUserByIdUseCase : IGetUserByIdUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<User?> ExecuteAsync(string userId)
+    public async Task<GetUserByIdResponse> ExecuteAsync(string userId)
     {
-        return await _userRepository.GetUserByIdAsync(userId);
+        var currentUser = await _userRepository.GetUserByIdAsync(userId);
+
+        if (currentUser == null)
+        {
+            return new GetUserByIdResponse.UserNotFound();
+        }
+
+        return new GetUserByIdResponse.Success(UserModelConverter.ToModel(currentUser));
     }
 }

@@ -6,6 +6,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+using EmployeeRecognition.Core.UseCases.Users.GetUserById;
 using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -54,12 +55,14 @@ public class UserController : ControllerBase
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] string userId)
     {
-        var currentUser = await _getUserByIdUseCase.ExecuteAsync(userId);
-        if (currentUser == null)
+        var getUserByIdResponse = await _getUserByIdUseCase.ExecuteAsync(userId);
+
+        return getUserByIdResponse switch
         {
-            return Ok();
-        }
-        return Ok(UserModelConverter.ToModel(currentUser));
+            GetUserByIdResponse.Success success => Ok(success.User),
+            GetUserByIdResponse.UserNotFound => NotFound(getUserByIdResponse.Message),
+            _ => Problem("Unexpected response")
+        };
     }
 
     [HttpGet("login")]
