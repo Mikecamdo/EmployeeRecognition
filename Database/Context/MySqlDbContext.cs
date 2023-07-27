@@ -74,6 +74,10 @@ public class MySqlDbContext : DbContext
             entity.HasOne(e => e.Kudo)
                 .WithMany(k => k.Comments)
                 .HasForeignKey(e => e.KudoId);
+
+            entity.HasOne(e => e.Sender)
+                .WithMany(u => u.CommentsSent)
+                .HasForeignKey(e => e.SenderId);
         });
     }
     

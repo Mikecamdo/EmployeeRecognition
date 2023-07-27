@@ -12,4 +12,5 @@ public class User
 
     public IEnumerable<Kudo>? KudosSent { get; set; }
     public IEnumerable<Kudo>? KudosReceived { get; set; }
+    public IEnumerable<Comment>? CommentsSent { get; set; }
 }

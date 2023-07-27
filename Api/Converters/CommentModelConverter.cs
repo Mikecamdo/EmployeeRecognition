@@ -28,8 +28,8 @@ public class CommentModelConverter
             Id = entity.Id,
             KudoId = entity.KudoId,
             SenderId = entity.SenderId,
-            SenderName = entity.Kudo?.Sender?.Name,
-            SenderAvatar = entity.Kudo?.Sender?.AvatarUrl,
+            SenderName = entity.Sender?.Name,
+            SenderAvatar = entity.Sender?.AvatarUrl,
             Message = entity.Message
         };
     }

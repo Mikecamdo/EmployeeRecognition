@@ -11,4 +11,5 @@ public class Comment
     public required string Message { get; set; }
 
     public Kudo? Kudo { get; set; }
+    public User? Sender { get; set; }
 }
