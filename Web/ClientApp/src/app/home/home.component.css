@@ -64,3 +64,8 @@
 .brown-text {
     color: #551E19;
 }
+
+#comments-section {
+    max-height: 250px;
+    overflow-y: auto;
+}
