@@ -20,9 +20,16 @@
     <div *ngFor="let kudo of allKudos; let i = index">
         <div class="card my-5"> <!-- Make kudo its own component (??) -->
             <div class="card-body">
-                <h6 class="card-title">
-                    <img class="small-image me-2" [src]="kudo.senderAvatarUrl"/>
-                    <b>{{ kudo.senderName }}</b> recognized
+                <h6 class="card-title d-flex justify-content-between">
+                    <span>
+                        <img class="small-image me-2" [src]="kudo.senderAvatarUrl"/>
+                        <b>{{ kudo.senderName }}</b> recognized
+                    </span>
+                    <span *ngIf="kudo.senderId == userId" class="close-container"
+                    (click)="deleteKudo(kudo.id, i)">
+                        <span class="leftright top-spacing"></span>
+                        <span class="rightleft top-spacing"></span>
+                    </span>
                 </h6>
                 <p class="card-text">
                     <img class="small-image me-2" [src]="kudo.receiverAvatarUrl"/>

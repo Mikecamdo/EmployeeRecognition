@@ -24,6 +24,11 @@ export class KudosService {
   getAllKudos(): Observable<Kudo[]> {
     return this.httpClient.get<Kudo[]>(this.apiRoot, {headers: this.headers });
   }
+
+  deleteKudo(kudoId: number): Observable<Object> {
+    let route = this.apiRoot + '/' + kudoId;
+    return this.httpClient.delete(route, {headers: this.headers });
+  }
   
 }
 

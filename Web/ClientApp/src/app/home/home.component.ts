@@ -96,12 +96,30 @@ export class HomeComponent implements OnInit {
     return window.innerWidth >= 768;
   }
 
+  deleteKudo(kudoId: number, kudoIndex: number): void {
+    this.kudosService.deleteKudo(kudoId).subscribe({
+      next: x => {
+        console.log("Deleted kudo!");
+        this.allKudos = this.allKudos.filter(kudo => kudo.id !== kudoId);
+        this.hasComments.splice(kudoIndex, 1);
+        this.showComments.splice(kudoIndex, 1);
+        this.allComments = this.allComments.filter(comment => comment.kudoId !== kudoId);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
   deleteComment(commentId: number, kudoId: number, kudoIndex: number): void {
     this.commentsService.deleteComment(commentId).subscribe({
       next: x => {
         this.allComments = this.allComments.filter(comment => comment.id !== commentId);
         let kudosWithComments = this.allComments.map(comment => comment.kudoId);
         this.hasComments[kudoIndex] = kudosWithComments.includes(kudoId);
+        if (!kudosWithComments.includes(kudoId)) {
+          this.showComments[kudoIndex] = false;
+        }
       },
       error: error => {
         console.log(error);
