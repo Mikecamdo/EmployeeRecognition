@@ -47,9 +47,9 @@ export class HomeComponent implements OnInit {
       mergeMap(() => this.commentsService.getAllComments()),
       tap(comments => {
         this.allComments = comments;
-        let kudoIds = comments.map(comment => comment.kudoId);
+        let kudosWithComments = comments.map(comment => comment.kudoId);
         this.allKudos.forEach((kudo, index) => {
-          this.hasComments[index] = kudoIds.includes(kudo.id);
+          this.hasComments[index] = kudosWithComments.includes(kudo.id);
         });
         this.everythingLoaded = true;
       }),
@@ -96,10 +96,12 @@ export class HomeComponent implements OnInit {
     return window.innerWidth >= 768;
   }
 
-  deleteComment(commentId: number): void {
+  deleteComment(commentId: number, kudoId: number, kudoIndex: number): void {
     this.commentsService.deleteComment(commentId).subscribe({
       next: x => {
         this.allComments = this.allComments.filter(comment => comment.id !== commentId);
+        let kudosWithComments = this.allComments.map(comment => comment.kudoId);
+        this.hasComments[kudoIndex] = kudosWithComments.includes(kudoId);
       },
       error: error => {
         console.log(error);

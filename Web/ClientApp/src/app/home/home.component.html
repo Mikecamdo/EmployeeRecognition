@@ -103,7 +103,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <b>{{ comment.senderName }}</b>
                                                     <span *ngIf="comment.senderId == userId" class="close-container"
-                                                    (click)="deleteComment(comment.id)">
+                                                    (click)="deleteComment(comment.id, kudo.id, i)">
                                                         <span class="leftright"></span>
                                                         <span class="rightleft"></span>
                                                     </span>
