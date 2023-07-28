@@ -10,6 +10,8 @@ import { TokenService } from '../services/token.service';
 })
 export class ProfileComponent implements OnInit {
 
+  editingProfile: boolean = false;
+
   characterSet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   showMessage: boolean = false; //FIXME change this to a popup (toastr??)
@@ -83,8 +85,7 @@ export class ProfileComponent implements OnInit {
     this.usersService.updateUser(this.userId, userInfo).subscribe({
       next: response => { 
         this.tokenService.updateToken(response.token);
-        this.message = "Changes Saved!";
-        this.showMessage = true;
+        this.editingProfile = false;
       },
       error: error => {
         console.log(error);
@@ -94,5 +95,9 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
+  }
+
+  editProfile(): void {
+    this.editingProfile = true;
   }
 }

@@ -11,51 +11,69 @@
         </div>
     </div>
 
-    <div class="row mt-2">
-        <div class="col-12 text-center">
-            <button class="btn btn-primary" (click)="generateNewAvatar()">
-                Generate New Avatar
-            </button>
+    <span *ngIf="!editingProfile">
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <div class="fs-1">{{ userName }}</div>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-12">
-            <label for="name" class="form-label">
-                Name
-            </label>
-            <input id="name" name="name" class="form-control" 
-             placeholder="Name" [(ngModel)]="userName" >
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" (click)="editProfile()">
+                    Edit Profile
+                </button>
+            </div>
         </div>
-    </div>
+    </span>
 
-    <div class="row">
-        <div class="col-12">
-            <label for="oldPassword" class="form-label">
-                Old Password
-            </label>
-            <input id="oldPassword" name="oldPassword" class="form-control" 
-             placeholder="Old Password" [(ngModel)]="oldPassword" >
+    <span *ngIf="editingProfile">
+        <div class="row mt-2">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" (click)="generateNewAvatar()">
+                    Generate New Avatar
+                </button>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-12">
-            <label for="newPassword" class="form-label">
-                New Password
-            </label>
-            <input id="newPassword" name="newPassword" class="form-control" 
-             placeholder="New Password" [(ngModel)]="newPassword" >
+        <div class="row">
+            <div class="col-12">
+                <label for="name" class="form-label">
+                    Name
+                </label>
+                <input id="name" name="name" class="form-control" 
+                 placeholder="Name" [(ngModel)]="userName" >
+            </div>
         </div>
-    </div>
-
-    <div *ngIf="showMessage" class="text-center">{{ message }}</div>
-
-    <div class="row mt-5">
-        <div class="col-12 text-center">
-            <button class="btn btn-primary" (click)="saveChanges()">
-                Save Changes
-            </button>
+    
+        <div class="row">
+            <div class="col-12">
+                <label for="oldPassword" class="form-label">
+                    Old Password
+                </label>
+                <input id="oldPassword" name="oldPassword" class="form-control" 
+                 placeholder="Old Password" [(ngModel)]="oldPassword" >
+            </div>
         </div>
-    </div>
+    
+        <div class="row">
+            <div class="col-12">
+                <label for="newPassword" class="form-label">
+                    New Password
+                </label>
+                <input id="newPassword" name="newPassword" class="form-control" 
+                 placeholder="New Password" [(ngModel)]="newPassword" >
+            </div>
+        </div>
+    
+        <div *ngIf="showMessage" class="text-center">{{ message }}</div>
+    
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" (click)="saveChanges()">
+                    Save Changes
+                </button>
+            </div>
+        </div>    
+    </span>
 </div>
