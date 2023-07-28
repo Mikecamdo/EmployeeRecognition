@@ -55,6 +55,16 @@ public class KudoRepository : IKudoRepository
     public async Task DeleteKudoAsync(Kudo kudo)
     {
         _mySqlDbContext.Kudos.Remove(kudo);
+
+        var kudoComments = await _mySqlDbContext.Comments
+            .Where(c => c.KudoId == kudo.Id)
+            .ToListAsync();
+
+        foreach(var comment in kudoComments)
+        {
+            _mySqlDbContext.Comments.Remove(comment);
+        }
+
         await _mySqlDbContext.SaveChangesAsync();
     }
 }
