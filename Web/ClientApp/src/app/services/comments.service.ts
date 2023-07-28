@@ -25,6 +25,11 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(this.apiRoot, {headers: this.headers });
   }
 
+  deleteComment(commentId: number): Observable<Object> {
+    let route = this.apiRoot + '/' + commentId;
+    return this.httpClient.delete(route, {headers: this.headers });
+  }
+
 }
 
 export interface CommentDto {
@@ -34,6 +39,7 @@ export interface CommentDto {
 }
 
 export interface Comment {
+  id: number;
   kudoId: number;
   senderId: string;
   senderName: string;

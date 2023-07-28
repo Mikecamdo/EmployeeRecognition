@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
       tap(comments => {
         this.allComments = comments;
         let kudoIds = comments.map(comment => comment.kudoId);
-        //let kudoIds = this.allKudos.map(kudo => kudo.id);
         this.allKudos.forEach((kudo, index) => {
           this.hasComments[index] = kudoIds.includes(kudo.id);
         });
@@ -95,6 +94,17 @@ export class HomeComponent implements OnInit {
 
   isMdViewport(): boolean {
     return window.innerWidth >= 768;
+  }
+
+  deleteComment(commentId: number): void {
+    this.commentsService.deleteComment(commentId).subscribe({
+      next: x => {
+        this.allComments = this.allComments.filter(comment => comment.id !== commentId);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])

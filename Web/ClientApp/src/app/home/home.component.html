@@ -100,8 +100,13 @@
                                                 'col-10': isXsViewport(),
                                                 'col-11': isMdViewport()
                                             }">
-                                                <div>
+                                                <div class="d-flex justify-content-between">
                                                     <b>{{ comment.senderName }}</b>
+                                                    <span *ngIf="comment.senderId == userId" class="close-container"
+                                                    (click)="deleteComment(comment.id)">
+                                                        <span class="leftright"></span>
+                                                        <span class="rightleft"></span>
+                                                    </span>
                                                 </div>
                                                 <div>
                                                     <b>{{ comment.message }}</b>
