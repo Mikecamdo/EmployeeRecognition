@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,47 +30,24 @@ export class ProfileComponent implements OnInit {
   confirmNewPassword: string = '';
   
   constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, 
-    private tokenService: TokenService, private route: ActivatedRoute) {
+    private tokenService: TokenService, private userDataService: UserDataService) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params.userName) {
-        console.log("userName");
-        console.log(params.userName);
+    let user = this.userDataService.getUserData();
 
-        const token: any = localStorage.getItem('token');
+    this.userName = user.name;
+    this.currentUserName = user.name;
+    this.userAvatar = user.avatarUrl;
+    this.userId = user.id;
 
-        const decodedToken = this.jwtHelper.decodeToken(token);
+    const token: any = localStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token);
 
-        this.userName = decodedToken.name;
-        this.currentUserName = decodedToken.name;
-        this.userAvatar = decodedToken.avatarUrl;
-        this.userId = decodedToken.id;
-        
-        this.isCurrentUser = true;
-      } else {
-        console.log("user");
-        console.log(JSON.parse(params.user));
-        let user = JSON.parse(params.user);
-
-        const token: any = localStorage.getItem('token');
-        const decodedToken = this.jwtHelper.decodeToken(token);
-
-        if (user.id === decodedToken.id) {
-          this.userName = decodedToken.name;
-          this.currentUserName = decodedToken.name;
-          this.userAvatar = decodedToken.avatarUrl;
-          this.userId = decodedToken.id;
-          this.isCurrentUser = true;
-        } else {
-          this.userName = user.name;
-          this.userAvatar = user.avatarUrl;
-          this.userId = user.id;
-        }
-      }
-    });
+    if (decodedToken.id === user.id) {
+      this.isCurrentUser = true;
+    }
   }
 
   generateNewAvatar(): void {

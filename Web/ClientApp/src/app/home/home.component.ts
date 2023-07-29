@@ -3,6 +3,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Kudo, KudosService } from '../services/kudos.service';
 import { Comment, CommentDto, CommentsService } from '../services/comments.service';
 import { catchError, mergeMap, of, tap } from 'rxjs';
+import { UserDataService } from '../services/user-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit {
   userAvatar: string = '';
 
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService,
-    private commentsService: CommentsService) {
+    private commentsService: CommentsService, private userDataService: UserDataService,
+    private router: Router) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -133,28 +136,42 @@ export class HomeComponent implements OnInit {
     this.isMdViewport();
   }
 
-  getUserQueryParam(object: any, type: string): string {
+  viewProfile(object: any, type: string): void {
+    let name = '';
+
     switch (type) {
       case "sender":
-        return JSON.stringify({
+        this.userDataService.setUserData({
           id: object.senderId,
           name: object.senderName,
           avatarUrl: object.senderAvatarUrl
         });
+        name = object.senderName;
+        break;
       case "receiver":
-        return JSON.stringify({
+        this.userDataService.setUserData({
           id: object.receiverId,
           name: object.receiverName,
           avatarUrl: object.receiverAvatarUrl
         });
+        name = object.receiverName;
+        break;
       case "comment":
-        return JSON.stringify({
+        this.userDataService.setUserData({
           id: object.senderId,
           name: object.senderName,
           avatarUrl: object.senderAvatar
         });
+        name = object.senderName;
+        break;
       default:
-        return "Error";
+        this.userDataService.setUserData({
+          id: this.userId,
+          name: this.userName,
+          avatarUrl: this.userAvatar
+        });
+        name = this.userName;
     };
+    this.router.navigate(['/profile', name]);
   }
 }

@@ -36,3 +36,7 @@ nav {
 .navbar-brand {
   width: 100px;
 }
+
+img {
+  cursor: pointer;
+}
