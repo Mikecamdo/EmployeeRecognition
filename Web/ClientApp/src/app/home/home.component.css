@@ -112,3 +112,7 @@
 .top-spacing {
     margin-top: 1rem;
 }
+
+img {
+    cursor: pointer;
+}

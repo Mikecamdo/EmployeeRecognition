@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,7 @@ import { TokenService } from '../services/token.service';
 })
 export class ProfileComponent implements OnInit {
 
+  isCurrentUser: boolean = false;
   editingProfile: boolean = false;
 
   characterSet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -26,19 +28,48 @@ export class ProfileComponent implements OnInit {
   newPassword: string = '';
   confirmNewPassword: string = '';
   
-  constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, private tokenService: TokenService) {
+  constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, 
+    private tokenService: TokenService, private route: ActivatedRoute) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    const token: any = localStorage.getItem('token');
+    this.route.queryParams.subscribe((params) => {
+      if (params.userName) {
+        console.log("userName");
+        console.log(params.userName);
 
-    const decodedToken = this.jwtHelper.decodeToken(token);
+        const token: any = localStorage.getItem('token');
 
-    this.userName = decodedToken.name;
-    this.currentUserName = decodedToken.name;
-    this.userAvatar = decodedToken.avatarUrl;
-    this.userId = decodedToken.id;
+        const decodedToken = this.jwtHelper.decodeToken(token);
+
+        this.userName = decodedToken.name;
+        this.currentUserName = decodedToken.name;
+        this.userAvatar = decodedToken.avatarUrl;
+        this.userId = decodedToken.id;
+        
+        this.isCurrentUser = true;
+      } else {
+        console.log("user");
+        console.log(JSON.parse(params.user));
+        let user = JSON.parse(params.user);
+
+        const token: any = localStorage.getItem('token');
+        const decodedToken = this.jwtHelper.decodeToken(token);
+
+        if (user.id === decodedToken.id) {
+          this.userName = decodedToken.name;
+          this.currentUserName = decodedToken.name;
+          this.userAvatar = decodedToken.avatarUrl;
+          this.userId = decodedToken.id;
+          this.isCurrentUser = true;
+        } else {
+          this.userName = user.name;
+          this.userAvatar = user.avatarUrl;
+          this.userId = user.id;
+        }
+      }
+    });
   }
 
   generateNewAvatar(): void {

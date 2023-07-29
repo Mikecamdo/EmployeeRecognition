@@ -132,4 +132,29 @@ export class HomeComponent implements OnInit {
     this.isXsViewport();
     this.isMdViewport();
   }
+
+  getUserQueryParam(object: any, type: string): string {
+    switch (type) {
+      case "sender":
+        return JSON.stringify({
+          id: object.senderId,
+          name: object.senderName,
+          avatarUrl: object.senderAvatarUrl
+        });
+      case "receiver":
+        return JSON.stringify({
+          id: object.receiverId,
+          name: object.receiverName,
+          avatarUrl: object.receiverAvatarUrl
+        });
+      case "comment":
+        return JSON.stringify({
+          id: object.senderId,
+          name: object.senderName,
+          avatarUrl: object.senderAvatar
+        });
+      default:
+        return "Error";
+    };
+  }
 }

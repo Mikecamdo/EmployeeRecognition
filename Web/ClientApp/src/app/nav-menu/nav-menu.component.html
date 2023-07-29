@@ -45,7 +45,7 @@
             <a class="nav-link text-dark" [routerLink]="['/home']">Logout</a>
           </li>
         </ul>
-        <a class="nav-link" [routerLink]="['/profile']">
+        <a class="nav-link" [routerLink]="['/profile', userName]" [queryParams]="{ userName: userName }">
           <img id="profile-picture" [src]="userAvatar" alt="Avatar" />
         </a>
       </div>

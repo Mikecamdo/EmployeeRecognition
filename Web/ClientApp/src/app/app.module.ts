@@ -31,7 +31,7 @@ import { ProfileComponent } from './profile/profile.component';
       { path: '', component: LandingPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
       { path: 'recognize', component: RecognizeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-      { path: 'profile', component: ProfileComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      { path: 'profile/:name', component: ProfileComponent, canActivate: [AuthGuard]},
       { path: '**', redirectTo: ''}
     ]),
     NgbModule,
