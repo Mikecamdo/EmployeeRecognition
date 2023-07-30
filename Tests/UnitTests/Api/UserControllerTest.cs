@@ -48,9 +48,26 @@ public class UserControllerShould : UserControllerSetup
         if (userAlreadyExists)
         {
             result.Should().BeOfType<BadRequestObjectResult>();
+
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+
+            var returnValue = badRequestResult.Value as SignupResponse;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(SignupResponse));
+            Assert.Equal("A user with that name already exists", returnValue.ErrorMessage);
+            Assert.False(returnValue.IsSignupSuccessful);
         } else
         {
             result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value as SignupResponse;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(SignupResponse));
+            Assert.True(returnValue.IsSignupSuccessful);
         }
     }
 }
