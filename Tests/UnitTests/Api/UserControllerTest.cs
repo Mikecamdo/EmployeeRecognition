@@ -2,6 +2,7 @@
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
+using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -68,6 +69,52 @@ public class UserControllerShould : UserControllerSetup
             returnValue.Should().NotBeNull();
             returnValue.Should().BeOfType(typeof(SignupResponse));
             Assert.True(returnValue.IsSignupSuccessful);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void DeleteUser(bool userExists)
+    {
+        //Arrange
+        if (userExists)
+        {
+            _deleteUserUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult<DeleteUserResponse>(new DeleteUserResponse.Success()));
+        }
+        else
+        {
+            _deleteUserUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult<DeleteUserResponse>(new DeleteUserResponse.UserNotFound()));
+        }
+        string request = "id";
+
+        //Act
+        var ctrl = CreateUserController();
+        var result = ctrl.DeleteUser(request).Result;
+
+        //Assert
+        if (userExists)
+        {
+            result.Should().BeOfType<NoContentResult>();
+
+            var noContentResult = result as NoContentResult;
+            noContentResult.Should().NotBeNull();
+        }
+        else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
+
+            var returnValue = notFoundResult.Value as string;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(string));
+            Assert.Equal("A User with the given UserId was not found", returnValue);
         }
     }
 }
