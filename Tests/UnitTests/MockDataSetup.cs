@@ -4,7 +4,7 @@ namespace EmployeeRecognition.Tests.UnitTests;
 
 public class MockDataSetup
 {
-    public List<User> CreateMockUserList()
+    public IEnumerable<User> CreateMockUserList()
     {
         var moqUsers = new List<User>
         {

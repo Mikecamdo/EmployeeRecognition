@@ -117,4 +117,27 @@ public class UserControllerShould : UserControllerSetup
             Assert.Equal("A User with the given UserId was not found", returnValue);
         }
     }
+
+    [Fact]
+    public void GetUsers()
+    {
+        //Arrange
+        _getAllUsersUseCase
+            .Setup(x => x.ExecuteAsync())
+            .Returns(Task.FromResult(CreateMockUserList()));
+
+        //Act
+        var ctrl = CreateUserController();
+        var result = ctrl.GetUsers().Result;
+
+        //Assert
+
+        result.Should().BeOfType<OkObjectResult>();
+
+        var okResult = result as OkObjectResult;
+        okResult.Should().NotBeNull();
+
+        var returnValue = okResult.Value;
+        returnValue.Should().NotBeNull();
+    }
 }
