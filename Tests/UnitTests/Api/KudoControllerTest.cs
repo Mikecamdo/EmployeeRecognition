@@ -2,6 +2,7 @@
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
+using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -72,6 +73,50 @@ public class KudoControllerShould : KudoControllerSetup
             returnValue.Should().NotBeNull();
             returnValue.Should().BeOfType(typeof(string));
             Assert.Equal("Invalid request", returnValue);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void DeleteKudo(bool kudoExists)
+    {
+        //Arrange
+        if (kudoExists)
+        {
+            _deleteKudoUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult<DeleteKudoResponse>(new DeleteKudoResponse.Success()));
+        } else
+        {
+            _deleteKudoUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult<DeleteKudoResponse>(new DeleteKudoResponse.KudoNotFound()));
+        }
+        int request = 1;
+
+        //Act
+        var ctrl = CreateKudoController();
+        var result = ctrl.DeleteKudo(request).Result;
+
+        //Assert
+        if (kudoExists)
+        {
+            result.Should().BeOfType<NoContentResult>();
+
+            var noContentResult = result as NoContentResult;
+            noContentResult.Should().NotBeNull();
+        } else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
+
+            var returnValue = notFoundResult.Value as string;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(string));
+            Assert.Equal("A Kudo with the given KudoId was not found", returnValue);
         }
     }
 }
