@@ -3,6 +3,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+using EmployeeRecognition.Core.UseCases.Users.GetUserById;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -131,7 +132,6 @@ public class UserControllerShould : UserControllerSetup
         var result = ctrl.GetUsers().Result;
 
         //Assert
-
         result.Should().BeOfType<OkObjectResult>();
 
         var okResult = result as OkObjectResult;
@@ -139,5 +139,54 @@ public class UserControllerShould : UserControllerSetup
 
         var returnValue = okResult.Value;
         returnValue.Should().NotBeNull();
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void GetUserById(bool userExists)
+    {
+        //Arrange
+        if (userExists)
+        {
+            _getUserByIdUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns((string y) => Task.FromResult<GetUserByIdResponse>(new GetUserByIdResponse.Success(
+                    UserModelConverter.ToModel(CreateMockUserList().First(z => z.Id == y)))));
+        }
+        else
+        {
+            _getUserByIdUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns((string y) => Task.FromResult<GetUserByIdResponse>(new GetUserByIdResponse.UserNotFound()));
+        }
+        string request = "19df82ba-a964-4dbf-8013-69c120e938de";
+
+        //Act
+        var ctrl = CreateUserController();
+        var result = ctrl.GetUserById(request).Result;
+
+        //Assert
+        if (userExists)
+        {
+            result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(UserModel));
+        } else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var okResult = result as NotFoundObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("A User with the given UserId was not found", returnValue);
+        }
     }
 }
