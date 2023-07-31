@@ -3,6 +3,7 @@ using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
+using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
 using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -188,6 +189,55 @@ public class KudoControllerShould : KudoControllerSetup
             var returnValue = badRequestResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("A User with the given SenderId was not found", returnValue);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void GetKudosByReceiverId(bool receiverExists)
+    {
+        //Arrange
+        if (receiverExists)
+        {
+            _getKudosByReceiverIdUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns((string y) => Task.FromResult<GetKudosByReceiverIdResponse>(new GetKudosByReceiverIdResponse.Success(
+                    KudoModelConverter.ToModel(CreateMockKudoList().Where(z => z.ReceiverId == y).ToList()))));
+        }
+        else
+        {
+            _getKudosByReceiverIdUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>()))
+                .Returns((string y) => Task.FromResult<GetKudosByReceiverIdResponse>(new GetKudosByReceiverIdResponse.UserNotFound()));
+        }
+        string request = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3";
+
+        //Act
+        var ctrl = CreateKudoController();
+        var result = ctrl.GetKudosByReceiverId(request).Result;
+
+        //Assert
+        if (receiverExists)
+        {
+            result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+        }
+        else
+        {
+            result.Should().BeOfType<BadRequestObjectResult>();
+
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+
+            var returnValue = badRequestResult.Value;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("A User with the given ReceiverId was not found", returnValue);
         }
     }
 }
