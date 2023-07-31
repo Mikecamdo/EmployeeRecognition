@@ -4,6 +4,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
 using EmployeeRecognition.Core.UseCases.Users.GetUserById;
+using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -243,6 +244,82 @@ public class UserControllerShould : UserControllerSetup
             var returnValue = okResult.Value as LoginResponse;
             returnValue.Should().NotBeNull();
             Assert.Equal("Invalid Login", returnValue.ErrorMessage);
+        }
+    }
+
+    [Theory]
+    [InlineData(true, true)]
+    [InlineData(true, false)]
+    [InlineData(false, true)]
+    [InlineData(false, false)]
+    public void UpdateUser(bool userExists, bool nameAlreadyTaken)
+    {
+        //Arrange
+        if (userExists && nameAlreadyTaken)
+        {
+            _updateUserUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.InvalidRequest("Name already in use")));
+        }
+        else if (userExists && !nameAlreadyTaken)
+        {
+            _updateUserUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.Success(
+                    UserModelConverter.ToModel(CreateMockUserList().First()))));
+        }
+        else
+        {
+            _updateUserUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.UserNotFound()));
+        }
+
+        string request1 = "id";
+        UserDto request2 = new()
+        {
+            Name = "name",
+            Password = "password",
+            AvatarUrl = "url"
+        };
+
+        //Act
+        var ctrl = CreateUserController();
+        var result = ctrl.UpdateUser(request1, request2).Result;
+
+        //Assert
+        if (userExists && nameAlreadyTaken)
+        {
+            result.Should().BeOfType<BadRequestObjectResult>();
+
+            var okResult = result as BadRequestObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("Name already in use", returnValue);
+        }
+        else if (userExists && !nameAlreadyTaken)
+        {
+            result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(SignupResponse));
+        }
+        else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var okResult = result as NotFoundObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("A User with the given UserId was not found", returnValue);
         }
     }
 }
