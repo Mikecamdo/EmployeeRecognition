@@ -184,10 +184,10 @@ public class UserControllerShould : UserControllerSetup
         {
             result.Should().BeOfType<NotFoundObjectResult>();
 
-            var okResult = result as NotFoundObjectResult;
-            okResult.Should().NotBeNull();
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
 
-            var returnValue = okResult.Value;
+            var returnValue = notFoundResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("A User with the given UserId was not found", returnValue);
         }
@@ -238,10 +238,10 @@ public class UserControllerShould : UserControllerSetup
         {
             result.Should().BeOfType<UnauthorizedObjectResult>();
 
-            var okResult = result as UnauthorizedObjectResult;
-            okResult.Should().NotBeNull();
+            var unauthorizedResult = result as UnauthorizedObjectResult;
+            unauthorizedResult.Should().NotBeNull();
 
-            var returnValue = okResult.Value as LoginResponse;
+            var returnValue = unauthorizedResult.Value as LoginResponse;
             returnValue.Should().NotBeNull();
             Assert.Equal("Invalid Login", returnValue.ErrorMessage);
         }
@@ -292,10 +292,10 @@ public class UserControllerShould : UserControllerSetup
         {
             result.Should().BeOfType<BadRequestObjectResult>();
 
-            var okResult = result as BadRequestObjectResult;
-            okResult.Should().NotBeNull();
+            var badRequestResult = result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
 
-            var returnValue = okResult.Value;
+            var returnValue = badRequestResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("Name already in use", returnValue);
         }
@@ -314,10 +314,10 @@ public class UserControllerShould : UserControllerSetup
         {
             result.Should().BeOfType<NotFoundObjectResult>();
 
-            var okResult = result as NotFoundObjectResult;
-            okResult.Should().NotBeNull();
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
 
-            var returnValue = okResult.Value;
+            var returnValue = notFoundResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("A User with the given UserId was not found", returnValue);
         }
