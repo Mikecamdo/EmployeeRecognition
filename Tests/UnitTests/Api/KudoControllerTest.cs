@@ -119,4 +119,26 @@ public class KudoControllerShould : KudoControllerSetup
             Assert.Equal("A Kudo with the given KudoId was not found", returnValue);
         }
     }
+
+    [Fact]
+    public void GetKudos()
+    {
+        //Arrange
+        _getAllKudosUseCase
+            .Setup(x => x.ExecuteAsync())
+            .Returns(Task.FromResult(CreateMockKudoList()));
+
+        //Act
+        var ctrl = CreateKudoController();
+        var result = ctrl.GetKudos().Result;
+
+        //Assert
+        result.Should().BeOfType<OkObjectResult>();
+
+        var okResult = result as OkObjectResult;
+        okResult.Should().NotBeNull();
+
+        var returnValue = okResult.Value;
+        returnValue.Should().NotBeNull();
+    }
 }
