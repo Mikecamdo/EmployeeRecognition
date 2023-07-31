@@ -59,7 +59,8 @@ public class UserControllerShould : UserControllerSetup
             returnValue.Should().BeOfType(typeof(SignupResponse));
             Assert.Equal("A user with that name already exists", returnValue.ErrorMessage);
             Assert.False(returnValue.IsSignupSuccessful);
-        } else
+        }
+        else
         {
             result.Should().BeOfType<OkObjectResult>();
 
@@ -177,7 +178,8 @@ public class UserControllerShould : UserControllerSetup
             var returnValue = okResult.Value;
             returnValue.Should().NotBeNull();
             returnValue.Should().BeOfType(typeof(UserModel));
-        } else
+        }
+        else
         {
             result.Should().BeOfType<NotFoundObjectResult>();
 
@@ -187,6 +189,60 @@ public class UserControllerShould : UserControllerSetup
             var returnValue = okResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("A User with the given UserId was not found", returnValue);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void GetUserByLoginCredentials(bool validCredential)
+    {
+        //Arrange
+        if (validCredential)
+        {
+            _getUserByLoginCredentialUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<LoginCredential>()))
+                .Returns((LoginCredential y) => Task.FromResult((CreateMockUserList().First())));
+        }
+        else
+        {
+            _getUserByLoginCredentialUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<LoginCredential>()))
+                .Returns((LoginCredential y) => Task.FromResult((CreateMockUserList().FirstOrDefault(z => z.Id == "id"))));
+        }
+
+        LoginCredential request = new()
+        {
+            Name = "Name",
+            Password = "Password"
+        };
+
+        //Act
+        var ctrl = CreateUserController();
+        var result = ctrl.GetUserByLoginCredentials(request).Result;
+
+        //Assert
+        if (validCredential)
+        {
+            result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(LoginResponse));
+        }
+        else
+        {
+            result.Should().BeOfType<UnauthorizedObjectResult>();
+
+            var okResult = result as UnauthorizedObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value as LoginResponse;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("Invalid Login", returnValue.ErrorMessage);
         }
     }
 }
