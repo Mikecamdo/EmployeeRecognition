@@ -108,9 +108,46 @@ public class MockDataSetup
                 Achiever = true,
                 Sweetness = false,
                 TheDate = DateOnly.FromDateTime(DateTime.Now)
-            },
+            }
         };
 
         return moqKudos;
+    }
+
+    public IEnumerable<Comment> CreateMockCommentList()
+    {
+        var moqComments = new List<Comment>
+        {
+            new Comment
+            {
+                Id = 1,
+                KudoId = 1,
+                SenderId = "19df82ba-a964-4dbf-8013-69c120e938de",
+                Message = "a comment"
+            },
+            new Comment
+            {
+                Id = 2,
+                KudoId = 1,
+                SenderId = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
+                Message = "anotha comment"
+            },
+            new Comment
+            {
+                Id = 3,
+                KudoId = 4,
+                SenderId = "19df82ba-a964-4dbf-8013-69c120e938de",
+                Message = "WOOO"
+            },
+            new Comment
+            {
+                Id = 4,
+                KudoId = 2,
+                SenderId = "e1a07078-fd94-4554-812a-383c0367de90",
+                Message = "Womp Womp"
+            }
+        };
+
+        return moqComments;
     }
 }
