@@ -2,6 +2,7 @@
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
+using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -84,6 +85,50 @@ public class CommentControllerTest : CommentControllerSetup
             returnValue.Should().NotBeNull();
             returnValue.Should().BeOfType(typeof(string));
             Assert.Equal("Missing/invalid parameters", returnValue);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void DeleteComment(bool commentExists)
+    {
+        //Arrange
+        if (commentExists)
+        {
+            _deleteCommentUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult<DeleteCommentResponse>(new DeleteCommentResponse.Success()));
+        } else
+        {
+            _deleteCommentUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>()))
+                .Returns(Task.FromResult<DeleteCommentResponse>(new DeleteCommentResponse.CommentNotFound()));
+        }
+        int request = 1;
+
+        //Act
+        var ctrl = CreateCommentController();
+        var result = ctrl.DeleteComment(request).Result;
+
+        //Assert
+        if (commentExists)
+        {
+            result.Should().BeOfType<NoContentResult>();
+
+            var noContentResult = result as NoContentResult;
+            noContentResult.Should().NotBeNull();
+        } else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
+
+            var returnValue = notFoundResult.Value as string;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(string));
+            Assert.Equal("A Comment with the given CommentId was not found", returnValue);
         }
     }
 }
