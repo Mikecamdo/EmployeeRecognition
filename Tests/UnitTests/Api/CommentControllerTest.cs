@@ -4,6 +4,7 @@ using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
 using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -199,6 +200,59 @@ public class CommentControllerTest : CommentControllerSetup
             var returnValue = badRequestResult.Value;
             returnValue.Should().NotBeNull();
             Assert.Equal("A Kudo with the given KudoId was not found", returnValue);
+        }
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void UpdateComment(bool commentExists)
+    {
+        //Arrange
+        if (commentExists)
+        {
+            _updateCommentUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>(), It.IsAny<CommentDto>()))
+                .Returns(Task.FromResult<UpdateCommentResponse>(new UpdateCommentResponse.Success(
+                    CommentModelConverter.ToModel(CreateMockCommentList().First()))));
+        } else
+        {
+            _updateCommentUseCase
+                .Setup(x => x.ExecuteAsync(It.IsAny<int>(), It.IsAny<CommentDto>()))
+                .Returns(Task.FromResult<UpdateCommentResponse>(new UpdateCommentResponse.CommentNotFound()));
+        }
+        int request1 = 1;
+        CommentDto request2 = new()
+        {
+            SenderId = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
+            Message = "A new message"
+        };
+
+        //Act
+        var ctrl = CreateCommentController();
+        var result = ctrl.UpdateComment(request1, request2).Result;
+
+        //Assert
+        if (commentExists)
+        {
+            result.Should().BeOfType<OkObjectResult>();
+
+            var okResult = result as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var returnValue = okResult.Value;
+            returnValue.Should().NotBeNull();
+            returnValue.Should().BeOfType(typeof(CommentModel));
+        } else
+        {
+            result.Should().BeOfType<NotFoundObjectResult>();
+
+            var notFoundResult = result as NotFoundObjectResult;
+            notFoundResult.Should().NotBeNull();
+
+            var returnValue = notFoundResult.Value;
+            returnValue.Should().NotBeNull();
+            Assert.Equal("A Comment with the given CommentId was not found", returnValue);
         }
     }
 }

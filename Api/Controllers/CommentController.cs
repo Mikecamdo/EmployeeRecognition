@@ -78,7 +78,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpPut("{commentId}")]
-    public async Task<IActionResult> UpdateUser([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
+    public async Task<IActionResult> UpdateComment([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
     {
         var updateCommentResponse = await _updateCommentUseCase.ExecuteAsync(commentId, updatedCommentInfo);
 
