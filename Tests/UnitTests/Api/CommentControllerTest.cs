@@ -131,4 +131,26 @@ public class CommentControllerTest : CommentControllerSetup
             Assert.Equal("A Comment with the given CommentId was not found", returnValue);
         }
     }
+
+    [Fact]
+    public void GetComments()
+    {
+        //Arrange
+        _getCommentsUseCase
+            .Setup(x => x.ExecuteAsync())
+            .Returns(Task.FromResult(CreateMockCommentList()));
+
+        //Act
+        var ctrl = CreateCommentController();
+        var result = ctrl.GetAllComments().Result;
+
+        //Assert
+        result.Should().BeOfType<OkObjectResult>();
+
+        var okResult = result as OkObjectResult;
+        okResult.Should().NotBeNull();
+
+        var returnValue = okResult.Value;
+        returnValue.Should().NotBeNull();
+    }
 }
