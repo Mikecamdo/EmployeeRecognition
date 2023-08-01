@@ -30,6 +30,11 @@ export class CommentsService {
     return this.httpClient.delete(route, {headers: this.headers });
   }
 
+  updateComment(commentId: number, commentInfo: CommentDto): Observable<Comment> {
+    let route = this.apiRoot + '/' + commentId;
+    return this.httpClient.put<Comment>(route, commentInfo, {headers: this.headers });
+  }
+
 }
 
 export interface CommentDto {

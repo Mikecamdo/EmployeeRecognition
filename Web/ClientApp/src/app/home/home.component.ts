@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   commentMessage: string[] = [];
   hasComments: boolean[] = [];
   showComments: boolean[] = [];
+  editingComment: boolean[] = [];
 
   userId: string = '';
   userName: string = '';
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
           this.hasComments[index] = kudosWithComments.includes(kudo.id);
         });
         this.everythingLoaded = true;
+        this.editingComment = new Array(comments.length).fill(false);
       }),
       catchError(error => {
         this.criticalError = true;
@@ -128,6 +130,32 @@ export class HomeComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  updateComment(commentId: number, kudoId: number, updatedMessage: string, iteration: number): void {
+    let updatedComment: CommentDto = {
+      kudoId: kudoId,
+      senderId: this.userId,
+      message: updatedMessage
+    };
+
+    this.commentsService.updateComment(commentId, updatedComment).subscribe({
+      next: (comment: Comment) => {
+        this.allComments[iteration] = comment;
+        this.editingComment[iteration] = false;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+  editComment(iteration: number): void {
+    this.editingComment[iteration] = true;
+  }
+
+  activateUpdateButton(message: string): boolean {
+    return !message;
   }
 
   @HostListener('window:resize', ['$event'])

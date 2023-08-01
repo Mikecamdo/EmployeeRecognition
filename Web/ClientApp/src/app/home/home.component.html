@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div *ngIf="showComments[i]" id="comments-section">
-                <div *ngFor="let comment of allComments">
+                <div *ngFor="let comment of allComments; let j = index">
                     <div *ngIf="comment.kudoId === kudo.id">
                         <div class="card-footer">
                             <div class="container">
@@ -109,14 +109,38 @@
                                             }">
                                                 <div class="d-flex justify-content-between">
                                                     <b>{{ comment.senderName }}</b>
-                                                    <span *ngIf="comment.senderId == userId" class="close-container"
-                                                    (click)="deleteComment(comment.id, kudo.id, i)">
-                                                        <span class="leftright"></span>
-                                                        <span class="rightleft"></span>
-                                                    </span>
+                                                    <div *ngIf="comment.senderId == userId" class="me-3">
+                                                        <span (click)="editComment(j)">
+                                                            <img class="edit-button" src="../../assets/images/edit-button.png"/>
+                                                        </span>
+                                                        <span class="close-container" (click)="deleteComment(comment.id, kudo.id, i)">
+                                                            <span class="leftright"></span>
+                                                            <span class="rightleft"></span>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div>
+                                                <div *ngIf="!editingComment[j]">
                                                     <b>{{ comment.message }}</b>
+                                                </div>
+                                                <div *ngIf="editingComment[j]">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div [ngClass]="{
+                                                                'col-9 p-0': isXsViewport(),
+                                                                'col-11': isMdViewport()
+                                                            }">
+                                                                <input class="form-control" placeholder="Add comment" type="text"
+                                                                id="comment" name="comment" maxlength="200" [(ngModel)]="comment.message" />
+                                                            </div>
+                                                            <div [ngClass]="{
+                                                                'col-3': isXsViewport(),
+                                                                'col-1': isMdViewport()
+                                                            }">
+                                                                <input class="btn btn-primary" type="submit" value="Update"
+                                                                [disabled]="activateUpdateButton(comment.message)" (click)="updateComment(comment.id, kudo.id, comment.message, j)" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
