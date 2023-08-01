@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  updateComment(commentId: number, kudoId: number, updatedMessage: string, iteration: number): void {
+  updateComment(iteration: number, commentId: number, kudoId: number, updatedMessage: string): void {
     let updatedComment: CommentDto = {
       kudoId: kudoId,
       senderId: this.userId,
@@ -150,8 +150,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  editComment(iteration: number): void {
-    this.editingComment[iteration] = true;
+  editComment(iteration: number, commentId: number, kudoId: number, updatedMessage: string): void {
+    if (this.editingComment[iteration]) {
+      this.updateComment(iteration, commentId, kudoId, updatedMessage);
+    }
+    this.editingComment[iteration] = !this.editingComment[iteration];
   }
 
   activateUpdateButton(message: string): boolean {

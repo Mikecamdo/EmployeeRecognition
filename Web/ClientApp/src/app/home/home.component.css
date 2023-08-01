@@ -122,3 +122,7 @@ img {
 .edit-button {
     max-height: 22px;
 }
+
+span.tag {
+    margin-top: 0.3rem;
+}
