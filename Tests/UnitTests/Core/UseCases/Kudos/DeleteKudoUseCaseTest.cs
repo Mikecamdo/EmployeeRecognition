@@ -1,5 +1,4 @@
 ﻿using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using Moq;
 
