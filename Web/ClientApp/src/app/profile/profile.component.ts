@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserDataService } from '../services/user-data.service';
 
 @Component({
@@ -30,7 +30,8 @@ export class ProfileComponent implements OnInit {
   confirmNewPassword: string = '';
   
   constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, 
-    private tokenService: TokenService, private userDataService: UserDataService) {
+    private tokenService: TokenService, private userDataService: UserDataService,
+    private router: Router) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -108,5 +109,17 @@ export class ProfileComponent implements OnInit {
 
   editProfile(): void {
     this.editingProfile = true;
+  }
+
+  deleteAccount(): void {
+    this.usersService.deleteUser(this.userId).subscribe({
+      next: response => {
+        localStorage.removeItem("token");
+        this.router.navigate(["/"]);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 }

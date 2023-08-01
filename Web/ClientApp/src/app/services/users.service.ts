@@ -33,6 +33,11 @@ export class UsersService {
     let route: string = this.apiRoot + '/' + currentUserId;
     return this.httpClient.put<SignupResponse>(route, currentUser, {headers: this.headers });
   }
+
+  deleteUser(userId: string): Observable<Object> {
+    let route: string = this.apiRoot + '/' + userId;
+    return this.httpClient.delete(route, {headers: this.headers });
+  }
 }
 
 export interface UserDto { //FIXME eventually want to move this to its own file
