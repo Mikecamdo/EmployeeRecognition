@@ -29,6 +29,13 @@ public class MockDataSetup
                 Password = "a_real_password",
                 AvatarUrl = ""
             },
+            new User
+            {
+                Id = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
+                Name = "Amanda",
+                Password = "WEEWOO",
+                AvatarUrl = "a_url"
+            }
         };
 
         return moqUsers;
