@@ -51,7 +51,7 @@ export class NavMenuComponent implements OnInit {
     this.userDataService.setUserData({
       id: this.userId,
       name: this.userName,
-      avatarUrl: this.userAvatar
+      avatarUrl: this.userAvatar.replace('&flip=true', '')
     });
 
     this.router.navigate(['/profile', this.userName]);
