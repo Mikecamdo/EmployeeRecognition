@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserDataService } from '../services/user-data.service';
 
 @Component({

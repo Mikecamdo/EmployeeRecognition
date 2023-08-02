@@ -22,6 +22,9 @@ export class NavMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let currentToken: any = localStorage.getItem("token");
+    this.tokenService.updateToken(currentToken);
+
     this.tokenService.token$.subscribe((token: any) => {
       const decodedToken = this.jwtHelper.decodeToken(token);
   
