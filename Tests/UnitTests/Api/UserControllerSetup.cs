@@ -13,6 +13,7 @@ public abstract class UserControllerSetup : MockDataSetup
     protected readonly Mock<IDeleteUserUseCase> _deleteUserUseCase;
     protected readonly Mock<IGetAllUsersUseCase> _getAllUsersUseCase;
     protected readonly Mock<IGetUserByIdUseCase> _getUserByIdUseCase;
+    protected readonly Mock<IGetUserByNameUseCase> _getUserByNameUseCase;
     protected readonly Mock<IGetUserByLoginCredentialUseCase> _getUserByLoginCredentialUseCase;
     protected readonly Mock<IUpdateUserUseCase> _updateUserUseCase;
 
@@ -26,6 +27,7 @@ public abstract class UserControllerSetup : MockDataSetup
         _deleteUserUseCase = new Mock<IDeleteUserUseCase>();
         _getAllUsersUseCase = new Mock<IGetAllUsersUseCase>();
         _getUserByIdUseCase = new Mock<IGetUserByIdUseCase>();
+        _getUserByNameUseCase = new Mock<IGetUserByNameUseCase>();
         _getUserByLoginCredentialUseCase = new Mock<IGetUserByLoginCredentialUseCase>();
         _updateUserUseCase = new Mock<IUpdateUserUseCase>();
     }
@@ -36,6 +38,7 @@ public abstract class UserControllerSetup : MockDataSetup
             _jwtHandler,
             _getAllUsersUseCase.Object,
             _getUserByIdUseCase.Object,
+            _getUserByNameUseCase.Object,
             _getUserByLoginCredentialUseCase.Object,
             _addUserUseCase.Object,
             _updateUserUseCase.Object,

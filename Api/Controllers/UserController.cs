@@ -7,6 +7,7 @@ using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
 using EmployeeRecognition.Core.UseCases.Users.GetUserById;
+using EmployeeRecognition.Core.UseCases.Users.GetUserByName;
 using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@ public class UserController : ControllerBase
 
     private readonly IGetAllUsersUseCase _getAllUsersUseCase;
     private readonly IGetUserByIdUseCase _getUserByIdUseCase;
+    private readonly IGetUserByNameUseCase _getUserByNameUseCase;
     private readonly IGetUserByLoginCredentialUseCase _getUserByLoginCredentialUseCase;
     private readonly IAddUserUseCase _addUserUseCase;
     private readonly IUpdateUserUseCase _updateUserUseCase;
@@ -28,6 +30,7 @@ public class UserController : ControllerBase
         JwtHandler jwtHandler,
         IGetAllUsersUseCase getAllUsersUseCase,
         IGetUserByIdUseCase getUserByIdUseCase,
+        IGetUserByNameUseCase getUserByNameUseCase,
         IGetUserByLoginCredentialUseCase getUserByLoginCredentialUseCase,
         IAddUserUseCase addUserUseCase,
         IUpdateUserUseCase updateUserUseCase,
@@ -37,6 +40,7 @@ public class UserController : ControllerBase
 
         _getAllUsersUseCase = getAllUsersUseCase;
         _getUserByIdUseCase = getUserByIdUseCase;
+        _getUserByNameUseCase = getUserByNameUseCase;
         _getUserByLoginCredentialUseCase = getUserByLoginCredentialUseCase;
         _addUserUseCase = addUserUseCase;
         _updateUserUseCase = updateUserUseCase;
@@ -61,6 +65,20 @@ public class UserController : ControllerBase
         {
             GetUserByIdResponse.Success success => Ok(success.User),
             GetUserByIdResponse.UserNotFound => NotFound(getUserByIdResponse.Message),
+            _ => Problem("Unexpected response")
+        };
+    }
+
+    //[Authorize]
+    [HttpGet("name")]
+    public async Task<IActionResult> GetUserByName([FromQuery] string name)
+    {
+        var getUserByNameResponse = await _getUserByNameUseCase.ExecuteAsync(name);
+
+        return getUserByNameResponse switch
+        {
+            GetUserByNameResponse.Success success => Ok(success.User),
+            GetUserByNameResponse.UserNotFound => NotFound(getUserByNameResponse.Message),
             _ => Problem("Unexpected response")
         };
     }

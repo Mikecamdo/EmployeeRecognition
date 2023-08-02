@@ -29,6 +29,7 @@ using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
 using EmployeeRecognition.Core.UseCases.Users.GetUserById;
 using EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
 using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+using EmployeeRecognition.Core.UseCases.Users.GetUserByName;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +68,7 @@ builder.Services.AddScoped<JwtHandler>();
 //Use cases
 builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
 builder.Services.AddScoped<IGetUserByIdUseCase, GetUserByIdUseCase>();
+builder.Services.AddScoped<IGetUserByNameUseCase, GetUserByNameUseCase>();
 builder.Services.AddScoped<IGetUserByLoginCredentialUseCase, GetUserByLoginCredentialUseCase>();
 builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
 builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
