@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="everythingLoaded" class="container">
     <div class="row">
         <div class="col-12">
             <h1 class="brown-text">Profile Details</h1>
@@ -81,4 +81,10 @@
             </div>
         </div>    
     </span>
+</div>
+<div *ngIf="!everythingLoaded && !criticalError" class="text-center"> <!-- FIXME change this to a loading icon -->
+    Loading...
+</div>
+<div *ngIf="criticalError" class="text-center text-red">
+    <h1>This user does not exist.</h1>
 </div>

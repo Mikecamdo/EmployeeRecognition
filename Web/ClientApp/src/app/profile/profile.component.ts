@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
-import { Router } from '@angular/router';
-import { UserDataService } from '../services/user-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +10,9 @@ import { UserDataService } from '../services/user-data.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  everythingLoaded: boolean = false;
+  criticalError: boolean = false;
 
   isCurrentUser: boolean = false;
   editingProfile: boolean = false;
@@ -30,25 +32,36 @@ export class ProfileComponent implements OnInit {
   confirmNewPassword: string = '';
   
   constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, 
-    private tokenService: TokenService, private userDataService: UserDataService,
-    private router: Router) {
+    private tokenService: TokenService, private router: Router, private route: ActivatedRoute) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    let user = this.userDataService.getUserData();
+    this.route.paramMap.subscribe(params => {
+      const name: any = params.get('name');
 
-    this.userName = user.name;
-    this.currentUserName = user.name;
-    this.userAvatar = user.avatarUrl;
-    this.userId = user.id;
+      this.usersService.getUserByName(name).subscribe({
+        next: user => {
+          this.userName = user.name;
+          this.currentUserName = user.name;
+          this.userAvatar = user.avatarUrl;
+          this.userId = user.id;
 
-    const token: any = localStorage.getItem('token');
-    const decodedToken = this.jwtHelper.decodeToken(token);
+          const token: any = localStorage.getItem('token');
+          const decodedToken = this.jwtHelper.decodeToken(token);
 
-    if (decodedToken.id === user.id) {
-      this.isCurrentUser = true;
-    }
+          if (decodedToken.id === user.id) {
+            this.isCurrentUser = true;
+          }
+          this.everythingLoaded = true;
+          this.criticalError = false;
+        },
+        error: error => {
+          console.log(error);
+          this.criticalError = true;
+        }
+      });
+    });
   }
 
   generateNewAvatar(): void {

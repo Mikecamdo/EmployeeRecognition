@@ -45,7 +45,7 @@
             <a class="nav-link text-dark" [routerLink]="['/home']">Logout</a>
           </li>
         </ul>
-        <a class="nav-link" (click)="viewProfile()">
+        <a class="nav-link" [routerLink]="['/profile', userName]">
           <img id="profile-picture" [src]="userAvatar" alt="Avatar" />
         </a>
       </div>

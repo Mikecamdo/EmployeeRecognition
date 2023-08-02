@@ -22,7 +22,7 @@
             <div class="card-body">
                 <h6 class="card-title d-flex justify-content-between">
                     <span>
-                        <img class="small-image me-2" [src]="kudo.senderAvatarUrl" (click)="viewProfile(kudo, 'sender')"/>
+                        <img class="small-image me-2" [src]="kudo.senderAvatarUrl" [routerLink]="['/profile', kudo.senderName]"/>
                         <b>{{ kudo.senderName }}</b> recognized
                     </span>
                     <span *ngIf="kudo.senderId == userId" class="close-container"
@@ -32,7 +32,7 @@
                     </span>
                 </h6>
                 <p class="card-text">
-                    <img class="small-image me-2" [src]="kudo.receiverAvatarUrl" (click)="viewProfile(kudo, 'receiver')"/>
+                    <img class="small-image me-2" [src]="kudo.receiverAvatarUrl" [routerLink]="['/profile', kudo.receiverName]"/>
                     <b>{{ kudo.receiverName }}</b>
                     <span *ngIf="kudo.teamPlayer" class="tag"> <i>#🏆teamplayer</i></span>
                     <span *ngIf="kudo.oneOfAKind" class="tag"> <i>#🎲oneofakind </i></span>
@@ -54,7 +54,7 @@
                             'hide-element': isXsViewport(),
                             'col-1': isMdViewport()
                         }">
-                            <img class="small-image" [src]="userAvatar" (click)="viewProfile('', '')"/>
+                            <img class="small-image" [src]="userAvatar" [routerLink]="['/profile', userName]"/>
                         </div>
                         <div [ngClass]="{
                             'col-9 p-0': isXsViewport(),
@@ -101,7 +101,7 @@
                                                 'col-2': isXsViewport(),
                                                 'col-1': isMdViewport()
                                             }">
-                                                <img class="small-image" [src]="comment.senderAvatar" (click)="viewProfile(comment, 'comment')"/>
+                                                <img class="small-image" [src]="comment.senderAvatar" [routerLink]="['/profile', comment.senderName]"/>
                                             </div>
                                             <div [ngClass]="{
                                                 'col-10': isXsViewport(),

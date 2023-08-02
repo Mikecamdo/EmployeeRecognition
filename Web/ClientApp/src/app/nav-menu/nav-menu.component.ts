@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenService } from '../services/token.service';
-import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -17,7 +16,7 @@ export class NavMenuComponent implements OnInit {
   userAvatar: string = '';
 
   constructor(private router: Router, private jwtHelper: JwtHelperService, 
-  private tokenService: TokenService, private userDataService: UserDataService) {
+  private tokenService: TokenService) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -45,15 +44,5 @@ export class NavMenuComponent implements OnInit {
   logout(): void {
     localStorage.removeItem("token");
     this.router.navigate(["/"]);
-  }
-
-  viewProfile(): void {
-    this.userDataService.setUserData({
-      id: this.userId,
-      name: this.userName,
-      avatarUrl: this.userAvatar.replace('&flip=true', '')
-    });
-
-    this.router.navigate(['/profile', this.userName]);
   }
 }

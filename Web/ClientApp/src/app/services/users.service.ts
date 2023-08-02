@@ -25,6 +25,10 @@ export class UsersService {
     return this.httpClient.get<LoginResponse>(`${this.apiRoot}/login`, { params: {name: loginCredential.name, password: loginCredential.password }});
   }
 
+  getUserByName(name: string): Observable<User> {
+    return this.httpClient.get<User>(this.apiRoot + '/name', {params: {name: name}});
+  }
+
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.apiRoot, {headers: this.headers });
   }
