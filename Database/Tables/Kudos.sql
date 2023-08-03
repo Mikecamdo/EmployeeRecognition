@@ -1,9 +1,9 @@
 CREATE TABLE Kudos (
 	Id INT AUTO_INCREMENT PRIMARY KEY,
-    SenderId VARCHAR(50),
-    ReceiverId VARCHAR(50) NOT NULL,
-    Title VARCHAR(50) NOT NULL,
-    Message VARCHAR(200) NOT NULL,
+    SenderId NVARCHAR(50),
+    ReceiverId NVARCHAR(50) NOT NULL,
+    Title NVARCHAR(50) NOT NULL,
+    Message NVARCHAR(200) NOT NULL,
     TeamPlayer BIT NOT NULL,
     OneOfAKind BIT NOT NULL,
     Creative BIT NOT NULL,
