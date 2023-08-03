@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   isCurrentUser: boolean = false;
   editingProfile: boolean = false;
+  editingPassword: boolean = false;
 
   characterSet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -122,6 +123,10 @@ export class ProfileComponent implements OnInit {
 
   editProfile(): void {
     this.editingProfile = true;
+  }
+
+  changePassword(): void {
+    this.editingPassword = true;
   }
 
   deleteAccount(): void {
