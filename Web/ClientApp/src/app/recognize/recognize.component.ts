@@ -4,6 +4,7 @@ import { Observable, OperatorFunction, debounceTime, distinctUntilChanged, map }
 import { KudoDto, KudosService } from '../services/kudos.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-recognize',
@@ -31,7 +32,8 @@ export class RecognizeComponent implements OnInit {
   constructor(private usersService: UsersService, 
               private kudosService: KudosService,
               private router: Router,
-              private jwtHelper: JwtHelperService) 
+              private jwtHelper: JwtHelperService,
+              private toastr: ToastrService) 
   {
     this.jwtHelper = new JwtHelperService();
   }
@@ -46,7 +48,7 @@ export class RecognizeComponent implements OnInit {
         this.allUsers = users;
       },
       error: error => {
-        console.log(error);
+        this.toastr.error("Error while retreiving users, please log out and try again.");
       }
     });
   }
@@ -114,12 +116,10 @@ export class RecognizeComponent implements OnInit {
 
     this.kudosService.addKudo(newKudo).subscribe({
       next: addedKudo => {
-        console.log("Added:");
-        console.log(addedKudo);
         this.router.navigate(["/home"]);
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while adding kudo");
       }
     })
   }

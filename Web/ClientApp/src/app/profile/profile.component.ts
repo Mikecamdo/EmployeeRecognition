@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -20,9 +21,6 @@ export class ProfileComponent implements OnInit {
 
   characterSet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  showMessage: boolean = false; //FIXME change this to a popup (toastr??)
-  message: string = '';
-
   currentUserName: string = '';
   userName: string = '';
   userAvatar: string = '';
@@ -33,17 +31,18 @@ export class ProfileComponent implements OnInit {
   confirmNewPassword: string = '';
   
   constructor(private jwtHelper: JwtHelperService, private usersService: UsersService, 
-    private tokenService: TokenService, private router: Router, private route: ActivatedRoute) {
+    private tokenService: TokenService, private router: Router, private route: ActivatedRoute,
+    private toastr: ToastrService) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const name: any = params.get('name');
+      this.userName = name;
 
       this.usersService.getUserByName(name).subscribe({
         next: user => {
-          this.userName = user.name;
           this.currentUserName = user.name;
           this.userAvatar = user.avatarUrl;
           this.userId = user.id;
@@ -77,8 +76,6 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges(): void {
-    this.showMessage = false;
-
     if (this.oldPassword) {
       let loginAttempt: LoginCredential = {
         name: this.currentUserName,
@@ -89,9 +86,7 @@ export class ProfileComponent implements OnInit {
           this.updateUser(true);
         },
         error: error => {
-          console.log(error);
-          this.message = "Incorrect old password, changes not saved";
-          this.showMessage = true;
+          this.toastr.error("Incorrect old password, changes not saved", "Error while updating password");
         }
       });
     } else {
@@ -115,11 +110,7 @@ export class ProfileComponent implements OnInit {
         this.newPassword = '';
       },
       error: error => {
-        console.log(error);
-        if (error.status == 400) {
-          this.message = "Name already in use, please choose another name";
-          this.showMessage = true;
-        }
+        this.toastr.error(error.error, "Error while updating user");
       }
     });
   }
@@ -139,7 +130,7 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(["/"]);
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while deleting user");
       }
     });
   }

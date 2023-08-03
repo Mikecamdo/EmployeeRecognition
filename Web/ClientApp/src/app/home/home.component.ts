@@ -4,6 +4,7 @@ import { Kudo, KudosService } from '../services/kudos.service';
 import { Comment, CommentDto, CommentsService } from '../services/comments.service';
 import { catchError, mergeMap, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   userAvatar: string = '';
 
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService,
-    private commentsService: CommentsService, private router: Router) {
+    private commentsService: CommentsService, private router: Router, private toastr: ToastrService) {
     this.jwtHelper = new JwtHelperService();
   }
 
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit {
         this.allComments.push(comment);
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while adding comment");
       }
     });
   }
@@ -109,7 +110,7 @@ export class HomeComponent implements OnInit {
         this.allComments = this.allComments.filter(comment => comment.kudoId !== kudoId);
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while deleting kudo");
       }
     });
   }
@@ -125,7 +126,7 @@ export class HomeComponent implements OnInit {
         }
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while deleting comment");
       }
     });
   }
@@ -143,7 +144,7 @@ export class HomeComponent implements OnInit {
         this.editingComment[iteration] = false;
       },
       error: error => {
-        console.log(error);
+        this.toastr.error(error.error, "Error while updating comment");
       }
     });
   }

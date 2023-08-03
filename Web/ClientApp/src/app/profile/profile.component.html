@@ -55,8 +55,6 @@
                  placeholder="Name" [(ngModel)]="userName" >
             </div>
         </div>
-        
-        <div *ngIf="showMessage" class="text-center">{{ message }}</div>
     
         <div class="row mt-3">
             <div class="col-12 text-center">
@@ -87,8 +85,6 @@
                  placeholder="New Password" [(ngModel)]="newPassword" >
             </div>
         </div>
-
-        <div *ngIf="showMessage" class="text-center">{{ message }}</div>
     
         <div class="row mt-3">
             <div class="col-12 text-center">
@@ -103,5 +99,5 @@
     Loading...
 </div>
 <div *ngIf="criticalError" class="text-center text-red">
-    <h1>This user does not exist.</h1>
+    <h1>User {{userName}} does not exist.</h1>
 </div>

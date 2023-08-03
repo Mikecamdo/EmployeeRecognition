@@ -18,7 +18,7 @@ export class LandingPageComponent {
   signInPassword: string = '';
   
   constructor(private modalService: NgbModal, private usersService: UsersService,
-     private router: Router, public toastr: ToastrService) { }
+     private router: Router, private toastr: ToastrService) { }
   
   open(content: any, label: string) {
     const modalRef = this.modalService.open(content, {ariaLabelledBy: label, windowClass: 'custom-modal'});
@@ -51,7 +51,7 @@ export class LandingPageComponent {
         this.router.navigate(['/home']);
       },
       error: error => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.error.errorMessage, "Error while signing up");
       }
     });
   }
@@ -68,7 +68,7 @@ export class LandingPageComponent {
         this.router.navigate(['/home']);
       },
       error: error => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.error.errorMessage, "Error while signing in");
       }
     });
   }
