@@ -13,6 +13,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { RecognizeComponent } from './recognize/recognize.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
@@ -35,7 +38,8 @@ import { ProfileComponent } from './profile/profile.component';
       { path: '**', redirectTo: ''}
     ]),
     NgbModule,
-    NgbTypeaheadModule
+    NgbTypeaheadModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthGuard,

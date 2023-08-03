@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { LoginCredential, LoginResponse, SignupResponse, UserDto, UsersService } from '../services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-landing-page',
@@ -17,7 +18,7 @@ export class LandingPageComponent {
   signInPassword: string = '';
   
   constructor(private modalService: NgbModal, private usersService: UsersService,
-     private router: Router) { }
+     private router: Router, public toastr: ToastrService) { }
   
   open(content: any, label: string) {
     const modalRef = this.modalService.open(content, {ariaLabelledBy: label, windowClass: 'custom-modal'});
@@ -45,15 +46,12 @@ export class LandingPageComponent {
     }
     this.usersService.addUser(newUser).subscribe({
       next: (response:SignupResponse) => {
-        console.log("Successfully signed up!");
-        console.log(response);
         localStorage.setItem("token", response.token);
         this.modalService.dismissAll();
         this.router.navigate(['/home']);
       },
       error: error => {
-        console.log("Error while signing up");
-        console.log(error);
+        this.toastr.error(error.error.errorMessage);
       }
     });
   }
@@ -65,15 +63,12 @@ export class LandingPageComponent {
     }
     this.usersService.getUserBySignIn(loginAttempt).subscribe({
       next: (response:LoginResponse) => {
-        console.log("Successfully signed in!");
-        console.log(response);
         localStorage.setItem("token", response.token);
         this.modalService.dismissAll();
         this.router.navigate(['/home']);
       },
       error: error => {
-        console.log("Error while signing in");
-        console.log(error.error.errorMessage);
+        this.toastr.error(error.error.errorMessage);
       }
     });
   }
