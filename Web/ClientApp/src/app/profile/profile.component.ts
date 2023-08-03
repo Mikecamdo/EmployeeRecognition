@@ -110,6 +110,9 @@ export class ProfileComponent implements OnInit {
       next: response => { 
         this.tokenService.updateToken(response.token);
         this.editingProfile = false;
+        this.editingPassword = false;
+        this.oldPassword = '';
+        this.newPassword = '';
       },
       error: error => {
         console.log(error);

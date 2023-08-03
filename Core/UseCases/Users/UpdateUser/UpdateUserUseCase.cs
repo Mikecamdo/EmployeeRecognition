@@ -25,7 +25,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
 
         var otherUser = await _userRepository.GetUserByNameAsync(updatedUserInfo.Name);
 
-        if (otherUser != null)
+        if (otherUser != null && otherUser.Id != userId)
         {
             return new UpdateUserResponse.InvalidRequest("Name already in use");
         }
