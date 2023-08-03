@@ -21,9 +21,13 @@
         <div class="card my-5"> <!-- Make kudo its own component (??) -->
             <div class="card-body">
                 <h6 class="card-title d-flex justify-content-between">
-                    <span>
+                    <span *ngIf="kudo.senderAvatarUrl">
                         <img class="small-image me-2" [src]="kudo.senderAvatarUrl" [routerLink]="['/profile', kudo.senderName]"/>
                         <b>{{ kudo.senderName }}</b> recognized
+                    </span>
+                    <span *ngIf="!kudo.senderAvatarUrl">
+                        <img class="small-image anonymous-image me-2" src="../../assets/favicon.png"/>
+                        <b>Anonymous</b> recognized
                     </span>
                     <span *ngIf="kudo.senderId == userId" class="close-container"
                     (click)="deleteKudo(kudo.id, i)">

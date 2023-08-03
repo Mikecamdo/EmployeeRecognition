@@ -16,10 +16,21 @@ public class KudoRepository : IKudoRepository
 
     public async Task<IEnumerable<Kudo>> GetAllKudosAsync()
     {
-        return await _mySqlDbContext.Kudos
+        var kudosWithSender = await _mySqlDbContext.Kudos
             .Include(s => s.Sender)
             .Include(r => r.Receiver)
             .ToListAsync();
+
+        var kudosWithoutSender = await _mySqlDbContext.Kudos
+            .Where(k => k.SenderId == "")
+            .Include(r => r.Receiver)
+            .ToListAsync();
+
+        var allKudos = kudosWithSender.Concat(kudosWithoutSender)
+            .OrderBy(k => k.Id)
+            .ToList();
+
+        return allKudos;
     }
 
     public async Task<Kudo?> GetKudoByIdAsync(int kudoId)
@@ -38,11 +49,22 @@ public class KudoRepository : IKudoRepository
 
     public async Task<IEnumerable<Kudo>> GetKudosByReceiverIdAsync(string receiverId)
     {
-        return await _mySqlDbContext.Kudos
+        var kudosWithSender = await _mySqlDbContext.Kudos
             .Where(k => k.ReceiverId == receiverId)
             .Include(s => s.Sender)
             .Include(r => r.Receiver)
             .ToListAsync();
+
+        var kudosWithoutSender = await _mySqlDbContext.Kudos
+            .Where(k => k.ReceiverId == receiverId && k.SenderId == "")
+            .Include(r => r.Receiver)
+            .ToListAsync();
+
+        var allKudos = kudosWithSender.Concat(kudosWithoutSender)
+            .OrderBy(k => k.Id)
+            .ToList();
+
+        return allKudos;
     }
 
     public async Task<Kudo> AddKudoAsync(Kudo kudo)

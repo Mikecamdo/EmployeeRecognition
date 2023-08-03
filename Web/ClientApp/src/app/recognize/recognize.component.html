@@ -119,8 +119,15 @@
                 >
             </div>
 
-            <input [disabled]="!activateButton()" class="btn btn-primary mt-5" type="submit" value="Post"
-            (click)="addKudo()"/>
+            <div class="mt-3">
+                <input [disabled]="!activateButton()" class="btn btn-primary" type="submit" value="Post"
+                (click)="addKudo()"/>
+
+                <span class="checkbox-wrapper-40">
+                    <input class="ms-4 checkbox" type="checkbox" (click)="setAnonymousSender()"/>
+                    <label class="ms-2 brown-text">Send Anonymously</label>
+                </span>
+            </div>
         </form>
     </div>
 </div>

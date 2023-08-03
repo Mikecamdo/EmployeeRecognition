@@ -53,7 +53,8 @@ public class MySqlDbContext : DbContext
 
             entity.HasOne(e => e.Sender)
                 .WithMany(s => s.KudosSent)
-                .HasForeignKey(e => e.SenderId);
+                .HasForeignKey(e => e.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.Receiver)
                 .WithMany(s => s.KudosReceived)

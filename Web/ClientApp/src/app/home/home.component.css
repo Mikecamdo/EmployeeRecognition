@@ -13,6 +13,7 @@
     height: 2.5rem;
     width: 2.5rem;
     border: 1px solid #551E19;
+    background-color: #E6B17E;
 }
 
 .hide-element {
@@ -125,4 +126,8 @@ img {
 
 span.tag {
     margin-top: 0.3rem;
+}
+
+.anonymous-image {
+    cursor: auto;
 }

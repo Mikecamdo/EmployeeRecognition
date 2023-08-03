@@ -26,6 +26,7 @@ export class RecognizeComponent implements OnInit {
   sweetness: boolean = false;
 
   senderId: string = '';
+  anonymousSender: boolean = false;
 
   constructor(private usersService: UsersService, 
               private kudosService: KudosService,
@@ -98,7 +99,7 @@ export class RecognizeComponent implements OnInit {
   addKudo(): void {
     let receiverId: any = this.allUsers.find(user => user.name === this.receiver)?.id;
     let newKudo: KudoDto = {
-      senderId: this.senderId,
+      senderId: this.anonymousSender ? "" : this.senderId,
       receiverId: receiverId,
       title: this.title,
       message: this.message,
@@ -121,5 +122,9 @@ export class RecognizeComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+
+  setAnonymousSender(): void {
+    this.anonymousSender = !this.anonymousSender;
   }
 }

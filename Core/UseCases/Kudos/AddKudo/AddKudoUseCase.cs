@@ -18,11 +18,14 @@ public class AddKudoUseCase : IAddKudoUseCase
 
     public async Task<AddKudoResponse> ExecuteAsync(Kudo kudo)
     {
-        var sender = await _userRepository.GetUserByIdAsync(kudo.SenderId);
-
-        if (sender == null)
+        if (kudo.SenderId != "")
         {
-            return new AddKudoResponse.InvalidRequest("A User with the given SenderId was not found");
+            var sender = await _userRepository.GetUserByIdAsync(kudo.SenderId);
+
+            if (sender == null)
+            {
+                return new AddKudoResponse.InvalidRequest("A User with the given SenderId was not found");
+            }
         }
 
         var receiver = await _userRepository.GetUserByIdAsync(kudo.ReceiverId);
