@@ -131,3 +131,35 @@ span.tag {
 .anonymous-image {
     cursor: auto;
 }
+
+.example-image {
+    float: right;
+    height: inherit;
+}
+
+.large-example {
+    max-width: 17%;
+    margin-top: -14%;
+    margin-right: 3rem;
+}
+
+.medium-example {
+    max-width: 18%;
+    margin-top: -16%;
+    margin-right: 3rem;
+}
+
+.small-example {
+    max-width: 20%;
+    margin-top: -19%;
+    margin-right: 2rem;
+}
+
+.smallest-example {
+    max-width: 26%;
+    margin-top: -25%;
+}
+
+.no-example {
+    display: none;
+}

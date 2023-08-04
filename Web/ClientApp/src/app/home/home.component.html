@@ -13,7 +13,15 @@
             <p class="card-text">
                 <button class="tag" [routerLink]="['/recognize']">+New Kudo</button>
             </p>
-            <!-- <img class="image" src="suhcs18b.png" alt="Image" style="max-width: 40%; height: auto; margin-top: -15%;"> -->
+            <img class="example-image" src="https://api.dicebear.com/6.x/miniavs/svg?seed=Salem&flip=true" alt="Image"
+            [ngClass]="{
+                'large-example' : exampleImageLarge(),
+                'medium-example' : exampleImageMedium(),
+                'small-example' : exampleImageSmall(),
+                'smallest-example' : exampleImageSmallest(),
+                'no-example' : exampleImageNone()
+            }"
+            >
         </div>
     </div>
 

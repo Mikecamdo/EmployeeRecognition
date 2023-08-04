@@ -164,5 +164,30 @@ export class HomeComponent implements OnInit {
   onWindowResize(event: Event): void {
     this.isXsViewport();
     this.isMdViewport();
+
+    this.exampleImageLarge();
+    this.exampleImageMedium();
+    this.exampleImageSmall();
+    this.exampleImageNone();
+  }
+
+  exampleImageLarge(): boolean {
+    return window.innerWidth >= 1400;
+  }
+
+  exampleImageMedium(): boolean {
+    return window.innerWidth >= 1200 && window.innerWidth < 1400;
+  }
+
+  exampleImageSmall(): boolean {
+    return window.innerWidth >= 992 && window.innerWidth < 1200;
+  }
+
+  exampleImageSmallest(): boolean {
+    return window.innerWidth >= 768 && window.innerWidth < 992;
+  }
+
+  exampleImageNone(): boolean {
+    return window.innerWidth < 768;
   }
 }
