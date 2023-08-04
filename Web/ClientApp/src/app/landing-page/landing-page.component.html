@@ -40,6 +40,7 @@
                                     name="name"
                                     class="form-control" 
                                     placeholder="Name"
+                                    maxlength="50"
                                     [(ngModel)]="signInName" >
                             </div>
             
@@ -53,6 +54,7 @@
                                     type="password"
                                     class="form-control" 
                                     placeholder="Password"
+                                    maxlength="80"
                                     [(ngModel)]="signInPassword" >
                             </div>
                         </div>
@@ -101,6 +103,7 @@
                                     name="name"
                                     class="form-control" 
                                     placeholder="Name"
+                                    maxlength="50"
                                     [(ngModel)]="signUpName" >
                             </div>
             
@@ -114,6 +117,7 @@
                                     type="password"
                                     class="form-control" 
                                     placeholder="Password"
+                                    maxlength="80"
                                     [(ngModel)]="signUpPassword" >
                             </div>
             
@@ -127,6 +131,7 @@
                                     type="password"
                                     class="form-control" 
                                     placeholder="Confirm Password"
+                                    maxlength="80"
                                     [(ngModel)]="signUpConfirmPassword"
                                     [ngClass]="{'is-invalid': invalidPassword()}"
                                     aria-describedby="invalid-password" >

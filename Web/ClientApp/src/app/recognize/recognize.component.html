@@ -16,15 +16,15 @@
         <form>
             <label for="title" class="mb-2">Title</label>
             <br/>
-            <input type="text" id="title" name="title" class="form-control"
-            maxlength="40" [(ngModel)]="title"
+            <input type="text" id="title" name="title" class="form-control" placeholder="Add a title"
+            maxlength="50" [(ngModel)]="title"
             />
             <br/>
 
             <label for="note" class="mb-2">Note</label>
             <br/>
             <textarea id="note" name="note" class="form-control no-resize" placeholder="Detailed praise..."
-            rows="4" cols="50" maxlength="500" [(ngModel)]="message"></textarea>
+            rows="4" cols="50" maxlength="200" [(ngModel)]="message"></textarea>
 
             <div class="text-center">
                 <input

@@ -57,7 +57,7 @@
                     Name
                 </label>
                 <input id="name" name="name" class="form-control" 
-                 placeholder="Name" [(ngModel)]="userName" >
+                 placeholder="Name" maxlength="50" [(ngModel)]="userName" >
             </div>
         </div>
 
@@ -88,7 +88,7 @@
                     Old Password
                 </label>
                 <input id="oldPassword" name="oldPassword" class="form-control" 
-                 placeholder="Old Password" [(ngModel)]="oldPassword" >
+                 placeholder="Old Password" maxlength="80" [(ngModel)]="oldPassword" >
             </div>
         </div>
     
@@ -98,7 +98,7 @@
                     New Password
                 </label>
                 <input id="newPassword" name="newPassword" class="form-control" 
-                 placeholder="New Password" [(ngModel)]="newPassword" >
+                 placeholder="New Password" maxlength="80" [(ngModel)]="newPassword" >
             </div>
         </div>
     
