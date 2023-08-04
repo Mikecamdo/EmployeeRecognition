@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { LoginCredential, LoginResponse, UserDto, UsersService } from '../services/users.service';
+import { UsersService } from '../services/users.service';
 import { TokenService } from '../services/token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoginCredential, UserDto } from '../interfaces/user';
 
 @Component({
   selector: 'app-profile',

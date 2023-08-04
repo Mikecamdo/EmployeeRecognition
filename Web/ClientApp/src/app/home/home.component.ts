@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Kudo, KudosService } from '../services/kudos.service';
-import { Comment, CommentDto, CommentsService } from '../services/comments.service';
+import { KudosService } from '../services/kudos.service';
+import { CommentsService } from '../services/comments.service';
 import { catchError, mergeMap, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Kudo } from '../interfaces/kudo';
+import { Comment, CommentDto } from '../interfaces/comment';
 
 @Component({
   selector: 'app-home',

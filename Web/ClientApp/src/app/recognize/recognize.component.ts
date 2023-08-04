@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UsersService } from '../services/users.service';
+import { UsersService } from '../services/users.service';
 import { Observable, OperatorFunction, debounceTime, distinctUntilChanged, map } from 'rxjs';
-import { KudoDto, KudosService } from '../services/kudos.service';
+import { KudosService } from '../services/kudos.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../interfaces/user';
+import { KudoDto } from '../interfaces/kudo';
 
 @Component({
   selector: 'app-recognize',

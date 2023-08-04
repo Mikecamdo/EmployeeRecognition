@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LoginCredential, LoginResponse, SignupResponse, User, UserDto } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -42,36 +43,4 @@ export class UsersService {
     let route: string = this.apiRoot + '/' + userId;
     return this.httpClient.delete(route, {headers: this.headers });
   }
-}
-
-export interface UserDto { //FIXME eventually want to move this to its own file
-  name: string;
-  password: string | null;
-  avatarUrl: string;
-  bio: string;
-}
-
-export interface User {
-  id: string;
-  name: string;
-  password: string;
-  avatarUrl: string;
-  bio: string;
-}
-
-export interface LoginCredential {
-  name: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  isLoginSuccessful: boolean;
-  errorMessage: string;
-  token: string;
-}
-
-export interface SignupResponse {
-  isSignupSuccessful: boolean;
-  errorMessage: string;
-  token: string;
 }

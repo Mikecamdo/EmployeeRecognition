@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Comment, CommentDto } from '../interfaces/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -35,19 +36,4 @@ export class CommentsService {
     return this.httpClient.put<Comment>(route, commentInfo, {headers: this.headers });
   }
 
-}
-
-export interface CommentDto {
-  kudoId: number;
-  senderId: string;
-  message: string;
-}
-
-export interface Comment {
-  id: number;
-  kudoId: number;
-  senderId: string;
-  senderName: string;
-  senderAvatar: string;
-  message: string;
 }

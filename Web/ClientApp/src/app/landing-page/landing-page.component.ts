@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginCredential, LoginResponse, SignupResponse, UserDto, UsersService } from '../services/users.service';
+import { UsersService } from '../services/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoginCredential, LoginResponse, SignupResponse, UserDto } from '../interfaces/user';
 
 @Component({
   selector: 'app-landing-page',
