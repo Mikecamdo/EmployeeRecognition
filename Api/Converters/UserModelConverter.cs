@@ -12,7 +12,8 @@ public class UserModelConverter
             Id = model.Id,
             Name = model.Name,
             Password = model.Password,
-            AvatarUrl = model.AvatarUrl
+            AvatarUrl = model.AvatarUrl,
+            Bio = model.Bio
         };
     }
 
@@ -28,7 +29,8 @@ public class UserModelConverter
             Id = entity.Id,
             Name = entity.Name,
             Password = entity.Password,
-            AvatarUrl = entity.AvatarUrl
+            AvatarUrl = entity.AvatarUrl,
+            Bio = entity.Bio
         };
     }
 

@@ -13,28 +13,32 @@ public class MockDataSetup
                 Id = "19df82ba-a964-4dbf-8013-69c120e938de",
                 Name = "test",
                 Password = "test",
-                AvatarUrl = ""
+                AvatarUrl = "",
+                Bio = "a bio"
             },
             new User
             {
                 Id = "e1a07078-fd94-4554-812a-383c0367de90",
                 Name = "Bob",
                 Password = "123",
-                AvatarUrl = ""
+                AvatarUrl = "",
+                Bio = "a bio"
             },
             new User
             {
                 Id = "36ccb155-c564-4e85-bd99-a564b7d3d429",
                 Name = "Michael",
                 Password = "a_real_password",
-                AvatarUrl = ""
+                AvatarUrl = "",
+                Bio = "a bio"
             },
             new User
             {
                 Id = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
                 Name = "Amanda",
                 Password = "WEEWOO",
-                AvatarUrl = "a_url"
+                AvatarUrl = "a_url",
+                Bio = "a bio"
             }
         };
 

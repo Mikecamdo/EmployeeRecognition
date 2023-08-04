@@ -48,6 +48,7 @@ export interface UserDto { //FIXME eventually want to move this to its own file
   name: string;
   password: string | null;
   avatarUrl: string;
+  bio: string;
 }
 
 export interface User {
@@ -55,6 +56,7 @@ export interface User {
   name: string;
   password: string;
   avatarUrl: string;
+  bio: string;
 }
 
 export interface LoginCredential {

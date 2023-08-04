@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   userName: string = '';
   userAvatar: string = '';
   userId: string = '';
+  userBio: string = '';
 
   oldPassword: string = '';
   newPassword: string = '';
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
           this.currentUserName = user.name;
           this.userAvatar = user.avatarUrl;
           this.userId = user.id;
+          this.userBio = user.bio;
 
           const token: any = localStorage.getItem('token');
           const decodedToken = this.jwtHelper.decodeToken(token);
@@ -98,7 +100,8 @@ export class ProfileComponent implements OnInit {
     let userInfo: UserDto = {
       name: this.userName,
       password: updatedPassword ? this.newPassword : null,
-      avatarUrl: this.userAvatar
+      avatarUrl: this.userAvatar,
+      bio: this.userBio
     };
 
     this.usersService.updateUser(this.userId, userInfo).subscribe({

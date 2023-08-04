@@ -36,6 +36,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
             toBeUpdated.Password = updatedUserInfo.Password;
         }
         toBeUpdated.AvatarUrl = updatedUserInfo.AvatarUrl;
+        toBeUpdated.Bio = updatedUserInfo.Bio;
 
         var updatedUser = await _userRepository.UpdateUserAsync(toBeUpdated);
         return new UpdateUserResponse.Success(UserModelConverter.ToModel(updatedUser));

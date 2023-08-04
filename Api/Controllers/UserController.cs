@@ -115,7 +115,8 @@ public class UserController : ControllerBase
             Id = userId,
             Name = user.Name,
             Password = user.Password,
-            AvatarUrl = user.AvatarUrl
+            AvatarUrl = user.AvatarUrl,
+            Bio = user.Bio
         };
 
         var addUserResponse = await _addUserUseCase.ExecuteAsync(newUser);

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginCredential, LoginResponse, SignupResponse, UserDto, UsersService } from '../services/users.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -42,7 +42,8 @@ export class LandingPageComponent {
     let newUser: UserDto = {
       name: this.signUpName,
       password: this.signUpPassword,
-      avatarUrl: "https://api.dicebear.com/6.x/miniavs/svg?seed=" + this.signUpName
+      avatarUrl: "https://api.dicebear.com/6.x/miniavs/svg?seed=" + this.signUpName,
+      bio: "I'm " + this.signUpName + ". Thanks for visiting my profile!"
     }
     this.usersService.addUser(newUser).subscribe({
       next: (response:SignupResponse) => {

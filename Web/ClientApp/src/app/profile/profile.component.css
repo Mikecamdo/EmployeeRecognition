@@ -13,3 +13,11 @@
     background-color: #C56E33;
     border: none;
 }
+
+.bio-container {
+    max-width: 600px;
+}
+
+textarea {
+    resize: none;
+}

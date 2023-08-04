@@ -18,18 +18,23 @@
             </div>
         </div>
 
+        <div class="row mt-2 mx-auto bio-container">
+            <div class="col-12 ">
+                <div class="fs-2">Bio:</div>
+                <div class="fs-5">{{ userBio }}</div>
+            </div>
+        </div>
+
         <div *ngIf="isCurrentUser" class="row mt-2">
-            <div class="col-12 text-center">
-                <button class="btn btn-primary" (click)="editProfile()">
+            <div class="col-12 text-center mt-4">
+                <button class="btn btn-primary me-2" (click)="editProfile()">
                     Edit Profile
                 </button>
-            </div>
-            <div class="col-12 text-center mt-2">
-                <button class="btn btn-primary" (click)="changePassword()">
+
+                <button class="btn btn-primary me-2" (click)="changePassword()">
                     Change Password
                 </button>
-            </div>
-            <div class="col-12 text-center mt-2">
+
                 <button class="btn btn-primary" (click)="deleteAccount()">
                     Delete Account
                 </button>
@@ -53,6 +58,17 @@
                 </label>
                 <input id="name" name="name" class="form-control" 
                  placeholder="Name" [(ngModel)]="userName" >
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-12">
+                <label for="bio" class="form-label">
+                    Bio
+                </label>
+                 <textarea id="bio" name="bio" class="form-control" 
+                 placeholder="Bio" rows="4" maxlength="500" [(ngModel)]="userBio">
+                </textarea>
             </div>
         </div>
     

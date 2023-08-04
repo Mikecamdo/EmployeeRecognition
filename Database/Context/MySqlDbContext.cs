@@ -27,6 +27,7 @@ public class MySqlDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
             entity.Property(e => e.Password).HasMaxLength(80).IsRequired();
             entity.Property(e => e.AvatarUrl).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.Bio).HasMaxLength(500).IsRequired();
 
             entity.HasKey(e => e.Id);
         });
@@ -53,8 +54,7 @@ public class MySqlDbContext : DbContext
 
             entity.HasOne(e => e.Sender)
                 .WithMany(s => s.KudosSent)
-                .HasForeignKey(e => e.SenderId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(e => e.SenderId);
 
             entity.HasOne(e => e.Receiver)
                 .WithMany(s => s.KudosReceived)

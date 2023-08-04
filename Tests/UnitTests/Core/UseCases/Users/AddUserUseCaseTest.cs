@@ -25,7 +25,8 @@ public class AddUserUseCaseShould : MockDataSetup
             Id = Guid.NewGuid().ToString(),
             Name = "Test",
             Password = "password",
-            AvatarUrl = "url"
+            AvatarUrl = "url",
+            Bio = "a bio"
         };
         var moqUsers = CreateMockUserList();
 
@@ -48,6 +49,7 @@ public class AddUserUseCaseShould : MockDataSetup
             Assert.Equal(request.Name, success.NewUser.Name);
             Assert.Equal(request.Password, success.NewUser.Password);
             Assert.Equal(request.AvatarUrl, success.NewUser.AvatarUrl);
+            Assert.Equal(request.Bio, success.NewUser.Bio);
         }
     }
 
@@ -63,7 +65,8 @@ public class AddUserUseCaseShould : MockDataSetup
             Id = Guid.NewGuid().ToString(),
             Name = name,
             Password = "password",
-            AvatarUrl = "url"
+            AvatarUrl = "url",
+            Bio = "a bio"
         };
         var moqUsers = CreateMockUserList();
 

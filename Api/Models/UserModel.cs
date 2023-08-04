@@ -6,4 +6,5 @@ public class UserModel
     public required string Name { get; set; }
     public required string Password { get; set; }
     public required string AvatarUrl { get; set; }
+    public required string Bio { get; set; }
 }
