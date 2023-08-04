@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
@@ -13,8 +14,8 @@ public class GetCommentsUseCase : IGetCommentsUseCase
         _commentRepository = commentRepository;
     }
 
-    public async Task<IEnumerable<Comment>> ExecuteAsync()
+    public async Task<IEnumerable<CommentModel>> ExecuteAsync()
     {
-        return await _commentRepository.GetCommentsAsync();
+        return CommentModelConverter.ToModel(await _commentRepository.GetCommentsAsync());
     }
 }

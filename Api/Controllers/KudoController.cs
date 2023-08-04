@@ -1,7 +1,6 @@
 ﻿using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
@@ -41,7 +40,7 @@ public class KudoController : ControllerBase
     public async Task<IActionResult> GetKudos()
     {
         var allKudos = await _getAllKudosUseCase.ExecuteAsync();
-        return Ok(KudoModelConverter.ToModel(allKudos));
+        return Ok(allKudos);
     }
 
     [HttpGet("sender/{senderId}")]

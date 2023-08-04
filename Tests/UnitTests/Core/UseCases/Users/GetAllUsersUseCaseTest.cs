@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
 using Moq;
@@ -26,12 +26,12 @@ public class GetAllUsersUseCaseShould : MockDataSetup
             .Returns(Task.FromResult(moqUsers));
         
         //Act
-        IEnumerable<User> result = await _useCase.ExecuteAsync();
+        IEnumerable<UserModel> result = await _useCase.ExecuteAsync();
 
         //Assert
         foreach(var user in result)
         {
-            Assert.IsType<User>(user);
+            Assert.IsType<UserModel>(user);
         }
     }
 }

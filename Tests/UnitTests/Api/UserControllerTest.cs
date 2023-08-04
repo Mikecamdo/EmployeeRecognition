@@ -128,7 +128,7 @@ public class UserControllerShould : UserControllerSetup
         //Arrange
         _getAllUsersUseCase
             .Setup(x => x.ExecuteAsync())
-            .Returns(Task.FromResult(CreateMockUserList()));
+            .Returns(Task.FromResult(UserModelConverter.ToModel(CreateMockUserList())));
 
         //Act
         var ctrl = CreateUserController();

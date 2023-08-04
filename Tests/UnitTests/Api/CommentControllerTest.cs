@@ -140,7 +140,7 @@ public class CommentControllerTest : CommentControllerSetup
         //Arrange
         _getCommentsUseCase
             .Setup(x => x.ExecuteAsync())
-            .Returns(Task.FromResult(CreateMockCommentList()));
+            .Returns(Task.FromResult(CommentModelConverter.ToModel(CreateMockCommentList())));
 
         //Act
         var ctrl = CreateCommentController();

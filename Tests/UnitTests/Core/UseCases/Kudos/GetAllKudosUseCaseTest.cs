@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
 using Moq;
@@ -27,12 +27,12 @@ public class GetAllKudosUseCaseShould : MockDataSetup
             .Returns(Task.FromResult(moqKudos));
 
         //Act
-        IEnumerable<Kudo> result = await _useCase.ExecuteAsync();
+        IEnumerable<KudoModel> result = await _useCase.ExecuteAsync();
 
         //Assert
         foreach(var kudo in result)
         {
-            Assert.IsType<Kudo>(kudo);
+            Assert.IsType<KudoModel>(kudo);
         }
     }
 }

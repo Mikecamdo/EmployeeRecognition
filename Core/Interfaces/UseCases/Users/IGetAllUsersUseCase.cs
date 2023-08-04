@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
 public interface IGetAllUsersUseCase
 {
-    Task<IEnumerable<User>> ExecuteAsync();
+    Task<IEnumerable<UserModel>> ExecuteAsync();
 }

@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
 public interface IGetCommentsUseCase
 {
-    Task<IEnumerable<Comment>> ExecuteAsync();
+    Task<IEnumerable<CommentModel>> ExecuteAsync();
 }

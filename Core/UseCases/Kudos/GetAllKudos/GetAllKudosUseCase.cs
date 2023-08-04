@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
@@ -11,8 +12,8 @@ public class GetAllKudosUseCase : IGetAllKudosUseCase
     {
         _kudoRepository = kudoRepository;
     }
-    public async Task<IEnumerable<Kudo>> ExecuteAsync()
+    public async Task<IEnumerable<KudoModel>> ExecuteAsync()
     {
-        return await _kudoRepository.GetAllKudosAsync();
+        return KudoModelConverter.ToModel(await _kudoRepository.GetAllKudosAsync());
     }
 }

@@ -1,7 +1,6 @@
 ﻿using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
@@ -41,7 +40,7 @@ public class CommentController : ControllerBase
     public async Task<IActionResult> GetAllComments()
     {
         var allComments = await _getCommentsUseCase.ExecuteAsync();
-        return Ok(CommentModelConverter.ToModel(allComments));
+        return Ok(allComments);
 
     }
 

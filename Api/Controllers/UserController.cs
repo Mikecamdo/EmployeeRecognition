@@ -54,7 +54,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUsers()
     {
         var allUsers = await _getAllUsersUseCase.ExecuteAsync();
-        return Ok(UserModelConverter.ToModel(allUsers));
+        return Ok(allUsers);
     }
 
     //[Authorize]

@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Comments.GetComments;
 using Moq;
@@ -27,12 +27,12 @@ public class GetCommentsUseCaseShould : MockDataSetup
             .Returns(Task.FromResult(moqComments));
 
         //Act
-        IEnumerable<Comment> result = await _useCase.ExecuteAsync();
+        IEnumerable<CommentModel> result = await _useCase.ExecuteAsync();
 
         //Assert
         foreach(var comment in result)
         {
-            Assert.IsType<Comment>(comment);
+            Assert.IsType<CommentModel>(comment);
         }
     }
 }

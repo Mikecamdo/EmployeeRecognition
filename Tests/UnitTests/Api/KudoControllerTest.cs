@@ -128,7 +128,7 @@ public class KudoControllerShould : KudoControllerSetup
         //Arrange
         _getAllKudosUseCase
             .Setup(x => x.ExecuteAsync())
-            .Returns(Task.FromResult(CreateMockKudoList()));
+            .Returns(Task.FromResult(KudoModelConverter.ToModel(CreateMockKudoList())));
 
         //Act
         var ctrl = CreateKudoController();
