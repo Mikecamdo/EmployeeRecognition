@@ -1,7 +1,6 @@
 ﻿using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;

@@ -1,7 +1,6 @@
 ﻿using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
 using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
