@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
     this.kudosService.getAllKudos().pipe(
       tap(kudos => {
-        this.allKudos = kudos.reverse(); //FIXME I think I can reverse this in the backend database call
+        this.allKudos = kudos.reverse();
         this.commentMessage = new Array(kudos.length).fill("");
       }),
       mergeMap(() => this.commentsService.getAllComments()),
@@ -103,7 +103,6 @@ export class HomeComponent implements OnInit {
   deleteKudo(kudoId: number, kudoIndex: number): void {
     this.kudosService.deleteKudo(kudoId).subscribe({
       next: x => {
-        console.log("Deleted kudo!");
         this.allKudos = this.allKudos.filter(kudo => kudo.id !== kudoId);
         this.hasComments.splice(kudoIndex, 1);
         this.showComments.splice(kudoIndex, 1);
