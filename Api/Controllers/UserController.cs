@@ -27,6 +27,7 @@ public class UserController : ControllerBase
     private readonly IAddUserUseCase _addUserUseCase;
     private readonly IUpdateUserUseCase _updateUserUseCase;
     private readonly IDeleteUserUseCase _deleteUserUseCase;
+
     public UserController(
         JwtHandler jwtHandler,
         IGetAllUsersUseCase getAllUsersUseCase,
@@ -48,7 +49,7 @@ public class UserController : ControllerBase
         _deleteUserUseCase = deleteUserUseCase;
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserModel>))]
     public async Task<IActionResult> GetUsers()
@@ -57,7 +58,7 @@ public class UserController : ControllerBase
         return Ok(allUsers);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpGet("{userId}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -73,7 +74,7 @@ public class UserController : ControllerBase
         };
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpGet("name")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -144,7 +145,7 @@ public class UserController : ControllerBase
         }
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPut("{userId}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SignupResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -179,7 +180,7 @@ public class UserController : ControllerBase
         }
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpDelete("{userId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

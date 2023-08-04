@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRecognition.Api.Controllers;
 
-//[Authorize]
+[Authorize]
 [Route("comments")]
 public class CommentController : ControllerBase
 {
