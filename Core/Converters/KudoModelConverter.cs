@@ -1,7 +1,7 @@
 ﻿using Entity = EmployeeRecognition.Core.Entities.Kudo;
 using Model = EmployeeRecognition.Api.Models.KudoModel;
 
-namespace EmployeeRecognition.Api.Converters;
+namespace EmployeeRecognition.Core.Converters;
 
 public class KudoModelConverter
 {

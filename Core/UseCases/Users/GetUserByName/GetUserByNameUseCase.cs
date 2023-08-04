@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Converters;
+﻿using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 

@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Converters;
-using EmployeeRecognition.Api.Dto;
+﻿using EmployeeRecognition.Api.Dto;
 using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;

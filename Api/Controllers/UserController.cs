@@ -1,8 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dto;
 using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;

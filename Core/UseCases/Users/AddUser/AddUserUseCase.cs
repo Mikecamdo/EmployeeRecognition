@@ -1,7 +1,7 @@
 ﻿using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Core.Converters;
 
 namespace EmployeeRecognition.Core.UseCases.Users.AddUser;
 

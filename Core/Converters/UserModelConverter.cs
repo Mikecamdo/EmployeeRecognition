@@ -1,18 +1,19 @@
-﻿using Entity = EmployeeRecognition.Core.Entities.Comment;
-using Model = EmployeeRecognition.Api.Models.CommentModel;
+﻿using Entity = EmployeeRecognition.Core.Entities.User;
+using Model = EmployeeRecognition.Api.Models.UserModel;
 
-namespace EmployeeRecognition.Api.Converters;
+namespace EmployeeRecognition.Core.Converters;
 
-public class CommentModelConverter
+public class UserModelConverter
 {
     public static Entity ToEntity(Model model)
     {
         return new Entity()
         {
             Id = model.Id,
-            KudoId = model.KudoId,
-            SenderId = model.SenderId,
-            Message = model.Message
+            Name = model.Name,
+            Password = model.Password,
+            AvatarUrl = model.AvatarUrl,
+            Bio = model.Bio
         };
     }
 
@@ -26,11 +27,10 @@ public class CommentModelConverter
         return new Model()
         {
             Id = entity.Id,
-            KudoId = entity.KudoId,
-            SenderId = entity.SenderId,
-            SenderName = entity.Sender?.Name,
-            SenderAvatar = entity.Sender?.AvatarUrl,
-            Message = entity.Message
+            Name = entity.Name,
+            Password = entity.Password,
+            AvatarUrl = entity.AvatarUrl,
+            Bio = entity.Bio
         };
     }
 
