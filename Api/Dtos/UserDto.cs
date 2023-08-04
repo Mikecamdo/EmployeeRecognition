@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Api.Dto;
+﻿namespace EmployeeRecognition.Api.Dtos;
 
 public class UserDto
 {

@@ -2,9 +2,9 @@
 
 public class UserModel
 {
-    public required string Id { get; set; }
-    public required string Name { get; set; }
-    public required string Password { get; set; }
-    public required string AvatarUrl { get; set; }
-    public required string Bio { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Password { get; set; }
+    public string AvatarUrl { get; set; }
+    public string Bio { get; set; }
 }

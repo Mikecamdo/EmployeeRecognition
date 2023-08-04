@@ -2,21 +2,21 @@
 
 public class KudoModel
 {
-    public required int Id { get; set; }
-    public required string? SenderName { get; set; }
-    public required string SenderId { get; set; }
-    public required string? SenderAvatarUrl { get; set; }
-    public required string? ReceiverName { get; set; }
-    public required string ReceiverId { get; set; }
-    public required string? ReceiverAvatarUrl { get; set; }
-    public required string Title { get; set; }
-    public required string Message { get; set; }
-    public required bool TeamPlayer { get; set; }
-    public required bool OneOfAKind { get; set; }
-    public required bool Creative { get; set; }
-    public required bool HighEnergy { get; set; }
-    public required bool Awesome { get; set; }
-    public required bool Achiever { get; set; }
-    public required bool Sweetness { get; set; }
-    public required DateOnly TheDate { get; set; }
+    public int Id { get; set; }
+    public string? SenderName { get; set; }
+    public string SenderId { get; set; }
+    public string? SenderAvatarUrl { get; set; }
+    public string? ReceiverName { get; set; }
+    public string ReceiverId { get; set; }
+    public string? ReceiverAvatarUrl { get; set; }
+    public string Title { get; set; }
+    public string Message { get; set; }
+    public bool TeamPlayer { get; set; }
+    public bool OneOfAKind { get; set; }
+    public bool Creative { get; set; }
+    public bool HighEnergy { get; set; }
+    public bool Awesome { get; set; }
+    public bool Achiever { get; set; }
+    public bool Sweetness { get; set; }
+    public DateOnly TheDate { get; set; }
 }

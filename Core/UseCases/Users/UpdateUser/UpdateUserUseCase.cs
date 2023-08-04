@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dto;
+﻿using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;

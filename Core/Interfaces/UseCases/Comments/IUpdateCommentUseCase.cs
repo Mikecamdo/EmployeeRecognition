@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dto;
+﻿using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;

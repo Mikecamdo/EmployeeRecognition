@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dto;
+﻿using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
 
 namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;

@@ -2,10 +2,10 @@
 
 public class CommentModel
 {
-    public required int Id { get; set; }
-    public required int KudoId { get; set; }
-    public required string SenderId { get; set; }
-    public required string SenderName { get; set; }
-    public required string SenderAvatar { get; set; }
-    public required string Message { get; set; }
+    public int Id { get; set; }
+    public int KudoId { get; set; }
+    public string SenderId { get; set; }
+    public string SenderName { get; set; }
+    public string SenderAvatar { get; set; }
+    public string Message { get; set; }
 }
