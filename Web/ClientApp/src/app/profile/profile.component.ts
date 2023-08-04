@@ -88,7 +88,7 @@ export class ProfileComponent implements OnInit {
           this.updateUser(true);
         },
         error: error => {
-          this.toastr.error("Incorrect old password, changes not saved", "Error while updating password");
+          this.toastr.error("Incorrect old password", "Error while updating password");
         }
       });
     } else {
@@ -136,5 +136,20 @@ export class ProfileComponent implements OnInit {
         this.toastr.error(error.error, "Error while deleting user");
       }
     });
+  }
+
+  invalidPassword(): boolean {
+    if (this.confirmNewPassword !== '' && this.confirmNewPassword !== this.newPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  disableButton(button: number): boolean {
+    if (button === 1) {
+      return !this.userName || !this.userBio || !this.userAvatar;
+    } else { //button === 2
+      return !this.oldPassword || !this.newPassword || !this.confirmNewPassword || this.invalidPassword();
+    }
   }
 }

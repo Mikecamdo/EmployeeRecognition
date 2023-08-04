@@ -74,7 +74,7 @@
     
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <button class="btn btn-primary" (click)="saveChanges()">
+                <button class="btn btn-primary" (click)="saveChanges()" [disabled]="disableButton(1)">
                     Save Changes
                 </button>
             </div>
@@ -101,10 +101,24 @@
                  placeholder="New Password" maxlength="80" [(ngModel)]="newPassword" >
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label for="confirmPassword" class="form-label">
+                    Confirm Password
+                </label>
+                <input id="confirmPassword" name="confirmPassword" class="form-control" 
+                 aria-describedby="invalid-password" placeholder="Confirm New Password" maxlength="80" 
+                 [(ngModel)]="confirmNewPassword" [ngClass]="{'is-invalid': invalidPassword()}">
+                 <div id="invalid-password" class="invalid-feedback">
+                    Passwords don't match
+                </div>
+            </div>
+        </div>
     
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <button class="btn btn-primary" (click)="saveChanges()">
+                <button class="btn btn-primary" (click)="saveChanges()" [disabled]="disableButton(2)">
                     Save Password
                 </button>
             </div>
