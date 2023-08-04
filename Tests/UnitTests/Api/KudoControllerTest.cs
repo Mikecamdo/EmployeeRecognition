@@ -1,4 +1,5 @@
 ﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Dto;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;

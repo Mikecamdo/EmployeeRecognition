@@ -1,5 +1,5 @@
 ﻿using EmployeeRecognition.Api.Converters;
-using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Api.Dto;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
