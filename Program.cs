@@ -2,34 +2,13 @@ using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Database.Context;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
-using EmployeeRecognition.Core.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
-using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EmployeeRecognition.Api.JwtFeatures;
 using System.Reflection;
-using EmployeeRecognition.Core.UseCases.Comments.AddComment;
-using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
-using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
-using EmployeeRecognition.Core.UseCases.Comments.GetComments;
-using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
-using EmployeeRecognition.Core.UseCases.Users.AddUser;
-using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
-using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
-using EmployeeRecognition.Core.UseCases.Users.GetUserById;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
-using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByName;
+using EmployeeRecognition;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,31 +44,8 @@ builder.Services.AddAuthentication(opt =>
 //JWT Authentication
 builder.Services.AddScoped<JwtHandler>();
 
-//Use cases
-builder.Services.AddScoped<IGetAllUsersUseCase, GetAllUsersUseCase>();
-builder.Services.AddScoped<IGetUserByIdUseCase, GetUserByIdUseCase>();
-builder.Services.AddScoped<IGetUserByNameUseCase, GetUserByNameUseCase>();
-builder.Services.AddScoped<IGetUserByLoginCredentialUseCase, GetUserByLoginCredentialUseCase>();
-builder.Services.AddScoped<IAddUserUseCase, AddUserUseCase>();
-builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
-builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
-
-builder.Services.AddScoped<IGetAllKudosUseCase, GetAllKudosUseCase>(); //FIXME can move all of these to their own folders to make this cleaner
-builder.Services.AddScoped<IGetKudosBySenderIdUseCase, GetKudosBySenderIdUseCase>();
-builder.Services.AddScoped<IGetKudosByReceiverIdUseCase, GetKudosByReceiverIdUseCase>();
-builder.Services.AddScoped<IAddKudoUseCase, AddKudoUseCase>();
-builder.Services.AddScoped<IDeleteKudoUseCase, DeleteKudoUseCase>();
-
-builder.Services.AddScoped<IGetCommentsUseCase, GetCommentsUseCase>();
-builder.Services.AddScoped<IGetCommentsByKudoIdUseCase, GetCommentsByKudoIdUseCase>();
-builder.Services.AddScoped<IAddCommentUseCase, AddCommentUseCase>();
-builder.Services.AddScoped<IUpdateCommentUseCase, UpdateCommentUseCase>();
-builder.Services.AddScoped<IDeleteCommentUseCase, DeleteCommentUseCase>();
-
-//Repositories
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IKudoRepository, KudoRepository>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddUseCases();
+builder.Services.AddRepositories();
 
 builder.Services.AddSwaggerGen(c =>
 {
