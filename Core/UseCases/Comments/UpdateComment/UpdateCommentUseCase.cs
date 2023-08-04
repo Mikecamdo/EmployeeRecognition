@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
@@ -13,9 +13,9 @@ public class UpdateCommentUseCase : IUpdateCommentUseCase
     {
         _commentRepository = commentRepository;
     }
-    public async Task<UpdateCommentResponse> ExecuteAsync(int commentId, CommentDto updatedCommentInfo)
+    public async Task<UpdateCommentResponse> ExecuteAsync(CommentModel updatedCommentInfo)
     {
-        var toBeUpdated = await _commentRepository.GetCommentByIdAsync(commentId);
+        var toBeUpdated = await _commentRepository.GetCommentByIdAsync(updatedCommentInfo.Id);
 
         if (toBeUpdated == null)
         {

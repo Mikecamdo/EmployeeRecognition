@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
@@ -59,12 +59,7 @@ public class CommentController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddComment([FromBody] CommentDto comment)
     {
-        var newComment = new Comment() //FIXME need to move to a converter
-        {
-            KudoId = comment.KudoId,
-            SenderId = comment.SenderId,
-            Message = comment.Message,
-        };
+        var newComment = CommentDtoConverter.ToModel(comment);
 
         var addCommentResponse = await _addCommentUseCase.ExecuteAsync(newComment);
 
@@ -80,7 +75,9 @@ public class CommentController : ControllerBase
     [HttpPut("{commentId}")]
     public async Task<IActionResult> UpdateComment([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
     {
-        var updateCommentResponse = await _updateCommentUseCase.ExecuteAsync(commentId, updatedCommentInfo);
+        var currentComment = CommentDtoConverter.ToModel(updatedCommentInfo);
+        currentComment.Id = commentId;
+        var updateCommentResponse = await _updateCommentUseCase.ExecuteAsync(currentComment);
 
         return updateCommentResponse switch
         {
@@ -95,7 +92,7 @@ public class CommentController : ControllerBase
     {
         var deleteCommentResponse = await _deleteCommentUseCase.ExecuteAsync(commentId);
 
-        return deleteCommentResponse switch //FIXME maybe add business logic to make sure users can only delete their own comments???
+        return deleteCommentResponse switch
         {
             DeleteCommentResponse.Success => NoContent(),
             DeleteCommentResponse.CommentNotFound => NotFound(deleteCommentResponse.Message),

@@ -1,7 +1,7 @@
 ﻿using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Converters;
+using EmployeeRecognition.Api.Models;
 
 namespace EmployeeRecognition.Core.UseCases.Users.AddUser;
 
@@ -13,7 +13,7 @@ public class AddUserUseCase : IAddUserUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<AddUserResponse> ExecuteAsync(User user)
+    public async Task<AddUserResponse> ExecuteAsync(UserModel user)
     {
         var currentUser = await _userRepository.GetUserByNameAsync(user.Name);
 
@@ -22,7 +22,7 @@ public class AddUserUseCase : IAddUserUseCase
             return new AddUserResponse.InvalidRequest("A user with that name already exists");
         }
 
-        var newUser = await _userRepository.AddUserAsync(user);
+        var newUser = await _userRepository.AddUserAsync(UserModelConverter.ToEntity(user));
 
         return new AddUserResponse.Success(UserModelConverter.ToModel(newUser));
     }

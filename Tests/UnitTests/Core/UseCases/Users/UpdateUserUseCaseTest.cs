@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
@@ -21,38 +21,39 @@ public class UpdateUserUseCaseShould : MockDataSetup
     public async void UpdateUser_ReturnSuccess()
     {
         //Arrange
-        var request1 = "19df82ba-a964-4dbf-8013-69c120e938de";
-        var request2 = new UserDto()
+        var request = new UserModel()
         {
+            Id = "19df82ba-a964-4dbf-8013-69c120e938de",
             Name = "Test",
             Password = "password",
-            AvatarUrl = "url"
+            AvatarUrl = "url",
+            Bio = "A bio"
         };
         var moqUsers = CreateMockUserList();
 
         _mockUserRepo
             .Setup(x => x.GetUserByIdAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         _mockUserRepo
             .Setup(x => x.GetUserByNameAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request2.Name)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request.Name)));
 
         _mockUserRepo
             .Setup(x => x.UpdateUserAsync(It.IsAny<User>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         //Act
-        var result = await _useCase.ExecuteAsync(request1, request2);
+        var result = await _useCase.ExecuteAsync(request);
 
         //Assert
         Assert.IsType<UpdateUserResponse.Success>(result);
         if (result is UpdateUserResponse.Success success)
         {
-            Assert.Equal(request1, success.UpdatedUser.Id);
-            Assert.Equal(request2.Name, success.UpdatedUser.Name);
-            Assert.Equal(request2.Password, success.UpdatedUser.Password);
-            Assert.Equal(request2.AvatarUrl, success.UpdatedUser.AvatarUrl);
+            Assert.Equal(request.Id, success.UpdatedUser.Id);
+            Assert.Equal(request.Name, success.UpdatedUser.Name);
+            Assert.Equal(request.Password, success.UpdatedUser.Password);
+            Assert.Equal(request.AvatarUrl, success.UpdatedUser.AvatarUrl);
         }
     }
 
@@ -63,29 +64,30 @@ public class UpdateUserUseCaseShould : MockDataSetup
     public async void UpdateNonexistentUser_ReturnUserNotFound(string userId)
     {
         //Arrange
-        var request1 = userId;
-        var request2 = new UserDto()
+        var request = new UserModel()
         {
+            Id = userId,
             Name = "Test",
             Password = "password",
-            AvatarUrl = "url"
+            AvatarUrl = "url",
+            Bio = "A bio"
         };
         var moqUsers = CreateMockUserList();
 
         _mockUserRepo
             .Setup(x => x.GetUserByIdAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         _mockUserRepo
             .Setup(x => x.GetUserByNameAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request2.Name)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request.Name)));
 
         _mockUserRepo
             .Setup(x => x.UpdateUserAsync(It.IsAny<User>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         //Act
-        var result = await _useCase.ExecuteAsync(request1, request2);
+        var result = await _useCase.ExecuteAsync(request);
 
         //Assert
         Assert.IsType<UpdateUserResponse.UserNotFound>(result);
@@ -99,9 +101,9 @@ public class UpdateUserUseCaseShould : MockDataSetup
     public async void UpdateUserWithExistingName_ReturnInvalidRequest(string newName)
     {
         //Arrange
-        var request1 = "e1a07078-fd94-4554-812a-383c0367de90";
-        var request2 = new UserDto()
+        var request = new UserModel()
         {
+            Id = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
             Name = newName,
             Password = "password",
             AvatarUrl = "url"
@@ -110,18 +112,18 @@ public class UpdateUserUseCaseShould : MockDataSetup
 
         _mockUserRepo
             .Setup(x => x.GetUserByIdAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         _mockUserRepo
             .Setup(x => x.GetUserByNameAsync(It.IsAny<string>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request2.Name)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Name == request.Name)));
 
         _mockUserRepo
             .Setup(x => x.UpdateUserAsync(It.IsAny<User>()))
-            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request1)));
+            .Returns(Task.FromResult(moqUsers.FirstOrDefault(y => y.Id == request.Id)));
 
         //Act
-        var result = await _useCase.ExecuteAsync(request1, request2);
+        var result = await _useCase.ExecuteAsync(request);
 
         //Assert
         Assert.IsType<UpdateUserResponse.InvalidRequest>(result);

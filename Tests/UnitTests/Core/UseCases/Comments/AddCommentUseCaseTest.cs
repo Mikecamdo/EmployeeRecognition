@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
 using Moq;
@@ -22,7 +23,7 @@ public class AddCommentUseCaseShould : MockDataSetup
     public async void AddComment_ReturnSuccess()
     {
         //Arrange
-        var request = new Comment()
+        var request = new CommentModel()
         {
             KudoId = 1,
             SenderId = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
@@ -59,7 +60,7 @@ public class AddCommentUseCaseShould : MockDataSetup
     public async void AddCommentWithMissingParameters_ReturnInvalidRequest(string senderId, string message)
     {
         //Arrange
-        var request = new Comment()
+        var request = new CommentModel()
         {
             KudoId = 1,
             SenderId = senderId,
@@ -89,7 +90,7 @@ public class AddCommentUseCaseShould : MockDataSetup
     public async void AddCommentWithNonexistentKudo_ReturnKudoNotFound(int kudoId)
     {
         //Arrange
-        var request = new Comment()
+        var request = new CommentModel()
         {
             KudoId = kudoId,
             SenderId = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",

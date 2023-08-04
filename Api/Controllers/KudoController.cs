@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Converters;
+using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
@@ -76,21 +76,7 @@ public class KudoController : ControllerBase
             return BadRequest("Missing/invalid parameters");
         }
 
-        var newKudo = new Kudo() //FIXME need to move to a converter
-        {
-            SenderId = kudo.SenderId,
-            ReceiverId = kudo.ReceiverId,
-            Title = kudo.Title,
-            Message = kudo.Message,
-            TeamPlayer = kudo.TeamPlayer,
-            OneOfAKind = kudo.OneOfAKind,
-            Creative = kudo.Creative,
-            HighEnergy = kudo.HighEnergy,
-            Awesome = kudo.Awesome,
-            Achiever = kudo.Achiever,
-            Sweetness = kudo.Sweetness,
-            TheDate = DateOnly.FromDateTime(DateTime.Now)
-        };
+        var newKudo = KudoDtoConverter.ToModel(kudo);
 
         var addKudoResponse = await _addKudoUseCase.ExecuteAsync(newKudo);
 

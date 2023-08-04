@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
 using Moq;
@@ -22,7 +23,7 @@ public class AddKudoUseCaseShould : MockDataSetup
     public async void AddKudo_ReturnSuccess()
     {
         //Arrange
-        var request = new Kudo()
+        var request = new KudoModel()
         {
             SenderId = "19df82ba-a964-4dbf-8013-69c120e938de",
             ReceiverId = "e1a07078-fd94-4554-812a-383c0367de90",
@@ -67,7 +68,7 @@ public class AddKudoUseCaseShould : MockDataSetup
     public async void AddKudoWithNonexistentSender_ReturnInvalidRequest(string senderId)
     {
         //Arrange
-        var request = new Kudo()
+        var request = new KudoModel()
         {
             SenderId = senderId,
             ReceiverId = "e1a07078-fd94-4554-812a-383c0367de90",
@@ -106,7 +107,7 @@ public class AddKudoUseCaseShould : MockDataSetup
     public async void AddKudoWithNonexistentReceiver_ReturnInvalidRequest(string receiverId)
     {
         //Arrange
-        var request = new Kudo()
+        var request = new KudoModel()
         {
             SenderId = "19df82ba-a964-4dbf-8013-69c120e938de",
             ReceiverId = receiverId,
@@ -145,7 +146,7 @@ public class AddKudoUseCaseShould : MockDataSetup
     public async void AddKudoWithSameSenderAndReceiver_ReturnInvalidRequest(string userId)
     {
         //Arrange
-        var request = new Kudo()
+        var request = new KudoModel()
         {
             SenderId = userId,
             ReceiverId = userId,

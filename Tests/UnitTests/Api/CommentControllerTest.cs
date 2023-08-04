@@ -25,21 +25,21 @@ public class CommentControllerTest : CommentControllerSetup
         if (validComment && kudoExists)
         {
             _addCommentUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<Comment>()))
-                .Returns((Comment y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<CommentModel>()))
+                .Returns((CommentModel y) =>
                     Task.FromResult<AddCommentResponse>(new AddCommentResponse.Success(
                         CommentModelConverter.ToModel(CreateMockCommentList().First()))));
         } else if (validComment && !kudoExists)
         {
             _addCommentUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<Comment>()))
-                .Returns((Comment y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<CommentModel>()))
+                .Returns((CommentModel y) =>
                     Task.FromResult<AddCommentResponse>(new AddCommentResponse.KudoNotFound()));
         } else
         {
             _addCommentUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<Comment>()))
-                .Returns((Comment y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<CommentModel>()))
+                .Returns((CommentModel y) =>
                     Task.FromResult<AddCommentResponse>(new AddCommentResponse.InvalidRequest("Missing/invalid parameters")));
         }
 
@@ -213,13 +213,13 @@ public class CommentControllerTest : CommentControllerSetup
         if (commentExists)
         {
             _updateCommentUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<int>(), It.IsAny<CommentDto>()))
+                .Setup(x => x.ExecuteAsync(It.IsAny<CommentModel>()))
                 .Returns(Task.FromResult<UpdateCommentResponse>(new UpdateCommentResponse.Success(
                     CommentModelConverter.ToModel(CreateMockCommentList().First()))));
         } else
         {
             _updateCommentUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<int>(), It.IsAny<CommentDto>()))
+                .Setup(x => x.ExecuteAsync(It.IsAny<CommentModel>()))
                 .Returns(Task.FromResult<UpdateCommentResponse>(new UpdateCommentResponse.CommentNotFound()));
         }
         int request1 = 1;

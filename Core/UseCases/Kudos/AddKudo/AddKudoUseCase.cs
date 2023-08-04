@@ -1,5 +1,5 @@
-﻿using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 
@@ -16,7 +16,7 @@ public class AddKudoUseCase : IAddKudoUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<AddKudoResponse> ExecuteAsync(Kudo kudo)
+    public async Task<AddKudoResponse> ExecuteAsync(KudoModel kudo)
     {
         if (kudo.SenderId != "")
         {
@@ -40,7 +40,7 @@ public class AddKudoUseCase : IAddKudoUseCase
             return new AddKudoResponse.InvalidRequest("Cannot send kudo to yourself");
         }
 
-        var newKudo = await _kudoRepository.AddKudoAsync(kudo);
+        var newKudo = await _kudoRepository.AddKudoAsync(KudoModelConverter.ToEntity(kudo));
         return new AddKudoResponse.Success(KudoModelConverter.ToModel(newKudo));
     }
 }

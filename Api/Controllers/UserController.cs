@@ -1,9 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dtos;
 using EmployeeRecognition.Api.JwtFeatures;
 using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
@@ -110,16 +110,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddUser([FromBody] UserDto user)
     {
-        var userId = Guid.NewGuid().ToString();
-        var newUser = new User() //FIXME need to move to a converter
-        {
-            Id = userId,
-            Name = user.Name,
-            Password = user.Password,
-            AvatarUrl = user.AvatarUrl,
-            Bio = user.Bio
-        };
-
+        var newUser = UserDtoConverter.ToModel(user);
         var addUserResponse = await _addUserUseCase.ExecuteAsync(newUser);
 
         switch (addUserResponse)
@@ -148,7 +139,9 @@ public class UserController : ControllerBase
     [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
-        var updateUserResponse = await _updateUserUseCase.ExecuteAsync(userId, updatedUserInfo);
+        var currentUser = UserDtoConverter.ToModel(updatedUserInfo);
+        currentUser.Id = userId;
+        var updateUserResponse = await _updateUserUseCase.ExecuteAsync(currentUser);
 
         switch (updateUserResponse)
         {
@@ -158,7 +151,7 @@ public class UserController : ControllerBase
                 var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
                 var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-                var signupResponse = new SignupResponse() //FIXME change name of return variable (??)
+                var signupResponse = new SignupResponse()
                 {
                     IsSignupSuccessful = true,
                     Token = token

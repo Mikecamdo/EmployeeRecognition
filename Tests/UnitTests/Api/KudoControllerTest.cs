@@ -23,15 +23,15 @@ public class KudoControllerShould : KudoControllerSetup
         if (validKudo)
         {
             _addKudoUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<Kudo>()))
-                .Returns((Kudo y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<KudoModel>()))
+                .Returns((KudoModel y) =>
                     Task.FromResult<AddKudoResponse>(new AddKudoResponse.Success(
                         KudoModelConverter.ToModel(CreateMockKudoList().First()))));
         } else
         {
             _addKudoUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<Kudo>()))
-                .Returns((Kudo y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<KudoModel>()))
+                .Returns((KudoModel y) =>
                     Task.FromResult<AddKudoResponse>(new AddKudoResponse.InvalidRequest("Invalid request")));
         }
 

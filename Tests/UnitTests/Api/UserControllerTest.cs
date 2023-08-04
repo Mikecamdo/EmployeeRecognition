@@ -23,16 +23,16 @@ public class UserControllerShould : UserControllerSetup
         if (userAlreadyExists)
         {
             _addUserUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<User>()))
-                .Returns((User y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<UserModel>()))
+                .Returns((UserModel y) =>
                     Task.FromResult<AddUserResponse>(new AddUserResponse.InvalidRequest(
                         "A user with that name already exists")));
         }
         else
         {
             _addUserUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<User>()))
-                .Returns((User y) =>
+                .Setup(x => x.ExecuteAsync(It.IsAny<UserModel>()))
+                .Returns((UserModel y) =>
                     Task.FromResult<AddUserResponse>(new AddUserResponse.Success(
                         UserModelConverter.ToModel(CreateMockUserList().First()))));
         }
@@ -259,20 +259,20 @@ public class UserControllerShould : UserControllerSetup
         if (userExists && nameAlreadyTaken)
         {
             _updateUserUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Setup(x => x.ExecuteAsync(It.IsAny<UserModel>()))
                 .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.InvalidRequest("Name already in use")));
         }
         else if (userExists && !nameAlreadyTaken)
         {
             _updateUserUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Setup(x => x.ExecuteAsync(It.IsAny<UserModel>()))
                 .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.Success(
                     UserModelConverter.ToModel(CreateMockUserList().First()))));
         }
         else
         {
             _updateUserUseCase
-                .Setup(x => x.ExecuteAsync(It.IsAny<string>(), It.IsAny<UserDto>()))
+                .Setup(x => x.ExecuteAsync(It.IsAny<UserModel>()))
                 .Returns(Task.FromResult<UpdateUserResponse>(new UpdateUserResponse.UserNotFound()));
         }
 

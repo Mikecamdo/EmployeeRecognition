@@ -1,4 +1,5 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Users.AddUser;
 using Moq;
@@ -20,7 +21,7 @@ public class AddUserUseCaseShould : MockDataSetup
     public async void AddUser_ReturnSuccess()
     {
         //Arrange
-        var request = new User()
+        var request = new UserModel()
         {
             Id = Guid.NewGuid().ToString(),
             Name = "Test",
@@ -60,7 +61,7 @@ public class AddUserUseCaseShould : MockDataSetup
     public async void AddUserWithExistingName_ReturnInvalidRequest(string name)
     {
         //Arrange
-        var request = new User()
+        var request = new UserModel()
         {
             Id = Guid.NewGuid().ToString(),
             Name = name,

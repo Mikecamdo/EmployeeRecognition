@@ -1,6 +1,5 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
@@ -14,9 +13,9 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         _userRepository = userRepository;
     }
 
-    public async Task<UpdateUserResponse> ExecuteAsync(string userId, UserDto updatedUserInfo)
+    public async Task<UpdateUserResponse> ExecuteAsync(UserModel updatedUserInfo)
     {
-        var toBeUpdated = await _userRepository.GetUserByIdAsync(userId);
+        var toBeUpdated = await _userRepository.GetUserByIdAsync(updatedUserInfo.Id);
         
         if (toBeUpdated == null)
         {
@@ -25,7 +24,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
 
         var otherUser = await _userRepository.GetUserByNameAsync(updatedUserInfo.Name);
 
-        if (otherUser != null && otherUser.Id != userId)
+        if (otherUser != null && otherUser.Id != updatedUserInfo.Id)
         {
             return new UpdateUserResponse.InvalidRequest("Name already in use");
         }

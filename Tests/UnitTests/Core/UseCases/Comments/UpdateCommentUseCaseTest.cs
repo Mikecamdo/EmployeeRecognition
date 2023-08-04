@@ -1,4 +1,4 @@
-﻿using EmployeeRecognition.Api.Dtos;
+﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
@@ -21,9 +21,9 @@ public class UpdateCommentUseCaseShould : MockDataSetup
     public async void UpdateComment_ReturnSuccess()
     {
         //Arrange
-        int request1 = 1;
-        CommentDto request2 = new()
+        CommentModel request = new()
         {
+            Id = 1,
             SenderId = "19df82ba-a964-4dbf-8013-69c120e938de",
             Message = "Anotha message"
         };
@@ -38,15 +38,15 @@ public class UpdateCommentUseCaseShould : MockDataSetup
             .Returns((Comment y) => Task.FromResult(y));
 
         //Act
-        var result = await _useCase.ExecuteAsync(request1, request2);
+        var result = await _useCase.ExecuteAsync(request);
 
         //Assert
         Assert.IsType<UpdateCommentResponse.Success>(result);
         if (result is UpdateCommentResponse.Success success)
         {
-            Assert.Equal(request1, success.UpdatedComment.Id);
-            Assert.Equal(request2.SenderId, success.UpdatedComment.SenderId);
-            Assert.Equal(request2.Message, success.UpdatedComment.Message);
+            Assert.Equal(request.Id, success.UpdatedComment.Id);
+            Assert.Equal(request.SenderId, success.UpdatedComment.SenderId);
+            Assert.Equal(request.Message, success.UpdatedComment.Message);
         }
     }
 
@@ -56,9 +56,9 @@ public class UpdateCommentUseCaseShould : MockDataSetup
     public async void UpdateNonexistentComment_ReturnCommentNotFound(int commentId)
     {
         //Arrange
-        int request1 = commentId;
-        CommentDto request2 = new()
+        CommentModel request = new()
         {
+            Id = commentId,
             SenderId = "a1b1bef1-1426-43cc-bcd9-d8425fe6e8e3",
             Message = "WEEWOO"
         };
@@ -73,7 +73,7 @@ public class UpdateCommentUseCaseShould : MockDataSetup
             .Returns((Comment y) => Task.FromResult(y));
 
         //Act
-        var result = await _useCase.ExecuteAsync(request1, request2);
+        var result = await _useCase.ExecuteAsync(request);
 
         //Assert
         Assert.IsType<UpdateCommentResponse.CommentNotFound>(result);

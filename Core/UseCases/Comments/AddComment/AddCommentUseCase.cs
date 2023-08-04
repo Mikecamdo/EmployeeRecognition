@@ -1,5 +1,5 @@
-﻿using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
+﻿using EmployeeRecognition.Api.Models;
+using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 
@@ -16,7 +16,7 @@ public class AddCommentUseCase : IAddCommentUseCase
         _kudoRepository = kudoRepository;
     }
 
-    public async Task<AddCommentResponse> ExecuteAsync(Comment comment)
+    public async Task<AddCommentResponse> ExecuteAsync(CommentModel comment)
     {
         if (comment.SenderId == "" || comment.Message == "" ||
            comment.SenderId == null || comment.Message == null)
@@ -31,7 +31,7 @@ public class AddCommentUseCase : IAddCommentUseCase
             return new AddCommentResponse.KudoNotFound();
         }
 
-        var newComment = await _commentRepository.AddCommentAsync(comment);
+        var newComment = await _commentRepository.AddCommentAsync(CommentModelConverter.ToEntity(comment));
         return new AddCommentResponse.Success(CommentModelConverter.ToModel(newComment));
     }
 }
