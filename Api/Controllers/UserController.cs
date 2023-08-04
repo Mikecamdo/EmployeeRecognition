@@ -50,6 +50,7 @@ public class UserController : ControllerBase
 
     //[Authorize]
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserModel>))]
     public async Task<IActionResult> GetUsers()
     {
         var allUsers = await _getAllUsersUseCase.ExecuteAsync();
@@ -58,6 +59,8 @@ public class UserController : ControllerBase
 
     //[Authorize]
     [HttpGet("{userId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserById([FromRoute] string userId)
     {
         var getUserByIdResponse = await _getUserByIdUseCase.ExecuteAsync(userId);
@@ -72,6 +75,8 @@ public class UserController : ControllerBase
 
     //[Authorize]
     [HttpGet("name")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserByName([FromQuery] string name)
     {
         var getUserByNameResponse = await _getUserByNameUseCase.ExecuteAsync(name);
@@ -85,6 +90,8 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("login")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LoginResponse))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(LoginResponse))]
     public async Task<IActionResult> GetUserByLoginCredentials([FromQuery] LoginCredential loginCredential)
     {
         var currentUser = await _getUserByLoginCredentialUseCase.ExecuteAsync(loginCredential);
@@ -108,6 +115,8 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SignupResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(SignupResponse))]
     public async Task<IActionResult> AddUser([FromBody] UserDto user)
     {
         var newUser = UserDtoConverter.ToModel(user);
@@ -137,6 +146,9 @@ public class UserController : ControllerBase
 
     //[Authorize]
     [HttpPut("{userId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SignupResponse))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId, [FromBody] UserDto updatedUserInfo)
     {
         var currentUser = UserDtoConverter.ToModel(updatedUserInfo);
@@ -169,6 +181,8 @@ public class UserController : ControllerBase
 
     //[Authorize]
     [HttpDelete("{userId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {
         var deleteUserResponse = await _deleteUserUseCase.ExecuteAsync(userId);

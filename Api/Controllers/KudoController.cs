@@ -1,5 +1,6 @@
 ﻿using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dtos;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
 using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
@@ -36,6 +37,7 @@ public class KudoController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<KudoModel>))]
     public async Task<IActionResult> GetKudos()
     {
         var allKudos = await _getAllKudosUseCase.ExecuteAsync();
@@ -43,6 +45,8 @@ public class KudoController : ControllerBase
     }
 
     [HttpGet("sender/{senderId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<KudoModel>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetKudosBySenderId([FromRoute] string senderId)
     {
         var getKudosBySenderIdResponse = await _getKudosBySenderIdUseCase.ExecuteAsync(senderId);
@@ -56,6 +60,8 @@ public class KudoController : ControllerBase
     }
 
     [HttpGet("receiver/{receiverId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<KudoModel>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetKudosByReceiverId([FromRoute] string receiverId)
     {
         var getKudosByReceiverIdResponse = await _getKudosByReceiverIdUseCase.ExecuteAsync(receiverId);
@@ -69,6 +75,8 @@ public class KudoController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(KudoModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddKudo([FromBody] KudoDto kudo)
     {
         if (kudo == null)
@@ -89,6 +97,8 @@ public class KudoController : ControllerBase
     }
 
     [HttpDelete("{kudoId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteKudo([FromRoute] int kudoId)
     {
         var deleteKudoResponse = await _deleteKudoUseCase.ExecuteAsync(kudoId);

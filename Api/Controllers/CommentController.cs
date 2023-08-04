@@ -1,5 +1,6 @@
 ﻿using EmployeeRecognition.Api.Converters;
 using EmployeeRecognition.Api.Dtos;
+using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
 using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
 using EmployeeRecognition.Core.UseCases.Comments.AddComment;
@@ -36,6 +37,7 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CommentModel>))]
     public async Task<IActionResult> GetAllComments()
     {
         var allComments = await _getCommentsUseCase.ExecuteAsync();
@@ -44,6 +46,8 @@ public class CommentController : ControllerBase
     }
 
     [HttpGet("{kudoId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CommentModel>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetCommentsByKudoId([FromRoute] int kudoId)
     {
         var getCommentsByKudoIdResponse = await _getCommentsByKudoIdUseCase.ExecuteAsync(kudoId);
@@ -57,6 +61,8 @@ public class CommentController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommentModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> AddComment([FromBody] CommentDto comment)
     {
         var newComment = CommentDtoConverter.ToModel(comment);
@@ -73,6 +79,8 @@ public class CommentController : ControllerBase
     }
 
     [HttpPut("{commentId}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CommentModel))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateComment([FromRoute] int commentId, [FromBody] CommentDto updatedCommentInfo)
     {
         var currentComment = CommentDtoConverter.ToModel(updatedCommentInfo);
@@ -88,6 +96,8 @@ public class CommentController : ControllerBase
     }
 
     [HttpDelete("{commentId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteComment([FromRoute] int commentId)
     {
         var deleteCommentResponse = await _deleteCommentUseCase.ExecuteAsync(commentId);
