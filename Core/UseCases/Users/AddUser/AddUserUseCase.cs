@@ -22,6 +22,8 @@ public class AddUserUseCase : IAddUserUseCase
             return new AddUserResponse.InvalidRequest("A user with that name already exists");
         }
 
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
         var newUser = await _userRepository.AddUserAsync(UserModelConverter.ToEntity(user));
 
         return new AddUserResponse.Success(UserModelConverter.ToModel(newUser));

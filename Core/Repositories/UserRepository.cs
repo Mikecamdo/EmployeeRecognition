@@ -33,8 +33,21 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserByLoginCredentialAsync(LoginCredential loginCredential)
     {
-        return await _mySqlDbContext.Users
-            .FirstOrDefaultAsync(e => e.Name == loginCredential.Name && e.Password == loginCredential.Password);
+        var user = await _mySqlDbContext.Users.FirstOrDefaultAsync(e => e.Name == loginCredential.Name);
+
+        if (user == null)
+        {
+            return null;
+        }
+
+        bool validPassword = BCrypt.Net.BCrypt.Verify(loginCredential.Password, user.Password);
+        
+        if (validPassword)
+        {
+            return user;
+        }
+
+        return null;
     }
 
     public async Task<User> AddUserAsync(User user)

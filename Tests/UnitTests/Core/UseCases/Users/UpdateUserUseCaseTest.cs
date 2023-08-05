@@ -52,7 +52,6 @@ public class UpdateUserUseCaseShould : MockDataSetup
         {
             Assert.Equal(request.Id, success.UpdatedUser.Id);
             Assert.Equal(request.Name, success.UpdatedUser.Name);
-            Assert.Equal(request.Password, success.UpdatedUser.Password);
             Assert.Equal(request.AvatarUrl, success.UpdatedUser.AvatarUrl);
         }
     }

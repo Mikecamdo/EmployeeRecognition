@@ -1,5 +1,6 @@
 ﻿using EmployeeRecognition.Api.Models;
 using EmployeeRecognition.Core.Converters;
+using EmployeeRecognition.Core.Entities;
 using EmployeeRecognition.Core.Interfaces.Repositories;
 using EmployeeRecognition.Core.Interfaces.UseCases.Users;
 
@@ -32,7 +33,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
         toBeUpdated.Name = updatedUserInfo.Name;
         if (updatedUserInfo.Password != null)
         {
-            toBeUpdated.Password = updatedUserInfo.Password;
+            toBeUpdated.Password = BCrypt.Net.BCrypt.HashPassword(updatedUserInfo.Password);
         }
         toBeUpdated.AvatarUrl = updatedUserInfo.AvatarUrl;
         toBeUpdated.Bio = updatedUserInfo.Bio;
