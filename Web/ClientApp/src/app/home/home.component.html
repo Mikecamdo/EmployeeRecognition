@@ -1,6 +1,18 @@
-<div *ngIf="everythingLoaded" class="container">
-    <div class="d-flex align-items-center my-4">
+<div *ngIf="everythingLoaded" class="container p-0">
+    <div class="d-flex align-items-center justify-content-between my-4">
         <h1 class="brown-text">Recognition Feed</h1>
+
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-secondary" id="basic-dropdown" ngbDropdownToggle>
+                <span *ngIf="filterType === 'None'">Filter by...</span>
+                <span *ngIf="filterType !== 'None'">{{ filterType }}</span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="basic-dropdown">
+                <button class="dropdown-item" (click)="filterType='None'">None</button>
+                <button class="dropdown-item" (click)="filterType='Kudos Sent'">Kudos Sent</button>
+                <button class="dropdown-item" (click)="filterType='Kudos Received'">Kudos Received</button>
+            </div>
+        </div>
     </div>
 
     <div class="card my-5">
@@ -26,7 +38,7 @@
     </div>
 
     <div *ngFor="let kudo of allKudos; let i = index">
-        <div class="card my-5">
+        <div *ngIf="filter(kudo)" class="card my-5">
             <div class="card-body">
                 <h6 class="card-title d-flex justify-content-between">
                     <span *ngIf="kudo.senderAvatarUrl">

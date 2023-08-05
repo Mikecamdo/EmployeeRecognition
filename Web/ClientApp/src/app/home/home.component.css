@@ -53,6 +53,12 @@
     border: none;
 }
 
+.btn.btn-secondary {
+    color: #551E19;
+    background-color: #C56E33;
+    border: none;
+}
+
 .btn.btn-outline-primary {
     color: #551E19;
     border-color: #E6B17E;
@@ -162,4 +168,14 @@ span.tag {
 
 .no-example {
     display: none;
+}
+
+.dropdown-menu.show {
+    color: #551E19;
+    background-color: #C56E33;
+}
+
+.dropdown-item:hover {
+    color: #551E19;
+    background-color: #E6B17E;
 }

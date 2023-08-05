@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
   userName: string = '';
   userAvatar: string = '';
 
+  filterType: string = 'None';
+
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService,
     private commentsService: CommentsService, private router: Router, private toastr: ToastrService) {
     this.jwtHelper = new JwtHelperService();
@@ -190,5 +192,24 @@ export class HomeComponent implements OnInit {
 
   exampleImageNone(): boolean {
     return window.innerWidth < 768;
+  }
+
+  filter(kudo: Kudo): boolean {
+    switch(this.filterType) {
+      case 'None':
+        return true;
+      case 'Kudos Sent':
+        if (kudo.senderId === this.userId) {
+          return true;
+        }
+        return false;
+      case 'Kudos Received':
+        if (kudo.receiverId === this.userId) {
+          return true;
+        }
+        return false;
+      default:
+        return true;
+    }
   }
 }
