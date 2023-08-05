@@ -179,3 +179,7 @@ span.tag {
     color: #551E19;
     background-color: #E6B17E;
 }
+
+.title-spacing {
+    margin-top: 0.83rem;
+}

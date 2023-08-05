@@ -10,8 +10,10 @@ body {
 }
 
 @font-face {
-  font-family: "Eczar Regular";
-  src: url("./assets/fonts/laudatio-eczar-regular.ttf");
+  font-family: 'Eczar Regular';
+  src: url('./assets/fonts/Eczar-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
