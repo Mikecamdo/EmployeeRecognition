@@ -112,6 +112,7 @@ export class ProfileComponent implements OnInit {
         this.editingPassword = false;
         this.oldPassword = '';
         this.newPassword = '';
+        this.confirmNewPassword = '';
       },
       error: error => {
         this.toastr.error(error.error, "Error while updating user");

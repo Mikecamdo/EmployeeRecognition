@@ -141,6 +141,7 @@ span.tag {
 .example-image {
     float: right;
     height: inherit;
+    cursor: auto;
 }
 
 .large-example {
