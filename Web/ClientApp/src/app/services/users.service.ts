@@ -27,7 +27,7 @@ export class UsersService {
   }
 
   getUserByName(name: string): Observable<User> {
-    return this.httpClient.get<User>(this.apiRoot + '/name', {params: {name: name}});
+    return this.httpClient.get<User>(this.apiRoot + '/name', {params: {name: name}, headers: this.headers});
   }
 
   getAllUsers(): Observable<User[]> {
