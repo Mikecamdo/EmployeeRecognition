@@ -36,8 +36,7 @@
 }
 
 #logo-spacing {
-    margin-top: 32vh;
-    margin-bottom: 31vh;
+    margin-top: 24vh;
 }
 
 #about-spacing {
@@ -60,4 +59,24 @@ hr {
 
 .container {
     color: #551E19;
+}
+
+.transition-effect {
+    opacity: 0;
+    transform: scale(1.5);
+    margin-bottom: 51vh;
+    transition: opacity 2s, transform 2s, margin-bottom 2s;
+    animation: fade-in 2s forwards;
+}
+  
+@keyframes fade-in {
+    to {
+      opacity: 1;
+      transform: scale(1);
+      margin-bottom: 31vh;
+    }
+}
+
+* {
+    overflow: hidden;
 }
