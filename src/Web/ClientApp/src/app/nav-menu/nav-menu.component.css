@@ -40,3 +40,7 @@ nav {
 img {
   cursor: pointer;
 }
+
+* {
+  color: #551E19 !important;
+}
