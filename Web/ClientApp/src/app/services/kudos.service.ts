@@ -12,7 +12,7 @@ export class KudosService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.apiRoot = baseUrl + 'api/kudos';
+    this.apiRoot = baseUrl + 'kudos';
     //this.apiRoot = 'https://localhost:7140' + '/kudos';
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
