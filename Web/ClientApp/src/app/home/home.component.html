@@ -8,9 +8,9 @@
                 <span *ngIf="filterType !== 'None'">{{ filterType }}</span>
             </button>
             <div ngbDropdownMenu aria-labelledby="basic-dropdown">
-                <button class="dropdown-item" (click)="filterType='None'">None</button>
-                <button class="dropdown-item" (click)="filterType='Kudos Sent'">Kudos Sent</button>
-                <button class="dropdown-item" (click)="filterType='Kudos Received'">Kudos Received</button>
+                <button class="dropdown-item" (click)="changeFilterType('None')">None</button>
+                <button class="dropdown-item" (click)="changeFilterType('Kudos Sent')">Kudos Sent</button>
+                <button class="dropdown-item" (click)="changeFilterType('Kudos Received')">Kudos Received</button>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div *ngFor="let kudo of allKudos; let i = index">
+    <div *ngFor="let kudo of displayKudos; let i = index">
         <div *ngIf="filter(kudo)" class="card my-5">
             <div class="card-body">
                 <h6 class="card-title d-flex justify-content-between">
@@ -166,6 +166,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="!allKudosLoaded" class="text-center mb-3">
+        <button class="btn btn-secondary" (click)="loadMoreKudos()">Load More</button>
     </div>
 </div>
 <div *ngIf="!everythingLoaded && !criticalError" class="text-center">

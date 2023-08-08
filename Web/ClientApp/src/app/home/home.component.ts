@@ -33,6 +33,12 @@ export class HomeComponent implements OnInit {
 
   filterType: string = 'None';
 
+  displayKudos: Kudo[] = [];
+  chunkSize: number = 10;
+  numChunks: number = 1;
+
+  allKudosLoaded: boolean = false;
+
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService,
     private commentsService: CommentsService, private router: Router, private toastr: ToastrService,
     private tokenService: TokenService) {
@@ -52,6 +58,7 @@ export class HomeComponent implements OnInit {
       tap(kudos => {
         this.allKudos = kudos.reverse();
         this.commentMessage = new Array(kudos.length).fill("");
+        this.updateDisplayKudos();
       }),
       mergeMap(() => this.commentsService.getAllComments()),
       tap(comments => {
@@ -69,6 +76,20 @@ export class HomeComponent implements OnInit {
         return of([]);
       })
     ).subscribe();
+  }
+
+  updateDisplayKudos(): void {
+    const index = (this.numChunks - 1) * this.chunkSize;
+    this.displayKudos = this.displayKudos.concat(this.allKudos.slice(index, index + this.chunkSize));
+
+    if (this.displayKudos.length === this.allKudos.length) {
+      this.allKudosLoaded = true;
+    }
+  }
+
+  loadMoreKudos(): void {
+    this.numChunks++;
+    this.updateDisplayKudos();
   }
 
   activateButton(iteration: number): boolean {
@@ -194,6 +215,18 @@ export class HomeComponent implements OnInit {
 
   exampleImageNone(): boolean {
     return window.innerWidth < 768;
+  }
+
+  changeFilterType(filterType: string) {
+    this.filterType = filterType;
+    if (filterType !== 'None') {
+      this.displayKudos = this.allKudos;
+      this.allKudosLoaded = true;
+    } else {
+      this.displayKudos = [];
+      this.allKudosLoaded = false;
+      this.updateDisplayKudos();
+    }
   }
 
   filter(kudo: Kudo): boolean {
