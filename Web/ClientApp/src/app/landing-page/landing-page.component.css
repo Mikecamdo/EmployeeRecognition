@@ -34,3 +34,30 @@
 ::ng-deep .modal-header, .modal-footer {
     border: none;
 }
+
+#logo-spacing {
+    margin-top: 32vh;
+    margin-bottom: 31vh;
+}
+
+#about-spacing {
+    margin-top: 8vh;
+    margin-bottom: 10vh;
+}
+
+#inspiration-spacing {
+    margin-top: 8vh;
+    margin-bottom: 10vh;
+}
+
+hr {
+    border: none !important;
+    opacity: 1 !important;
+    height: 2px;
+    background: #C56E33;
+    margin: 0;
+}
+
+.container {
+    color: #551E19;
+}

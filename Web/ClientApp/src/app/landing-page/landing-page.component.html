@@ -1,178 +1,200 @@
 <div class="container">
-    <div class="row text-center mt-5">
-        <div class="col-12">
-            <img class="logo-width" src="../../assets/images/laudatio-high-resolution-logo-color-on-transparent-background.png" />
+    <div id="logo-spacing">
+        <div class="row text-center">
+            <div class="col-12">
+                <img class="logo-width" src="../../assets/images/laudatio-high-resolution-logo-color-on-transparent-background.png" />
+            </div>
         </div>
-    </div>
-
-    <div class="row text-center my-4">
-        <div class="col-12 fs-4">
-            Celebrating Employee Excellence, One Praise at a Time
+    
+        <div class="row text-center my-4">
+            <div class="col-12 fs-4">
+                Celebrating Employee Excellence, One Praise at a Time
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-6 text-end">
-            <ng-template #signIn let-modal>
-                <div class="modal-header">
-                    <h4 class="modal-title" 
-                        id="sign-in">
-                        Sign in
-                    </h4>
-                    <button type="button" class="btn btn-primary close"
-                            aria-label="Close" (click)=
-                            "modal.dismiss('Cross click')">
-              
-                        <span aria-hidden="true">
-                            X
-                        </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="name" class="form-label">
-                                Name
-                            </label>
-                            <div class="input-group">
-                                <input 
-                                    id="name"
-                                    name="name"
-                                    class="form-control" 
-                                    placeholder="Name"
-                                    maxlength="50"
-                                    [(ngModel)]="signInName" >
-                            </div>
-            
-                            <label for="password" class="form-label">
-                                Password
-                            </label>
-                            <div class="input-group">
-                                <input 
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    class="form-control" 
-                                    placeholder="Password"
-                                    maxlength="80"
-                                    [(ngModel)]="signInPassword" >
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer d=flex">
-                    <div class="flex-grow-1">
-                        Don't have an account? <span class="link-text" (click)="modal.close('Sign in'); open(signUp, 'sign-up')">Sign up</span>
+        <div class="row">
+            <div class="col-6 text-end">
+                <ng-template #signIn let-modal>
+                    <div class="modal-header">
+                        <h4 class="modal-title" 
+                            id="sign-in">
+                            Sign in
+                        </h4>
+                        <button type="button" class="btn btn-primary close"
+                                aria-label="Close" (click)=
+                                "modal.dismiss('Cross click')">
+                  
+                            <span aria-hidden="true">
+                                X
+                            </span>
+                        </button>
                     </div>
-                    <button type="button" 
-                        class="btn btn-outline-primary ml-auto" 
-                        (click)="attemptSignIn()"
-                        [disabled]="disableSignIn()">
-                        Sign in
-                    </button>
-                </div>
-            </ng-template>
-            <button class="btn btn-lg btn-outline-primary" (click)="open(signIn, 'sign-in')">Sign in</button>        
-        </div>
-
-        <div class="col-6 text-start">
-            <ng-template #signUp let-modal>
-                <div class="modal-header temp">
-                    <h4 class="modal-title" 
-                        id="sign-up">
-                        Sign up
-                    </h4>
-                    <button type="button" class="btn btn-primary close"
-                            aria-label="Close" (click)=
-                            "modal.dismiss('Cross click')">
-              
-                        <span aria-hidden="true">
-                            X
-                        </span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="name" class="form-label">
-                                Name
-                            </label>
-                            <div class="input-group">
-                                <input 
-                                    id="name"
-                                    name="name"
-                                    class="form-control" 
-                                    placeholder="Name"
-                                    maxlength="50"
-                                    [(ngModel)]="signUpName" >
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="name" class="form-label">
+                                    Name
+                                </label>
+                                <div class="input-group">
+                                    <input 
+                                        id="name"
+                                        name="name"
+                                        class="form-control" 
+                                        placeholder="Name"
+                                        maxlength="50"
+                                        [(ngModel)]="signInName" >
+                                </div>
+                
+                                <label for="password" class="form-label">
+                                    Password
+                                </label>
+                                <div class="input-group">
+                                    <input 
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        class="form-control" 
+                                        placeholder="Password"
+                                        maxlength="80"
+                                        [(ngModel)]="signInPassword" >
+                                </div>
                             </div>
-            
-                            <label for="password" class="form-label">
-                                Password
-                            </label>
-                            <div class="input-group">
-                                <input 
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    class="form-control" 
-                                    placeholder="Password"
-                                    maxlength="80"
-                                    [(ngModel)]="signUpPassword" >
-                            </div>
-            
-                            <label for="confirm_password" class="form-label">
-                                Confirm Password
-                            </label>
-                            <div class="input-group">
-                                <input 
-                                    id="confirm_password"
-                                    name="confirm_password"
-                                    type="password"
-                                    class="form-control" 
-                                    placeholder="Confirm Password"
-                                    maxlength="80"
-                                    [(ngModel)]="signUpConfirmPassword"
-                                    [ngClass]="{'is-invalid': invalidPassword()}"
-                                    aria-describedby="invalid-password" >
-
-                                    <div id="invalid-password" class="invalid-feedback">
-                                        Passwords don't match
-                                    </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer d-flex">
-                    <div class="flex-grow-1">
-                        Already have an account? <span class="link-text" (click)="modal.close('Sign up'); open(signIn, 'sign-in')">Sign in</span>
+                        </form>
                     </div>
-                    <button type="button" 
-                        class="btn btn-outline-primary ml-auto" 
-                        (click)="attemptSignUp()"
-                        [disabled]="disableSignUp()">
-                        Sign up
-                    </button>
-                </div>
-            </ng-template>
-            <button class="btn btn-lg btn-outline-primary" (click)="open(signUp, 'sign-up')">Sign up</button>        
+                    <div class="modal-footer d-flex">
+                        <div class="flex-grow-1">
+                            Don't have an account? <span class="link-text" (click)="modal.close('Sign in'); open(signUp, 'sign-up')">Sign up</span>
+                        </div>
+                        <button type="button" 
+                            class="btn btn-outline-primary ml-auto" 
+                            (click)="attemptSignIn()"
+                            [disabled]="disableSignIn()">
+                            Sign in
+                        </button>
+                    </div>
+                </ng-template>
+                <button class="btn btn-lg btn-outline-primary" (click)="open(signIn, 'sign-in')">Sign in</button>        
+            </div>
+    
+            <div class="col-6 text-start">
+                <ng-template #signUp let-modal>
+                    <div class="modal-header temp">
+                        <h4 class="modal-title" 
+                            id="sign-up">
+                            Sign up
+                        </h4>
+                        <button type="button" class="btn btn-primary close"
+                                aria-label="Close" (click)=
+                                "modal.dismiss('Cross click')">
+                  
+                            <span aria-hidden="true">
+                                X
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="name" class="form-label">
+                                    Name
+                                </label>
+                                <div class="input-group">
+                                    <input 
+                                        id="name"
+                                        name="name"
+                                        class="form-control" 
+                                        placeholder="Name"
+                                        maxlength="50"
+                                        [(ngModel)]="signUpName" >
+                                </div>
+                
+                                <label for="password" class="form-label">
+                                    Password
+                                </label>
+                                <div class="input-group">
+                                    <input 
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        class="form-control" 
+                                        placeholder="Password"
+                                        maxlength="80"
+                                        [(ngModel)]="signUpPassword" >
+                                </div>
+                
+                                <label for="confirm_password" class="form-label">
+                                    Confirm Password
+                                </label>
+                                <div class="input-group">
+                                    <input 
+                                        id="confirm_password"
+                                        name="confirm_password"
+                                        type="password"
+                                        class="form-control" 
+                                        placeholder="Confirm Password"
+                                        maxlength="80"
+                                        [(ngModel)]="signUpConfirmPassword"
+                                        [ngClass]="{'is-invalid': invalidPassword()}"
+                                        aria-describedby="invalid-password" >
+    
+                                        <div id="invalid-password" class="invalid-feedback">
+                                            Passwords don't match
+                                        </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex">
+                        <div class="flex-grow-1">
+                            Already have an account? <span class="link-text" (click)="modal.close('Sign up'); open(signIn, 'sign-in')">Sign in</span>
+                        </div>
+                        <button type="button" 
+                            class="btn btn-outline-primary ml-auto" 
+                            (click)="attemptSignUp()"
+                            [disabled]="disableSignUp()">
+                            Sign up
+                        </button>
+                    </div>
+                </ng-template>
+                <button class="btn btn-lg btn-outline-primary" (click)="open(signUp, 'sign-up')">Sign up</button>        
+            </div>
         </div>
     </div>
 
-    <br/>
-    <br/>
-    <br/>
+    <hr/>
 
-    <div class="row">
-        <div class="col-12 fs-1">
-            About
+    <div id="about-spacing">
+        <div class="row mt-5">
+            <div class="col-12 fs-1">
+                About
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 fs-5">
+                Welcome to Laudatio, a web application that facilitates employees praising and commending each other to foster a positive and appreciative workplace culture.
+                Signing up is as easy as just entering your name and password - that's it!
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12 fs-5">
-            Welcome to Laudatio, a web application that facilitates employees praising and commending each other to foster a positive and appreciative workplace culture.
-            <!-- FIXME maybe add some stuff about our inspiration + name choice -->
+    <hr/>
+    
+    <div id="inspiration-spacing">
+        <div class="row mt-5">
+            <div class="col-12 fs-1">
+                Our Inspiration
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 fs-5">
+                The name "Laudatio" draws its inspiration from the Latin word for commendation and praise. "Laudatio" beautifully captures the act of celebrating each other's achievements and contributions, embodying our commitment to fostering a positive and uplifting workplace culture.
+            </div>
+    
+            <div class="col-12 fs-5 mt-3">
+                At Laudatio, we believe in the power of appreciation and positivity within the workplace. We have created a unique and innovative web application that is dedicated to enhancing the way employees recognize and commend each other. Our mission is to cultivate a workplace culture where appreciation flows freely, collaboration thrives, and individuals are inspired to give their best every day.
+            </div>
         </div>
     </div>
 </div>
