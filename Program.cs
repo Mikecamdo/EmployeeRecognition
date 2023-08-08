@@ -105,6 +105,17 @@ builder.Services.AddCors(options =>
         });
 });
 
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    // Configure the web host to listen on 0.0.0.0 and the specified port
+    var listenUrl = $"http://0.0.0.0:{port}";
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenAnyIP(int.Parse(port));
+    });
+}
+
 var app = builder.Build();
 
 app.UseCors("AllowOrigin");
