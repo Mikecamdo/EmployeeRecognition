@@ -47,30 +47,34 @@ builder.Services.AddScoped<JwtHandler>();
 builder.Services.AddUseCases();
 builder.Services.AddRepositories();
 
-builder.Services.AddSwaggerGen(c =>
+
+
+if (!builder.Environment.IsProduction())
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "employee-recognition", Version = "v1" });
+    builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "employee-recognition", Version = "v1" });
 
-    //Resolve apiDescriptions conflict
-    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+        //Resolve apiDescriptions conflict
+        c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
-    // Set the comments path for the Swagger JSON and UI.
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (File.Exists(xmlFilePath))
-        c.IncludeXmlComments(xmlFilePath);
+        // Set the comments path for the Swagger JSON and UI.
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        if (File.Exists(xmlFilePath))
+            c.IncludeXmlComments(xmlFilePath);
 
-    //Settings for token authentication
-    c.AddSecurityDefinition("Bearer",
-        new OpenApiSecurityScheme
-        {
-            In = ParameterLocation.Header,
-            Description = "Please enter into field the word 'Bearer' following by space and JWT",
-            Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer"
-        });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+        //Settings for token authentication
+        c.AddSecurityDefinition("Bearer",
+            new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Please enter into field the word 'Bearer' following by space and JWT",
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
         {
             new OpenApiSecurityScheme
@@ -87,7 +91,8 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
-});
+    });
+}
 
 builder.Services.AddCors(options =>
 {
@@ -126,14 +131,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (!app.Environment.IsProduction())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "employee-recognition v1");
-    c.InjectStylesheet("/swagger/swagger.css");
-    c.InjectJavascript("/swagger/swagger.js");
-    c.DefaultModelsExpandDepth(-1);
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "employee-recognition v1");
+        c.InjectStylesheet("/swagger/swagger.css");
+        c.InjectJavascript("/swagger/swagger.js");
+        c.DefaultModelsExpandDepth(-1);
+    });
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
