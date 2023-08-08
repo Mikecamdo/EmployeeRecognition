@@ -21,3 +21,7 @@
 textarea {
     resize: none;
 }
+
+* {
+    color: #551E19 !important;
+}
