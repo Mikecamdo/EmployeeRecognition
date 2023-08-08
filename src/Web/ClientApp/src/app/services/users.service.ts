@@ -29,7 +29,7 @@ export class UsersService {
     return this.httpClient.post<SignupResponse>(this.apiRoot, newUser);
   }
 
-  getUserBySignIn(loginCredential: LoginCredential): Observable<LoginResponse> { //FIXME need to figure out where to hash the password
+  getUserBySignIn(loginCredential: LoginCredential): Observable<LoginResponse> {
     return this.httpClient.get<LoginResponse>(`${this.apiRoot}/login`, { params: {name: loginCredential.name, password: loginCredential.password }});
   }
 
