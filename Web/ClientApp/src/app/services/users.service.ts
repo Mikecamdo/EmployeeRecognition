@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginCredential, LoginResponse, SignupResponse, User, UserDto } from '../interfaces/user';
 
@@ -12,8 +12,12 @@ export class UsersService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.apiRoot = baseUrl + 'users';
-    //this.apiRoot = 'https://localhost:7140' + '/users';
+    if (isDevMode()) {
+      this.apiRoot = 'https://localhost:7140/users';
+    } else {
+      this.apiRoot = baseUrl + 'users';
+    }
+    
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment, CommentDto } from '../interfaces/comment';
 
@@ -12,8 +12,12 @@ export class CommentsService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.apiRoot = baseUrl + 'comments';
-    //this.apiRoot = 'https://localhost:7140' + '/comments';
+    if (isDevMode()) {
+      this.apiRoot = 'https://localhost:7140/comments';
+    } else {
+      this.apiRoot = baseUrl + 'comments';
+    }
+    
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }

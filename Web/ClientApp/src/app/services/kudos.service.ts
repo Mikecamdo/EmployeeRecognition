@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Kudo, KudoDto } from '../interfaces/kudo';
 
@@ -12,8 +12,12 @@ export class KudosService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.apiRoot = baseUrl + 'kudos';
-    //this.apiRoot = 'https://localhost:7140' + '/kudos';
+    if (isDevMode()) {
+      this.apiRoot = 'https://localhost:7140/kudos';
+    } else {
+      this.apiRoot = baseUrl + 'kudos';
+    }
+    
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }
