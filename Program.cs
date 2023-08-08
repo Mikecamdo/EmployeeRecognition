@@ -97,7 +97,8 @@ builder.Services.AddCors(options =>
             builder.WithOrigins(
                     "https://localhost:44489",
                     "https://localhost:4200",
-                    "https://laudatio.vercel.app/"
+                    "https://laudatio.vercel.app/",
+                    "https://laudatio-production.up.railway.app/"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
