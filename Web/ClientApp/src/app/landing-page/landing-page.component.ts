@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../services/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoginCredential, LoginResponse, SignupResponse, UserDto } from '../interfaces/user';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -19,7 +20,7 @@ export class LandingPageComponent {
   signInPassword: string = '';
   
   constructor(private modalService: NgbModal, private usersService: UsersService,
-     private router: Router, private toastr: ToastrService) { }
+     private router: Router, private toastr: ToastrService, private tokenService: TokenService) { }
   
   open(content: any, label: string) {
     const modalRef = this.modalService.open(content, {ariaLabelledBy: label, windowClass: 'custom-modal'});
@@ -27,7 +28,7 @@ export class LandingPageComponent {
     modalRef.result.then((result) => {
       this.signUpName = '';
       this.signUpPassword = '';
-      this.signUpConfirmPassword = ''; //FIXME I think these don't do anything
+      this.signUpConfirmPassword = '';
       this.signInName = '';
       this.signInPassword = '';
     }, (reason) => {
@@ -48,7 +49,7 @@ export class LandingPageComponent {
     }
     this.usersService.addUser(newUser).subscribe({
       next: (response:SignupResponse) => {
-        localStorage.setItem("token", response.token);
+        this.tokenService.updateToken(response.token);
         this.modalService.dismissAll();
         this.router.navigate(['/home']);
       },
@@ -65,7 +66,7 @@ export class LandingPageComponent {
     }
     this.usersService.getUserBySignIn(loginAttempt).subscribe({
       next: (response:LoginResponse) => {
-        localStorage.setItem("token", response.token);
+        this.tokenService.updateToken(response.token);
         this.modalService.dismissAll();
         this.router.navigate(['/home']);
       },

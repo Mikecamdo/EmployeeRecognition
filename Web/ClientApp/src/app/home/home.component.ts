@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Kudo } from '../interfaces/kudo';
 import { Comment, CommentDto } from '../interfaces/comment';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-home',
@@ -33,18 +34,19 @@ export class HomeComponent implements OnInit {
   filterType: string = 'None';
 
   constructor(private jwtHelper: JwtHelperService, private kudosService: KudosService,
-    private commentsService: CommentsService, private router: Router, private toastr: ToastrService) {
+    private commentsService: CommentsService, private router: Router, private toastr: ToastrService,
+    private tokenService: TokenService) {
     this.jwtHelper = new JwtHelperService();
   }
 
   ngOnInit(): void {
-    const token: any = localStorage.getItem('token');
+    this.tokenService.token$.subscribe((token: any) => {
+      const decodedToken = this.jwtHelper.decodeToken(token);
 
-    const decodedToken = this.jwtHelper.decodeToken(token);
-
-    this.userId = decodedToken.id;
-    this.userName = decodedToken.name;
-    this.userAvatar = decodedToken.avatarUrl;
+      this.userId = decodedToken.id;
+      this.userName = decodedToken.name;
+      this.userAvatar = decodedToken.avatarUrl;
+    });
 
     this.kudosService.getAllKudos().pipe(
       tap(kudos => {

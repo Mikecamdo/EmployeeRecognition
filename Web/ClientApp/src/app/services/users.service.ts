@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginCredential, LoginResponse, SignupResponse, User, UserDto } from '../interfaces/user';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,19 @@ import { LoginCredential, LoginResponse, SignupResponse, User, UserDto } from '.
 export class UsersService {
 
   apiRoot: string;
-  headers: HttpHeaders;
+  headers: HttpHeaders = new HttpHeaders;
 
-  constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+  private tokenService: TokenService) {
     if (isDevMode()) {
       this.apiRoot = 'https://localhost:7140/users';
     } else {
       this.apiRoot = baseUrl + 'users';
     }
     
-    const token: any = localStorage.getItem('token');
-    this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    this.tokenService.token$.subscribe((token: any) => {
+      this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    });
   }
 
   addUser(newUser: UserDto): Observable<SignupResponse> {
