@@ -12,8 +12,8 @@ export class UsersService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    //this.apiRoot = baseUrl + 'users';
-    this.apiRoot = 'https://localhost:7140' + '/users';
+    this.apiRoot = baseUrl + 'api/users';
+    //this.apiRoot = 'https://localhost:7140' + '/users';
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }

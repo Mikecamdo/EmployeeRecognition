@@ -12,8 +12,8 @@ export class CommentsService {
   headers: HttpHeaders;
 
   constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    //this.apiRoot = baseUrl + 'comments';
-    this.apiRoot = 'https://localhost:7140' + '/comments';
+    this.apiRoot = baseUrl + 'api/comments';
+    //this.apiRoot = 'https://localhost:7140' + '/comments';
     const token: any = localStorage.getItem('token');
     this.headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
   }

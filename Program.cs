@@ -94,8 +94,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowOrigin",
         builder =>
         {
-            builder.WithOrigins("https://localhost:44489")
-            //builder.AllowAnyOrigin()
+            builder.WithOrigins(
+                    "https://localhost:44489",
+                    "https://localhost:4200",
+                    "https://laudatio.vercel.app/"
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
