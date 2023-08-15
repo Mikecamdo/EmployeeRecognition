@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
+﻿using Laudatio.Core.UseCases.Kudos.DeleteKudo;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+namespace Laudatio.Core.Interfaces.UseCases.Kudos;
 
 public interface IDeleteKudoUseCase
 {

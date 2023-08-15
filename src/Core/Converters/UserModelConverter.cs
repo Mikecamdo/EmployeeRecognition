@@ -1,7 +1,7 @@
-﻿using Entity = EmployeeRecognition.Core.Entities.User;
-using Model = EmployeeRecognition.Api.Models.UserModel;
+﻿using Entity = Laudatio.Core.Entities.User;
+using Model = Laudatio.Api.Models.UserModel;
 
-namespace EmployeeRecognition.Core.Converters;
+namespace Laudatio.Core.Converters;
 
 public class UserModelConverter
 {

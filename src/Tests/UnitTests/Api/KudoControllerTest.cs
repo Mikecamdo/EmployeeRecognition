@@ -1,15 +1,15 @@
-﻿using EmployeeRecognition.Api.Dtos;
-using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
+﻿using Laudatio.Api.Dtos;
+using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.UseCases.Kudos.AddKudo;
+using Laudatio.Core.UseCases.Kudos.DeleteKudo;
+using Laudatio.Core.UseCases.Kudos.GetKudosByReceiverId;
+using Laudatio.Core.UseCases.Kudos.GetKudosBySenderId;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Api;
+namespace Laudatio.Tests.UnitTests.Api;
 
 public class KudoControllerShould : KudoControllerSetup
 {

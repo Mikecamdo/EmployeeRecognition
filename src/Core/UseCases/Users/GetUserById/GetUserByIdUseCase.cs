@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+﻿using Laudatio.Core.Converters;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users.GetUserById;
+namespace Laudatio.Core.UseCases.Users.GetUserById;
 
 public class GetUserByIdUseCase : IGetUserByIdUseCase
 {

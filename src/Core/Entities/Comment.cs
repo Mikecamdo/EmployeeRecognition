@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmployeeRecognition.Core.Entities;
+namespace Laudatio.Core.Entities;
 
 [Table("comments")]
 public class Comment

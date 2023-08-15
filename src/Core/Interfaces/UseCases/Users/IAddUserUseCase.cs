@@ -1,7 +1,7 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.UseCases.Users.AddUser;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.UseCases.Users.AddUser;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
+namespace Laudatio.Core.Interfaces.UseCases.Users;
 
 public interface IAddUserUseCase
 {

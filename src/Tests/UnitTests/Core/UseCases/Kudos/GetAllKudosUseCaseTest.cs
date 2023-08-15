@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Kudos.GetAllKudos;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Kudos;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Kudos;
 
 public class GetAllKudosUseCaseShould : MockDataSetup
 {

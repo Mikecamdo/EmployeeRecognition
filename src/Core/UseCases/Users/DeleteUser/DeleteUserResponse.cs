@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+﻿namespace Laudatio.Core.UseCases.Users.DeleteUser;
 
 public record DeleteUserResponse(string Message)
 {

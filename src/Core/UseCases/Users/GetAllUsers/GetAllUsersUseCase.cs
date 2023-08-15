@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Core.Interfaces.UseCases.Users;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Core.Interfaces.UseCases.Users;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Converters;
+using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
+namespace Laudatio.Core.UseCases.Users.GetAllUsers;
 
 public class GetAllUsersUseCase : IGetAllUsersUseCase
 {

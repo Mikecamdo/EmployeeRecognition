@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Api.Controllers;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+﻿using Laudatio.Api.Controllers;
+using Laudatio.Core.Interfaces.UseCases.Kudos;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Api;
+namespace Laudatio.Tests.UnitTests.Api;
 
 public abstract class KudoControllerSetup : MockDataSetup
 {

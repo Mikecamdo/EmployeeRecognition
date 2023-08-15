@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
+﻿using Laudatio.Core.UseCases.Kudos.GetKudosByReceiverId;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+namespace Laudatio.Core.Interfaces.UseCases.Kudos;
 
 public interface IGetKudosByReceiverIdUseCase
 {

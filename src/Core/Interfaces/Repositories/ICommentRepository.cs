@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using Laudatio.Core.Entities;
 
-namespace EmployeeRecognition.Core.Interfaces.Repositories;
+namespace Laudatio.Core.Interfaces.Repositories;
 
 public interface ICommentRepository
 {

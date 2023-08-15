@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Users.GetUserByName;
+namespace Laudatio.Core.UseCases.Users.GetUserByName;
 
 public record GetUserByNameResponse(string Message)
 {

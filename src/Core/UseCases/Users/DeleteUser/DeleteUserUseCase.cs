@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+﻿using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+namespace Laudatio.Core.UseCases.Users.DeleteUser;
 
 public class DeleteUserUseCase : IDeleteUserUseCase
 {

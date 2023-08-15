@@ -1,10 +1,10 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Users.GetUserByLoginCredential;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Users;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Users;
 
 public class GetUserByLoginCredentialUseCaseShould : MockDataSetup
 {

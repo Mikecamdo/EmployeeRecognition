@@ -1,7 +1,7 @@
-﻿using Dto = EmployeeRecognition.Api.Dtos.CommentDto;
-using Model = EmployeeRecognition.Api.Models.CommentModel;
+﻿using Dto = Laudatio.Api.Dtos.CommentDto;
+using Model = Laudatio.Api.Models.CommentModel;
 
-namespace EmployeeRecognition.Api.Converters;
+namespace Laudatio.Api.Converters;
 
 public class CommentDtoConverter
 {

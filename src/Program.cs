@@ -2,13 +2,13 @@ using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using EmployeeRecognition.Database.Context;
+using Laudatio.Database.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using EmployeeRecognition.Api.JwtFeatures;
+using Laudatio.Api.JwtFeatures;
 using System.Reflection;
-using EmployeeRecognition;
+using Laudatio;
 
 var builder = WebApplication.CreateBuilder(args);
 

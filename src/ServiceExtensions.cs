@@ -1,27 +1,27 @@
-﻿using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
-using EmployeeRecognition.Core.Repositories;
-using EmployeeRecognition.Core.UseCases.Comments.AddComment;
-using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
-using EmployeeRecognition.Core.UseCases.Comments.GetComments;
-using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
-using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
-using EmployeeRecognition.Core.UseCases.Users.AddUser;
-using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
-using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
-using EmployeeRecognition.Core.UseCases.Users.GetUserById;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByName;
-using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+﻿using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Comments;
+using Laudatio.Core.Interfaces.UseCases.Kudos;
+using Laudatio.Core.Interfaces.UseCases.Users;
+using Laudatio.Core.Repositories;
+using Laudatio.Core.UseCases.Comments.AddComment;
+using Laudatio.Core.UseCases.Comments.DeleteComment;
+using Laudatio.Core.UseCases.Comments.GetComments;
+using Laudatio.Core.UseCases.Comments.GetCommentsByKudoId;
+using Laudatio.Core.UseCases.Comments.UpdateComment;
+using Laudatio.Core.UseCases.Kudos.AddKudo;
+using Laudatio.Core.UseCases.Kudos.DeleteKudo;
+using Laudatio.Core.UseCases.Kudos.GetAllKudos;
+using Laudatio.Core.UseCases.Kudos.GetKudosByReceiverId;
+using Laudatio.Core.UseCases.Kudos.GetKudosBySenderId;
+using Laudatio.Core.UseCases.Users.AddUser;
+using Laudatio.Core.UseCases.Users.DeleteUser;
+using Laudatio.Core.UseCases.Users.GetAllUsers;
+using Laudatio.Core.UseCases.Users.GetUserById;
+using Laudatio.Core.UseCases.Users.GetUserByLoginCredential;
+using Laudatio.Core.UseCases.Users.GetUserByName;
+using Laudatio.Core.UseCases.Users.UpdateUser;
 
-namespace EmployeeRecognition;
+namespace Laudatio;
 
 public static class ServiceExtensions
 {

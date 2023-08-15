@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
+﻿using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Comments.DeleteComment;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Comments;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Comments;
 
 public class DeleteCommentUseCaseShould : MockDataSetup
 {

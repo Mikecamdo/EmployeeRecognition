@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
+namespace Laudatio.Core.UseCases.Kudos.GetKudosBySenderId;
 
 public record GetKudosBySenderIdResponse(string Message)
 {

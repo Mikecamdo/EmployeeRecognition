@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
+namespace Laudatio.Core.UseCases.Kudos.AddKudo;
 
 public record AddKudoResponse(string Message)
 {

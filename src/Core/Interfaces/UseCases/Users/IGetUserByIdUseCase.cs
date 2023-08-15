@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Users.GetUserById;
+﻿using Laudatio.Core.UseCases.Users.GetUserById;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
+namespace Laudatio.Core.Interfaces.UseCases.Users;
 
 public interface IGetUserByIdUseCase
 {

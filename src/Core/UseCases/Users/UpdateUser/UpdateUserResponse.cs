@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+namespace Laudatio.Core.UseCases.Users.UpdateUser;
 
 public record UpdateUserResponse(string Message)
 {

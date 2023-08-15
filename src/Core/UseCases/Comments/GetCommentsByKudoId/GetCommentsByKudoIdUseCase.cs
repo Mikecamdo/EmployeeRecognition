@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+﻿using Laudatio.Core.Converters;
+using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Comments;
 
-namespace EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+namespace Laudatio.Core.UseCases.Comments.GetCommentsByKudoId;
 
 public class GetCommentsByKudoIdUseCase : IGetCommentsByKudoIdUseCase
 {

@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
+﻿using Laudatio.Core.UseCases.Users.DeleteUser;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Users;
+namespace Laudatio.Core.Interfaces.UseCases.Users;
 
 public interface IDeleteUserUseCase
 {

@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Api.Models;
+﻿namespace Laudatio.Api.Models;
 
 public class LoginResponse
 {

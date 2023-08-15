@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Database.Context;
-using EmployeeRecognition.Api.Models;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Entities;
+using Laudatio.Database.Context;
+using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.Repositories;
+namespace Laudatio.Core.Repositories;
 
 public class UserRepository : IUserRepository
 {

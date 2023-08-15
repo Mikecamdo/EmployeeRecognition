@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Database.Context;
+﻿using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Database.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeRecognition.Core.Repositories;
+namespace Laudatio.Core.Repositories;
 
 public class KudoRepository : IKudoRepository
 {

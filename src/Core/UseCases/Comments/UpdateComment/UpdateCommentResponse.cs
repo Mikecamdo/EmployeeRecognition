@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
+namespace Laudatio.Core.UseCases.Comments.UpdateComment;
 
 public record UpdateCommentResponse(string Message)
 {

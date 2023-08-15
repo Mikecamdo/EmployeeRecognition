@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+﻿using Laudatio.Core.Converters;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Kudos;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
+namespace Laudatio.Core.UseCases.Kudos.GetKudosByReceiverId;
 
 public class GetKudosByReceiverIdUseCase : IGetKudosByReceiverIdUseCase
 {

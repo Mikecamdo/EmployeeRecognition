@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Api.Controllers;
-using EmployeeRecognition.Api.JwtFeatures;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+﻿using Laudatio.Api.Controllers;
+using Laudatio.Api.JwtFeatures;
+using Laudatio.Core.Interfaces.UseCases.Users;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Api;
+namespace Laudatio.Tests.UnitTests.Api;
 
 public abstract class UserControllerSetup : MockDataSetup
 {

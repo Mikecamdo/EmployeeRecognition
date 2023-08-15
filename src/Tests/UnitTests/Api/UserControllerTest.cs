@@ -1,16 +1,16 @@
-﻿using EmployeeRecognition.Api.Dtos;
-using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.UseCases.Users.AddUser;
-using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
-using EmployeeRecognition.Core.UseCases.Users.GetUserById;
-using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+﻿using Laudatio.Api.Dtos;
+using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.Entities;
+using Laudatio.Core.UseCases.Users.AddUser;
+using Laudatio.Core.UseCases.Users.DeleteUser;
+using Laudatio.Core.UseCases.Users.GetUserById;
+using Laudatio.Core.UseCases.Users.UpdateUser;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Api;
+namespace Laudatio.Tests.UnitTests.Api;
 
 public class UserControllerShould : UserControllerSetup
 {

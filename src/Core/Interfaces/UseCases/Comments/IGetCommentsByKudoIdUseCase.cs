@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+﻿using Laudatio.Core.UseCases.Comments.GetCommentsByKudoId;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+namespace Laudatio.Core.Interfaces.UseCases.Comments;
 
 public interface IGetCommentsByKudoIdUseCase
 {

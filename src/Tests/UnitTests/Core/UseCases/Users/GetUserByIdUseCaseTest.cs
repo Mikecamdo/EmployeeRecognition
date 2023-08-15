@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Users.GetUserById;
+﻿using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Users.GetUserById;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Users;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Users;
 
 public class GetUserByIdUseCaseShould : MockDataSetup
 {

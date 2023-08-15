@@ -1,7 +1,7 @@
-﻿using Dto = EmployeeRecognition.Api.Dtos.UserDto;
-using Model = EmployeeRecognition.Api.Models.UserModel;
+﻿using Dto = Laudatio.Api.Dtos.UserDto;
+using Model = Laudatio.Api.Models.UserModel;
 
-namespace EmployeeRecognition.Api.Converters;
+namespace Laudatio.Api.Converters;
 
 public class UserDtoConverter
 {

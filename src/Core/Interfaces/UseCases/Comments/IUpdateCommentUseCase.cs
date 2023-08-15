@@ -1,7 +1,7 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.UseCases.Comments.UpdateComment;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+namespace Laudatio.Core.Interfaces.UseCases.Comments;
 
 public interface IUpdateCommentUseCase
 {

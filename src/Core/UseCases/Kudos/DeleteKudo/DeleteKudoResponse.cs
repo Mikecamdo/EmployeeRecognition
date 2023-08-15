@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
+﻿namespace Laudatio.Core.UseCases.Kudos.DeleteKudo;
 
 public record DeleteKudoResponse(string Message)
 {

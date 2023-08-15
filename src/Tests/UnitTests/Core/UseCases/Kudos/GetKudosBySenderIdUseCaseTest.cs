@@ -1,8 +1,8 @@
-﻿using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
+﻿using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Kudos.GetKudosBySenderId;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Kudos;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Kudos;
 
 public class GetKudosBySenderIdUseCaseShould : MockDataSetup
 {

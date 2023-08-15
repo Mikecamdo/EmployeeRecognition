@@ -1,7 +1,7 @@
-﻿using Entity = EmployeeRecognition.Core.Entities.Comment;
-using Model = EmployeeRecognition.Api.Models.CommentModel;
+﻿using Entity = Laudatio.Core.Entities.Comment;
+using Model = Laudatio.Api.Models.CommentModel;
 
-namespace EmployeeRecognition.Core.Converters;
+namespace Laudatio.Core.Converters;
 
 public class CommentModelConverter
 {

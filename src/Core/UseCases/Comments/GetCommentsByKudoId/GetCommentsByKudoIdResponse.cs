@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
+namespace Laudatio.Core.UseCases.Comments.GetCommentsByKudoId;
 
 public record GetCommentsByKudoIdResponse(string Message)
 {

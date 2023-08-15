@@ -1,10 +1,10 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Comments.AddComment;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Comments.AddComment;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Comments;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Comments;
 
 public class AddCommentUseCaseShould : MockDataSetup
 {

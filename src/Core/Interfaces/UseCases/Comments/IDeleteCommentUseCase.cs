@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
+﻿using Laudatio.Core.UseCases.Comments.DeleteComment;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+namespace Laudatio.Core.Interfaces.UseCases.Comments;
 
 public interface IDeleteCommentUseCase
 {

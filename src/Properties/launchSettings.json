@@ -1,6 +1,6 @@
 {
     "profiles": {
-        "EmployeeRecognition": {
+        "Laudatio": {
             "commandName": "Project",
             "launchBrowser": true,
             "environmentVariables": {

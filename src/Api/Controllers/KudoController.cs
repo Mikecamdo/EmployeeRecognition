@@ -1,15 +1,15 @@
-﻿using EmployeeRecognition.Api.Converters;
-using EmployeeRecognition.Api.Dtos;
-using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.DeleteKudo;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosByReceiverId;
-using EmployeeRecognition.Core.UseCases.Kudos.GetKudosBySenderId;
+﻿using Laudatio.Api.Converters;
+using Laudatio.Api.Dtos;
+using Laudatio.Api.Models;
+using Laudatio.Core.Interfaces.UseCases.Kudos;
+using Laudatio.Core.UseCases.Kudos.AddKudo;
+using Laudatio.Core.UseCases.Kudos.DeleteKudo;
+using Laudatio.Core.UseCases.Kudos.GetKudosByReceiverId;
+using Laudatio.Core.UseCases.Kudos.GetKudosBySenderId;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeRecognition.Api.Controllers;
+namespace Laudatio.Api.Controllers;
 
 [Authorize]
 [Route("kudos")]

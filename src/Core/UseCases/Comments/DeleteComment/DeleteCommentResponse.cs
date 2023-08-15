@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
+﻿namespace Laudatio.Core.UseCases.Comments.DeleteComment;
 
 public record DeleteCommentResponse(string Message)
 {

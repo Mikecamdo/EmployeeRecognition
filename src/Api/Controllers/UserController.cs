@@ -1,19 +1,19 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using EmployeeRecognition.Api.Converters;
-using EmployeeRecognition.Api.Dtos;
-using EmployeeRecognition.Api.JwtFeatures;
-using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
-using EmployeeRecognition.Core.UseCases.Users.AddUser;
-using EmployeeRecognition.Core.UseCases.Users.DeleteUser;
-using EmployeeRecognition.Core.UseCases.Users.GetUserById;
-using EmployeeRecognition.Core.UseCases.Users.GetUserByName;
-using EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+using Laudatio.Api.Converters;
+using Laudatio.Api.Dtos;
+using Laudatio.Api.JwtFeatures;
+using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.Interfaces.UseCases.Users;
+using Laudatio.Core.UseCases.Users.AddUser;
+using Laudatio.Core.UseCases.Users.DeleteUser;
+using Laudatio.Core.UseCases.Users.GetUserById;
+using Laudatio.Core.UseCases.Users.GetUserByName;
+using Laudatio.Core.UseCases.Users.UpdateUser;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeRecognition.Api.Controllers;
+namespace Laudatio.Api.Controllers;
 
 [Route("users")]
 public class UserController : ControllerBase

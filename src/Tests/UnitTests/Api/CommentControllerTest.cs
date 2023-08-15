@@ -1,15 +1,15 @@
-﻿using EmployeeRecognition.Api.Dtos;
-using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.UseCases.Comments.AddComment;
-using EmployeeRecognition.Core.UseCases.Comments.DeleteComment;
-using EmployeeRecognition.Core.UseCases.Comments.GetCommentsByKudoId;
-using EmployeeRecognition.Core.UseCases.Comments.UpdateComment;
+﻿using Laudatio.Api.Dtos;
+using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.UseCases.Comments.AddComment;
+using Laudatio.Core.UseCases.Comments.DeleteComment;
+using Laudatio.Core.UseCases.Comments.GetCommentsByKudoId;
+using Laudatio.Core.UseCases.Comments.UpdateComment;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Api;
+namespace Laudatio.Tests.UnitTests.Api;
 
 public class CommentControllerTest : CommentControllerSetup
 {

@@ -1,7 +1,7 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.UseCases.Kudos.AddKudo;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.UseCases.Kudos.AddKudo;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+namespace Laudatio.Core.Interfaces.UseCases.Kudos;
 
 public interface IAddKudoUseCase
 {

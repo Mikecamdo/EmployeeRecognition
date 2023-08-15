@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Kudos;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Kudos;
 
-namespace EmployeeRecognition.Core.UseCases.Kudos.GetAllKudos;
+namespace Laudatio.Core.UseCases.Kudos.GetAllKudos;
 
 public class GetAllKudosUseCase : IGetAllKudosUseCase
 {

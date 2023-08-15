@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users.GetUserByLoginCredential;
+namespace Laudatio.Core.UseCases.Users.GetUserByLoginCredential;
 
 public class GetUserByLoginCredentialUseCase : IGetUserByLoginCredentialUseCase
 {

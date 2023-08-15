@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeRecognition", "..\EmployeeRecognition.csproj", "{DC42F27D-D662-4CBC-8EED-BCD123884914}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laudatio", "..\Laudatio.csproj", "{DC42F27D-D662-4CBC-8EED-BCD123884914}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

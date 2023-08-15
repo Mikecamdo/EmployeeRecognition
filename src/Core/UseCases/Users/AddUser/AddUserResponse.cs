@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.UseCases.Users.AddUser;
+namespace Laudatio.Core.UseCases.Users.AddUser;
 
 public record AddUserResponse(string Message)
 {

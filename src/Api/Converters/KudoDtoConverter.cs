@@ -1,7 +1,7 @@
-﻿using Dto = EmployeeRecognition.Api.Dtos.KudoDto;
-using Model = EmployeeRecognition.Api.Models.KudoModel;
+﻿using Dto = Laudatio.Api.Dtos.KudoDto;
+using Model = Laudatio.Api.Models.KudoModel;
 
-namespace EmployeeRecognition.Api.Converters;
+namespace Laudatio.Api.Converters;
 
 public class KudoDtoConverter
 {

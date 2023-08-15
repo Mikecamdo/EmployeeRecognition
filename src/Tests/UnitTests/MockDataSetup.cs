@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Core.Entities;
+﻿using Laudatio.Core.Entities;
 
-namespace EmployeeRecognition.Tests.UnitTests;
+namespace Laudatio.Tests.UnitTests;
 
 public class MockDataSetup
 {

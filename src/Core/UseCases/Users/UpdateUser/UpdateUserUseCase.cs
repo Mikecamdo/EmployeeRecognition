@@ -1,10 +1,10 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Converters;
-using EmployeeRecognition.Core.Entities;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.Interfaces.UseCases.Users;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Converters;
+using Laudatio.Core.Entities;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.Interfaces.UseCases.Users;
 
-namespace EmployeeRecognition.Core.UseCases.Users.UpdateUser;
+namespace Laudatio.Core.UseCases.Users.UpdateUser;
 
 public class UpdateUserUseCase : IUpdateUserUseCase
 {

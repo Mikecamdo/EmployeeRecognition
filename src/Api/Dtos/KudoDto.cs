@@ -1,4 +1,4 @@
-﻿namespace EmployeeRecognition.Api.Dtos;
+﻿namespace Laudatio.Api.Dtos;
 
 public class KudoDto
 {

@@ -1,6 +1,6 @@
-﻿using EmployeeRecognition.Api.Models;
+﻿using Laudatio.Api.Models;
 
-namespace EmployeeRecognition.Core.Interfaces.UseCases.Comments;
+namespace Laudatio.Core.Interfaces.UseCases.Comments;
 
 public interface IGetCommentsUseCase
 {

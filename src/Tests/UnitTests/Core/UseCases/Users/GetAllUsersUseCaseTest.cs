@@ -1,9 +1,9 @@
-﻿using EmployeeRecognition.Api.Models;
-using EmployeeRecognition.Core.Interfaces.Repositories;
-using EmployeeRecognition.Core.UseCases.Users.GetAllUsers;
+﻿using Laudatio.Api.Models;
+using Laudatio.Core.Interfaces.Repositories;
+using Laudatio.Core.UseCases.Users.GetAllUsers;
 using Moq;
 
-namespace EmployeeRecognition.Tests.UnitTests.Core.UseCases.Users;
+namespace Laudatio.Tests.UnitTests.Core.UseCases.Users;
 
 public class GetAllUsersUseCaseShould : MockDataSetup
 {

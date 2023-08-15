@@ -1,7 +1,7 @@
-﻿using Entity = EmployeeRecognition.Core.Entities.Kudo;
-using Model = EmployeeRecognition.Api.Models.KudoModel;
+﻿using Entity = Laudatio.Core.Entities.Kudo;
+using Model = Laudatio.Api.Models.KudoModel;
 
-namespace EmployeeRecognition.Core.Converters;
+namespace Laudatio.Core.Converters;
 
 public class KudoModelConverter
 {

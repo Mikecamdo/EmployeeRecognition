@@ -1,7 +1,7 @@
-using EmployeeRecognition.Core.Entities;
+using Laudatio.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeRecognition.Database.Context;
+namespace Laudatio.Database.Context;
 
 public class MySqlDbContext : DbContext
 {
@@ -14,10 +14,10 @@ public class MySqlDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        CreateEmployeeRecognitionComponents(modelBuilder);
+        CreateLaudatioComponents(modelBuilder);
     }
 
-    private void CreateEmployeeRecognitionComponents(ModelBuilder modelBuilder)
+    private void CreateLaudatioComponents(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>(entity =>
         {
