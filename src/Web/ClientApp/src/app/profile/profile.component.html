@@ -1,4 +1,4 @@
-<div *ngIf="everythingLoaded" class="container">
+<div *ngIf="everythingLoaded" class="container mb-3">
     <div class="row">
         <div class="col-12">
             <h1 class="brown-text">Profile Details</h1>
@@ -27,15 +27,15 @@
 
         <div *ngIf="isCurrentUser" class="row mt-2">
             <div class="col-12 text-center mt-4">
-                <button class="btn btn-primary me-2" (click)="editProfile()">
+                <button class="btn btn-primary me-2 my-1" (click)="editProfile()">
                     Edit Profile
                 </button>
 
-                <button class="btn btn-primary me-2" (click)="changePassword()">
+                <button class="btn btn-primary me-2 my-1" (click)="changePassword()">
                     Change Password
                 </button>
 
-                <button class="btn btn-primary" (click)="deleteAccount()">
+                <button class="btn btn-primary my-1" (click)="deleteAccount()">
                     Delete Account
                 </button>
             </div>
