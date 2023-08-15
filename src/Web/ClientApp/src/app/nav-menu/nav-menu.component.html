@@ -27,6 +27,7 @@
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
+            (click)="collapse()"
           >
             <a class="nav-link text-dark" [routerLink]="['/home']">Feed</a>
           </li>
@@ -34,6 +35,7 @@
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
+            (click)="collapse()"
           >
             <a class="nav-link text-dark" [routerLink]="['/recognize']">Recognize</a>
           </li>
@@ -46,7 +48,7 @@
             <a class="nav-link text-dark" [routerLink]="['/home']">Logout</a>
           </li>
         </ul>
-        <a class="nav-link" [routerLink]="['/profile', userName]">
+        <a class="nav-link" [routerLink]="['/profile', userName]" (click)="collapse()">
           <img id="profile-picture" [src]="userAvatar" alt="Avatar" />
         </a>
       </div>
