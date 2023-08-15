@@ -1,4 +1,5 @@
 .tag {
+    color: #551E19;
     display: inline-block;
     padding: 3px 10px;
     border-radius: 13px;
@@ -35,10 +36,6 @@
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-}
-
-.text-red {
-    color: rgb(223, 9, 9);
 }
 
 .card {
@@ -174,6 +171,10 @@ span.tag {
 .dropdown-menu.show {
     color: #551E19;
     background-color: #C56E33;
+}
+
+.dropdown-item {
+    color: #551E19;
 }
 
 .dropdown-item:hover {

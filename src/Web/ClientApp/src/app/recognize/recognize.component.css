@@ -90,3 +90,7 @@
 .checkbox {
     cursor: pointer;
 }
+
+label {
+    color: #551E19;
+}
