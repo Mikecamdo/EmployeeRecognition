@@ -3,10 +3,10 @@
 
 #### A web application for employees to recognize and praise each other, improving employee morale in a virtual work environment.
 
-#### You can view the website [here](https://laudatio-production.up.railway.app/).
+#### You can view the web application [here](https://laudatio-production.up.railway.app/).
 
 # Project Background
-This web app was inspired by remote internship during Summer 2023. A little peer encouragement goes a long way towards boosting company culture and team morale. A "Thank You" by the coffee machine or stopping by someone's desk to give praise can be encouraging, but how does a company support this in a remote work environment? I wanted to develop a digital application that allows a company's employees to recognize each other, with the aim of promoting peer engagement and cross-team connections.
+This web app was inspired by my remote internship during Summer 2023. A little peer encouragement goes a long way towards boosting company culture and team morale. A "Thank You" by the coffee machine or stopping by someone's desk to give praise can be encouraging, but how does a company support this in a remote work environment? I wanted to develop a digital application that allows a company's employees to recognize each other, with the aim of promoting peer engagement and cross-team connections.
 
 # Project Details
 This web app includes all the essential features, including:
